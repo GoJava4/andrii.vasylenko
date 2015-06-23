@@ -8,7 +8,7 @@
 <title>Kickstarter: Projects</title>
 </head>
 <body>
-	<h1>CHOICE PROJECT:</h1>
+	<h1>CHOOSE PROJECT:</h1>
 	<c:forEach var="project" items="${projects}">
 		<h2>
 			<a href="/kickstarter/project?project=${project.id}&category=${project.categoryId}"> 
