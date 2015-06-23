@@ -40,9 +40,17 @@
 	</c:forEach>
 	<br />
 	<br />
+	<h2>
+		<a href="/kickstarter/ask_question?project=${project.id}&category=${project.categoryId}"> 
+			<c:out value="Ask a question" />
+		</a>
+	</h2>
+	<br />
+	<br />
 	<h3>
 		<a href="/kickstarter/projects?category=${project.categoryId}"> 
 			<c:out value="<- back to projects" />
 		</a>
-	</h3></body>
+	</h3>
+</body>
 </html>

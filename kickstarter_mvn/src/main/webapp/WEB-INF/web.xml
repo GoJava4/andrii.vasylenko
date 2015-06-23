@@ -24,6 +24,15 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>ProjectsServlet</servlet-name>
+		<servlet-class>kickstarter.control.ProjectsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProjectsServlet</servlet-name>
+		<url-pattern>/projects</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>ProjectServlet</servlet-name>
 		<servlet-class>kickstarter.control.ProjectServlet</servlet-class>
 	</servlet>
@@ -33,12 +42,12 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>ProjectsServlet</servlet-name>
-		<servlet-class>kickstarter.control.ProjectsServlet</servlet-class>
+		<servlet-name>AskQuestion</servlet-name>
+		<servlet-class>kickstarter.control.AskQuestion</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ProjectsServlet</servlet-name>
-		<url-pattern>/projects</url-pattern>
+		<servlet-name>AskQuestion</servlet-name>
+		<url-pattern>/ask_question</url-pattern>
 	</servlet-mapping>
 
 	<resource-ref>

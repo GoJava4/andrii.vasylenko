@@ -12,8 +12,7 @@ import kickstarter.control.executor.ExecutorImpl;
 public class ProjectsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		Executor executor = ExecutorImpl.getInstance();
 		executor.execute(PROJECTS, request, response);
 	}

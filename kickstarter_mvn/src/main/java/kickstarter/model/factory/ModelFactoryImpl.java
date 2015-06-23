@@ -8,6 +8,8 @@ import java.util.Map;
 
 import kickstarter.control.state.State;
 import kickstarter.exception.IncorrectInputException;
+import kickstarter.model.AskQuestionModel;
+import kickstarter.model.AskQuestionSubmitModel;
 import kickstarter.model.CategoriesModel;
 import kickstarter.model.Model;
 import kickstarter.model.ProjectModel;
@@ -29,6 +31,8 @@ public class ModelFactoryImpl implements ModelFactory {
 		states.put(CATEGORIES, new CategoriesModel());
 		states.put(PROJECTS, new ProjectsModel());
 		states.put(PROJECT, new ProjectModel());
+		states.put(ASK_QUESTION, new AskQuestionModel());
+		states.put(ASK_QUESTION_SUBMIT, new AskQuestionSubmitModel());
 	}
 
 	public static ModelFactory getInstance() {
@@ -52,7 +56,7 @@ public class ModelFactoryImpl implements ModelFactory {
 
 	@Override
 	public Model getModel(State state) throws IncorrectInputException {
-		if (state == null) {
+		if (state == null || !states.containsKey(state)) {
 			throw new IncorrectInputException("state is null");
 		}
 

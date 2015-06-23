@@ -7,6 +7,8 @@ import java.util.Map;
 
 import kickstarter.control.state.State;
 import kickstarter.exception.IncorrectInputException;
+import kickstarter.view.AskQuestionSubmitView;
+import kickstarter.view.AskQuestionView;
 import kickstarter.view.CategoriesView;
 import kickstarter.view.ProjectView;
 import kickstarter.view.ProjectsView;
@@ -23,6 +25,8 @@ public class ViewFactoryImpl implements ViewFactory {
 		states.put(CATEGORIES, new CategoriesView());
 		states.put(PROJECTS, new ProjectsView());
 		states.put(PROJECT, new ProjectView());
+		states.put(ASK_QUESTION, new AskQuestionView());
+		states.put(ASK_QUESTION_SUBMIT, new AskQuestionSubmitView());
 	}
 
 	public static ViewFactory getInstance() {
@@ -41,7 +45,7 @@ public class ViewFactoryImpl implements ViewFactory {
 
 	@Override
 	public View getView(State state) throws IncorrectInputException {
-		if (state == null) {
+		if (state == null || !states.containsKey(state)) {
 			throw new IncorrectInputException("state is null");
 		}
 

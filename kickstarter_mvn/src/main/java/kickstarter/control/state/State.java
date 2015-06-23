@@ -4,5 +4,7 @@ public enum State {
 	QUOTE, 
 	CATEGORIES, 
 	PROJECTS, 
-	PROJECT; 
+	PROJECT,
+	ASK_QUESTION,
+	ASK_QUESTION_SUBMIT; 
 }

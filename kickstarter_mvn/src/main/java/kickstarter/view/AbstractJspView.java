@@ -34,6 +34,19 @@ public abstract class AbstractJspView implements View {
 		return result;
 	}
 
+	protected Map<String, Object> getStringParameters(HttpServletRequest request, HttpServletResponse response,
+			String[] inputParameters) throws IncorrectInputException {
+		checkInput(request, response);
+
+		Map<String, Object> result = new HashMap<String, Object>();
+
+		for (String parameter : inputParameters) {
+			result.put(parameter, request.getParameter(parameter));
+		}
+
+		return result;
+	}
+
 	@Override
 	public void forward(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data)
 			throws IncorrectInputException, ServletException, IOException {
