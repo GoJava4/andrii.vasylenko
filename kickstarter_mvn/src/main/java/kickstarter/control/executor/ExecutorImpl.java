@@ -34,7 +34,7 @@ public class ExecutorImpl implements Executor {
 		return instance;
 	}
 
-	private ExecutorImpl() {
+	public ExecutorImpl() {
 	}
 
 	@Override
