@@ -10,18 +10,16 @@ import org.apache.log4j.Logger;
 import kickstarter.control.state.State;
 import kickstarter.model.Model;
 import kickstarter.model.factory.ModelFactory;
-import kickstarter.model.factory.ModelFactoryImpl;
 import kickstarter.view.View;
 import kickstarter.view.factory.ViewFactory;
-import kickstarter.view.factory.ViewFactoryImpl;
 
 public class ExecutorImpl implements Executor {
-	private ViewFactory viewFactory;
 	private ModelFactory modelFactory;
+	private ViewFactory viewFactory;
 
-	public ExecutorImpl() {
-		viewFactory = ViewFactoryImpl.getInstance();
-		modelFactory = ModelFactoryImpl.getInstance();
+	public ExecutorImpl(ModelFactory modelFactory, ViewFactory viewFactory) {
+		this.modelFactory = modelFactory;
+		this.viewFactory = viewFactory;
 	}
 
 	@Override

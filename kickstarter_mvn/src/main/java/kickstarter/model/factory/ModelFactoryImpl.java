@@ -20,8 +20,6 @@ import kickstarter.model.dao.DAOImpl;
 import kickstarter.model.dao.connection.ConnectionPoolImpl;
 
 public class ModelFactoryImpl implements ModelFactory {
-	private static volatile ModelFactory instance;
-
 	private static final Map<State, Model> states = new HashMap<>();
 
 	private DAO dao;
@@ -35,18 +33,7 @@ public class ModelFactoryImpl implements ModelFactory {
 		states.put(ASK_QUESTION_SUBMIT, new AskQuestionSubmitModel());
 	}
 
-	public static ModelFactory getInstance() {
-		if (instance == null) {
-			synchronized (ModelFactoryImpl.class) {
-				if (instance == null) {
-					instance = new ModelFactoryImpl();
-				}
-			}
-		}
-		return instance;
-	}
-
-	private ModelFactoryImpl() {
+	public ModelFactoryImpl() {
 		try {
 			this.dao = new DAOImpl(ConnectionPoolImpl.getInstance());
 		} catch (SQLException e) {

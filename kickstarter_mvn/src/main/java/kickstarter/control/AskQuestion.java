@@ -18,13 +18,13 @@ public class AskQuestion extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
-		Executor executor = (Executor) context.getBean("executor");
+		Executor executor = (Executor) context.getBean("Executor");
 		executor.execute(ASK_QUESTION, request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
-		Executor executor = (Executor) context.getBean("executor");
+		Executor executor = (Executor) context.getBean("Executor");
 		executor.execute(ASK_QUESTION_SUBMIT, request, response);
 	}
 }

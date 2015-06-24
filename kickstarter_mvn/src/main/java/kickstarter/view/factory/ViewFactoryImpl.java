@@ -16,8 +16,6 @@ import kickstarter.view.QuoteView;
 import kickstarter.view.View;
 
 public class ViewFactoryImpl implements ViewFactory {
-	private static volatile ViewFactory instance;
-
 	private static final Map<State, View> states = new HashMap<>();
 
 	static {
@@ -27,20 +25,6 @@ public class ViewFactoryImpl implements ViewFactory {
 		states.put(PROJECT, new ProjectView());
 		states.put(ASK_QUESTION, new AskQuestionView());
 		states.put(ASK_QUESTION_SUBMIT, new AskQuestionSubmitView());
-	}
-
-	public static ViewFactory getInstance() {
-		if (instance == null) {
-			synchronized (ViewFactoryImpl.class) {
-				if (instance == null) {
-					instance = new ViewFactoryImpl();
-				}
-			}
-		}
-		return instance;
-	}
-
-	private ViewFactoryImpl() {
 	}
 
 	@Override

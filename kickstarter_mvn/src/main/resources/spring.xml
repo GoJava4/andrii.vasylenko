@@ -3,7 +3,16 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
-	<bean id="executor" class="kickstarter.control.executor.ExecutorImpl"
+	<bean id="ModelFactory" class="kickstarter.model.factory.ModelFactoryImpl"
 		scope="singleton" />
+
+	<bean id="ViewFactory" class="kickstarter.view.factory.ViewFactoryImpl"
+		scope="singleton" />
+
+	<bean id="Executor" class="kickstarter.control.executor.ExecutorImpl"
+		scope="singleton">
+		<constructor-arg ref="ModelFactory" />
+		<constructor-arg ref="ViewFactory" />
+	</bean>
 
 </beans>

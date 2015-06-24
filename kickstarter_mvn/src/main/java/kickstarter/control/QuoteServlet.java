@@ -16,7 +16,7 @@ public class QuoteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
-		Executor executor = (Executor) context.getBean("executor");
+		Executor executor = (Executor) context.getBean("Executor");
 		executor.execute(QUOTE, request, response);
 	}
 }
