@@ -22,6 +22,7 @@ public class ModelFactoryImpl implements ModelFactory {
 		BEANS.put(PROJECT, "ProjectModel");
 		BEANS.put(ASK_QUESTION, "AskQuestionModel");
 		BEANS.put(ASK_QUESTION_SUBMIT, "AskQuestionSubmitModel");
+		BEANS.put(DONATE, "DonateModel");
 	}
 
 	@Override

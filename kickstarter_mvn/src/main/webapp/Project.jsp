@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -30,9 +30,7 @@
 	<h3>
 		<c:out value=" link= ${project.link}" />
 	</h3>
-	<h3>
-		Questions and answers:
-	</h3>
+	<h3>Questions and answers:</h3>
 	<c:forEach var="question" items="${project.questionsAndAnswers}">
 		<h3>
 			<c:out value=" question= ${question}" />
@@ -41,15 +39,21 @@
 	<br />
 	<br />
 	<h2>
-		<a href="/kickstarter/ask_question?project=${project.id}&category=${project.categoryId}"> 
+		<a
+			href="/kickstarter/donate?project=${project.id}&category=${project.categoryId}">
+			<c:out value="Donate" />
+		</a>
+	</h2>
+	<h2>
+		<a
+			href="/kickstarter/ask_question?project=${project.id}&category=${project.categoryId}">
 			<c:out value="Ask a question" />
 		</a>
 	</h2>
 	<br />
-	<br />
 	<h3>
-		<a href="/kickstarter/projects?category=${project.categoryId}"> 
-			<c:out value="<- back to projects" />
+		<a href="/kickstarter/projects?category=${project.categoryId}"> <c:out
+				value="<- back to projects" />
 		</a>
 	</h3>
 </body>

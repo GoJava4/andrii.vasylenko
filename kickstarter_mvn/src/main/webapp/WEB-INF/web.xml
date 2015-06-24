@@ -4,7 +4,6 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
 	<display-name>kickstarter</display-name>
-
 	<servlet>
 		<servlet-name>QuoteServlet</servlet-name>
 		<servlet-class>kickstarter.control.QuoteServlet</servlet-class>
@@ -13,7 +12,6 @@
 		<servlet-name>QuoteServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<servlet-name>CategoriesServlet</servlet-name>
 		<servlet-class>kickstarter.control.CategoriesServlet</servlet-class>
@@ -22,7 +20,6 @@
 		<servlet-name>CategoriesServlet</servlet-name>
 		<url-pattern>/categories</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<servlet-name>ProjectsServlet</servlet-name>
 		<servlet-class>kickstarter.control.ProjectsServlet</servlet-class>
@@ -31,7 +28,6 @@
 		<servlet-name>ProjectsServlet</servlet-name>
 		<url-pattern>/projects</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<servlet-name>ProjectServlet</servlet-name>
 		<servlet-class>kickstarter.control.ProjectServlet</servlet-class>
@@ -40,28 +36,32 @@
 		<servlet-name>ProjectServlet</servlet-name>
 		<url-pattern>/project</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
-		<servlet-name>AskQuestion</servlet-name>
-		<servlet-class>kickstarter.control.AskQuestion</servlet-class>
+		<servlet-name>AskQuestionServlet</servlet-name>
+		<servlet-class>kickstarter.control.AskQuestionServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>AskQuestion</servlet-name>
+		<servlet-name>AskQuestionServlet</servlet-name>
 		<url-pattern>/ask_question</url-pattern>
 	</servlet-mapping>
-
+	<servlet>
+		<servlet-name>DonateServlet</servlet-name>
+		<servlet-class>kickstarter.control.DonateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DonateServlet</servlet-name>
+		<url-pattern>/donate</url-pattern>
+	</servlet-mapping>
 	<resource-ref>
 		<description>postgreSQLDatasource</description>
 		<res-ref-name>jdbc/kickstarter</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
 	</resource-ref>
-
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring.xml</param-value>
 	</context-param>
-
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>

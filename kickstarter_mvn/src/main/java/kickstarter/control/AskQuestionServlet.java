@@ -13,7 +13,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import kickstarter.control.executor.Executor;
 
-public class AskQuestion extends HttpServlet {
+public class AskQuestionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {

@@ -22,6 +22,7 @@ public class ViewFactoryImpl implements ViewFactory {
 		BEANS.put(PROJECT, "ProjectView");
 		BEANS.put(ASK_QUESTION, "AskQuestionView");
 		BEANS.put(ASK_QUESTION_SUBMIT, "AskQuestionSubmitView");
+		BEANS.put(DONATE, "DonateView");
 	}
 
 	@Override

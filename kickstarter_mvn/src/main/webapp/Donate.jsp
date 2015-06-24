@@ -5,22 +5,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Kickstarter: Ask a question</title>
+<title>Kickstarter: Donate</title>
 </head>
 <body>
-	<h1>Ask a question:</h1>
+	<h1>Donate:</h1>
 	<h2>
 		Project:
 		<c:out value="${project.name}" />
 	</h2>
 
 	<form method="POST"
-		action="/kickstarter/ask_question?project=${project.id}&category=${project.categoryId}">
+		action="/kickstarter/donate?project=${project.id}&category=${project.categoryId}">
+		<c:forEach var="paymentVariant" items="${paymentVariants}">
+			<p>
+				<input type="radio" name="id" value="${paymentVariant.id}">
+				<c:out
+					value="${paymentVariant.amount} - ${paymentVariant.description}" />
+			</p>
+		</c:forEach>
 		<p>
-			<input type="text" name="question">
+			<input type="radio" name="id" value="other">
+			<c:out value="other:" />
+			<input type="text" name="amount">
 		</p>
 		<p>
-			<input type="submit" value="Send">
+			<input type="submit" value="Donate">
 		</p>
 	</form>
 

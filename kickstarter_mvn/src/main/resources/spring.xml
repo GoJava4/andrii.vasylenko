@@ -18,6 +18,7 @@
 	<bean id="ProjectView" class="kickstarter.view.ProjectView" />
 	<bean id="AskQuestionView" class="kickstarter.view.AskQuestionView" />
 	<bean id="AskQuestionSubmitView" class="kickstarter.view.AskQuestionSubmitView" />
+	<bean id="DonateView" class="kickstarter.view.DonateView" />
 
 	<bean id="dao" class="kickstarter.model.dao.DAOImpl">
 		<constructor-arg ref="QuotesDAO" />
@@ -61,6 +62,9 @@
 		<property name="dao" ref="dao" />
 	</bean>
 	<bean id="AskQuestionSubmitModel" class="kickstarter.model.AskQuestionSubmitModel">
+		<property name="dao" ref="dao" />
+	</bean>
+	<bean id="DonateModel" class="kickstarter.model.DonateModel">
 		<property name="dao" ref="dao" />
 	</bean>
 
