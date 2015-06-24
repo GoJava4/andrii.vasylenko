@@ -25,4 +25,17 @@
 		scope="prototype" />
 	<bean id="AskQuestionSubmitView" class="kickstarter.view.AskQuestionSubmitView"
 		scope="prototype" />
+
+	<bean id="QuoteModel" class="kickstarter.model.QuoteModel" scope="prototype" />
+	<bean id="CategoriesModel" class="kickstarter.model.CategoriesModel"
+		scope="prototype" />
+	<bean id="ProjectsModel" class="kickstarter.model.ProjectsModel"
+		scope="prototype" />
+	<bean id="ProjectModel" class="kickstarter.model.ProjectModel"
+		scope="prototype" />
+	<bean id="AskQuestionModel" class="kickstarter.model.AskQuestionModel"
+		scope="prototype" />
+	<bean id="AskQuestionSubmitModel" class="kickstarter.model.AskQuestionSubmitModel"
+		scope="prototype" />
+
 </beans>

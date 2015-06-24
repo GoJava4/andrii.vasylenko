@@ -6,31 +6,28 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
+
 import kickstarter.control.state.State;
 import kickstarter.exception.IncorrectInputException;
-import kickstarter.model.AskQuestionModel;
-import kickstarter.model.AskQuestionSubmitModel;
-import kickstarter.model.CategoriesModel;
 import kickstarter.model.Model;
-import kickstarter.model.ProjectModel;
-import kickstarter.model.ProjectsModel;
-import kickstarter.model.QuoteModel;
 import kickstarter.model.dao.DAO;
 import kickstarter.model.dao.DAOImpl;
 import kickstarter.model.dao.connection.ConnectionPoolImpl;
 
 public class ModelFactoryImpl implements ModelFactory {
-	private static final Map<State, Model> states = new HashMap<>();
+	private static final Map<State, String> BEANS = new HashMap<>();
 
 	private DAO dao;
 
 	static {
-		states.put(QUOTE, new QuoteModel());
-		states.put(CATEGORIES, new CategoriesModel());
-		states.put(PROJECTS, new ProjectsModel());
-		states.put(PROJECT, new ProjectModel());
-		states.put(ASK_QUESTION, new AskQuestionModel());
-		states.put(ASK_QUESTION_SUBMIT, new AskQuestionSubmitModel());
+		BEANS.put(QUOTE, "QuoteModel");
+		BEANS.put(CATEGORIES, "CategoriesModel");
+		BEANS.put(PROJECTS, "ProjectsModel");
+		BEANS.put(PROJECT, "ProjectModel");
+		BEANS.put(ASK_QUESTION, "AskQuestionModel");
+		BEANS.put(ASK_QUESTION_SUBMIT, "AskQuestionSubmitModel");
 	}
 
 	public ModelFactoryImpl() {
@@ -43,12 +40,15 @@ public class ModelFactoryImpl implements ModelFactory {
 
 	@Override
 	public Model getModel(State state) throws IncorrectInputException {
-		if (state == null || !states.containsKey(state)) {
+		if (state == null || !BEANS.containsKey(state)) {
 			throw new IncorrectInputException("state is null");
 		}
 
-		Model model = states.get(state);
+		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
+		Model model = (Model) context.getBean(BEANS.get(state));
+
 		model.init(dao);
+
 		return model;
 	}
 }
