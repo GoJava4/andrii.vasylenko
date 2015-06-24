@@ -9,6 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
+
 import kickstarter.exception.DataBaseException;
 import kickstarter.model.dao.connection.ConnectionPool;
 import kickstarter.model.entity.Project;
@@ -103,8 +106,11 @@ public class ProjectsDAOImpl implements ProjectsDAO {
 			questionsAndAnswers.addAll(getQuestionsList(resultQuery.getArray("questions")));
 		}
 
-		return new Project(id, categoryId, name, description, totalAmount, daysLeft, history, link,
-				questionsAndAnswers, collectAmount);
+		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
+		Project project = (Project) context.getBean("Project", id, categoryId, name, description, totalAmount,
+				daysLeft, history, link, questionsAndAnswers, collectAmount);
+
+		return project;
 	}
 
 	private List<String> getQuestionsList(Array array) throws SQLException {

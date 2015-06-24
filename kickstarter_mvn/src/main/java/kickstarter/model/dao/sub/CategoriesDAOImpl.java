@@ -8,6 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
+
 import kickstarter.exception.DataBaseException;
 import kickstarter.model.dao.connection.ConnectionPool;
 import kickstarter.model.entity.Category;
@@ -80,7 +83,10 @@ public class CategoriesDAOImpl implements CategoriesDAO {
 		int id = resultQuery.getInt("id");
 		String name = resultQuery.getString("name");
 
-		return new Category(id, name);
+		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
+		Category category = (Category) context.getBean("Category", id, name);
+
+		return category;
 	}
 
 	private String getInsertQuery() {

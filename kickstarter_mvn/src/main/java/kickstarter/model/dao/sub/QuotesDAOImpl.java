@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
+
 import kickstarter.exception.DataBaseException;
 import kickstarter.model.dao.connection.ConnectionPool;
 import kickstarter.model.entity.Quote;
@@ -58,7 +61,10 @@ public class QuotesDAOImpl implements QuotesDAO {
 		int id = result.getInt("id");
 		String qoute = result.getString("quote");
 
-		return new Quote(id, qoute);
+		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
+		Quote quote = (Quote) context.getBean("Quote", id, qoute);
+
+		return quote;
 	}
 
 	private String getInsertQuery() {

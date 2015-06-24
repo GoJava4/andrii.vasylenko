@@ -83,4 +83,10 @@
 		<property name="dao" ref="dao" />
 	</bean>
 
+	<bean id="Quote" class="kickstarter.model.entity.Quote" scope="prototype" />
+	<bean id="Category" class="kickstarter.model.entity.Category"
+		scope="prototype" />
+	<bean id="Project" class="kickstarter.model.entity.Project" scope="prototype" />
+	<bean id="PaymentVariant" class="kickstarter.model.entity.PaymentVariant"
+		scope="prototype" />
 </beans>

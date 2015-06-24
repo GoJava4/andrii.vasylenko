@@ -8,6 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
+
 import kickstarter.exception.DataBaseException;
 import kickstarter.model.dao.connection.ConnectionPool;
 import kickstarter.model.entity.PaymentVariant;
@@ -99,7 +102,11 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 		int amount = resultQuery.getInt("amount");
 		String description = resultQuery.getString("description");
 
-		return new PaymentVariant(id, projectId, amount, description);
+		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
+		PaymentVariant paymentVariant = (PaymentVariant) context.getBean("PaymentVariant", id, projectId, amount,
+				description);
+
+		return paymentVariant;
 	}
 
 	private String getInsertQuery() {
