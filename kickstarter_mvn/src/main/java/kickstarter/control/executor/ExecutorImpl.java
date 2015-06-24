@@ -16,8 +16,6 @@ import kickstarter.view.factory.ViewFactory;
 import kickstarter.view.factory.ViewFactoryImpl;
 
 public class ExecutorImpl implements Executor {
-	final static Logger logger = Logger.getLogger(ExecutorImpl.class);
-
 	private ViewFactory viewFactory;
 	private ModelFactory modelFactory;
 
@@ -46,6 +44,7 @@ public class ExecutorImpl implements Executor {
 	}
 
 	private void showError(Exception e) {
+		Logger logger = Logger.getLogger(ExecutorImpl.class);
 		logger.error(e.getStackTrace(), e);
 		// TODO: show page with error for user
 	}
