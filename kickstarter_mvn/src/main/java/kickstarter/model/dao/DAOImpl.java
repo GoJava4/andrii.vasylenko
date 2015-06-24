@@ -4,33 +4,30 @@ import java.sql.SQLException;
 import java.util.List;
 
 import kickstarter.exception.DataBaseException;
-import kickstarter.model.dao.connection.ConnectionPool;
 import kickstarter.model.dao.sub.CategoriesDAO;
-import kickstarter.model.dao.sub.CategoriesDAOImpl;
 import kickstarter.model.dao.sub.PaymentsDAO;
-import kickstarter.model.dao.sub.PaymentsDAOImpl;
 import kickstarter.model.dao.sub.ProjectsDAO;
-import kickstarter.model.dao.sub.ProjectsDAOImpl;
 import kickstarter.model.dao.sub.QuestionsDAO;
-import kickstarter.model.dao.sub.QuestionsDAOImpl;
 import kickstarter.model.dao.sub.QuotesDAO;
-import kickstarter.model.dao.sub.QuotesDAOImpl;
 import kickstarter.model.entity.Category;
 import kickstarter.model.entity.PaymentVariant;
 import kickstarter.model.entity.Project;
 import kickstarter.model.entity.Quote;
 
 public class DAOImpl implements DAO {
-	private ConnectionPool connectionPool;
 	private QuotesDAO quotes;
 	private CategoriesDAO categories;
 	private ProjectsDAO projects;
 	private QuestionsDAO questions;
 	private PaymentsDAO payments;
 
-	public DAOImpl(ConnectionPool connectionPool) {
-		this.connectionPool = connectionPool;
-		initDAO();
+	public DAOImpl(QuotesDAO quotes, CategoriesDAO categories, ProjectsDAO projects, QuestionsDAO questions,
+			PaymentsDAO payments) {
+		this.quotes = quotes;
+		this.categories = categories;
+		this.projects = projects;
+		this.questions = questions;
+		this.payments = payments;
 	}
 
 	@Override
@@ -128,14 +125,6 @@ public class DAOImpl implements DAO {
 	@Override
 	public void createTablePayments() throws DataBaseException, SQLException {
 		payments.createTablePayments();
-	}
-
-	private void initDAO() {
-		quotes = new QuotesDAOImpl(connectionPool);
-		categories = new CategoriesDAOImpl(connectionPool);
-		projects = new ProjectsDAOImpl(connectionPool);
-		questions = new QuestionsDAOImpl(connectionPool);
-		payments = new PaymentsDAOImpl(connectionPool);
 	}
 
 	private void createTables() throws DataBaseException, SQLException {
