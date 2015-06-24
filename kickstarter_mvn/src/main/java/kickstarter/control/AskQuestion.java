@@ -8,19 +8,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
+
 import kickstarter.control.executor.Executor;
-import kickstarter.control.executor.ExecutorImpl;
 
 public class AskQuestion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-		Executor executor = ExecutorImpl.getInstance();
+		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
+		Executor executor = (Executor) context.getBean("executor");
 		executor.execute(ASK_QUESTION, request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Executor executor = ExecutorImpl.getInstance();
+		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
+		Executor executor = (Executor) context.getBean("executor");
 		executor.execute(ASK_QUESTION_SUBMIT, request, response);
 	}
 }

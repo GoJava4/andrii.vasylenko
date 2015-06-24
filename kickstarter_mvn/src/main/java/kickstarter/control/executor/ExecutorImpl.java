@@ -18,23 +18,12 @@ import kickstarter.view.factory.ViewFactoryImpl;
 public class ExecutorImpl implements Executor {
 	final static Logger logger = Logger.getLogger(ExecutorImpl.class);
 
-	private static volatile Executor instance;
-
-	private ViewFactory viewFactory = ViewFactoryImpl.getInstance();
-	private ModelFactory modelFactory = ModelFactoryImpl.getInstance();
-
-	public static Executor getInstance() {
-		if (instance == null) {
-			synchronized (ExecutorImpl.class) {
-				if (instance == null) {
-					instance = new ExecutorImpl();
-				}
-			}
-		}
-		return instance;
-	}
+	private ViewFactory viewFactory;
+	private ModelFactory modelFactory;
 
 	public ExecutorImpl() {
+		viewFactory = ViewFactoryImpl.getInstance();
+		modelFactory = ModelFactoryImpl.getInstance();
 	}
 
 	@Override
