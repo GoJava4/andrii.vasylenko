@@ -15,4 +15,14 @@
 		<constructor-arg ref="ViewFactory" />
 	</bean>
 
+	<bean id="QuoteView" class="kickstarter.view.QuoteView" scope="prototype" />
+	<bean id="CategoriesView" class="kickstarter.view.CategoriesView"
+		scope="prototype" />
+	<bean id="ProjectsView" class="kickstarter.view.ProjectsView"
+		scope="prototype" />
+	<bean id="ProjectView" class="kickstarter.view.ProjectView" scope="prototype" />
+	<bean id="AskQuestionView" class="kickstarter.view.AskQuestionView"
+		scope="prototype" />
+	<bean id="AskQuestionSubmitView" class="kickstarter.view.AskQuestionSubmitView"
+		scope="prototype" />
 </beans>

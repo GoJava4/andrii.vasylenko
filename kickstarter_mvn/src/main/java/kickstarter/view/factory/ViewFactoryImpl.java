@@ -5,34 +5,34 @@ import static kickstarter.control.state.State.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
+
 import kickstarter.control.state.State;
 import kickstarter.exception.IncorrectInputException;
-import kickstarter.view.AskQuestionSubmitView;
-import kickstarter.view.AskQuestionView;
-import kickstarter.view.CategoriesView;
-import kickstarter.view.ProjectView;
-import kickstarter.view.ProjectsView;
-import kickstarter.view.QuoteView;
 import kickstarter.view.View;
 
 public class ViewFactoryImpl implements ViewFactory {
-	private static final Map<State, View> states = new HashMap<>();
+	private static final Map<State, String> BEANS = new HashMap<>();
 
 	static {
-		states.put(QUOTE, new QuoteView());
-		states.put(CATEGORIES, new CategoriesView());
-		states.put(PROJECTS, new ProjectsView());
-		states.put(PROJECT, new ProjectView());
-		states.put(ASK_QUESTION, new AskQuestionView());
-		states.put(ASK_QUESTION_SUBMIT, new AskQuestionSubmitView());
+		BEANS.put(QUOTE, "QuoteView");
+		BEANS.put(CATEGORIES, "CategoriesView");
+		BEANS.put(PROJECTS, "ProjectsView");
+		BEANS.put(PROJECT, "ProjectView");
+		BEANS.put(ASK_QUESTION, "AskQuestionView");
+		BEANS.put(ASK_QUESTION_SUBMIT, "AskQuestionSubmitView");
 	}
 
 	@Override
 	public View getView(State state) throws IncorrectInputException {
-		if (state == null || !states.containsKey(state)) {
+		if (state == null || !BEANS.containsKey(state)) {
 			throw new IncorrectInputException("state is null");
 		}
 
-		return states.get(state);
+		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
+		View view = (View) context.getBean(BEANS.get(state));
+
+		return view;
 	}
 }
