@@ -12,7 +12,7 @@ public class ProjectsModel implements Model {
 	private DAO dao;
 
 	@Override
-	public void init(DAO dao) throws IncorrectInputException {
+	public void setDao(DAO dao) throws IncorrectInputException {
 		if (dao == null) {
 			throw new IncorrectInputException("can not init: dao is null");
 		}

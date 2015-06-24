@@ -19,14 +19,14 @@ public class QuoteModelTest {
 	public void shouldException_whenDaoIsNull() throws IncorrectInputException {
 		DAO dao = null;
 		Model model = new QuoteModel();
-		model.init(dao);
+		model.setDao(dao);
 	}
 
 	@Test(expected = IncorrectInputException.class)
 	public void shouldException_whenParametersIsNull() throws IncorrectInputException, DataBaseException, SQLException {
 		DAO dao = mock(DAO.class);
 		Model model = new QuoteModel();
-		model.init(dao);
+		model.setDao(dao);
 		model.getData(null);
 	}
 
@@ -37,7 +37,7 @@ public class QuoteModelTest {
 		when(dao.getRandomQuote()).thenReturn(expectedQuote);
 
 		Model model = new QuoteModel();
-		model.init(dao);
+		model.setDao(dao);
 		Map<String, Object> actual = model.getData(new HashMap<String, Object>());
 
 		Quote actualQuote = (Quote) actual.get("quote");

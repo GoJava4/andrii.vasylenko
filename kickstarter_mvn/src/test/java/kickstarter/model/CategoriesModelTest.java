@@ -21,14 +21,14 @@ public class CategoriesModelTest {
 	public void shouldException_whenDaoIsNull() throws IncorrectInputException {
 		DAO dao = null;
 		Model model = new CategoriesModel();
-		model.init(dao);
+		model.setDao(dao);
 	}
 
 	@Test(expected = IncorrectInputException.class)
 	public void shouldException_whenParametersIsNull() throws IncorrectInputException, DataBaseException, SQLException {
 		DAO dao = mock(DAO.class);
 		Model model = new CategoriesModel();
-		model.init(dao);
+		model.setDao(dao);
 		model.getData(null);
 	}
 
@@ -45,7 +45,7 @@ public class CategoriesModelTest {
 		when(dao.getCategories()).thenReturn(expectedCategories);
 
 		Model model = new CategoriesModel();
-		model.init(dao);
+		model.setDao(dao);
 		Map<String, Object> actual = model.getData(new HashMap<String, Object>());
 
 		@SuppressWarnings("unchecked")

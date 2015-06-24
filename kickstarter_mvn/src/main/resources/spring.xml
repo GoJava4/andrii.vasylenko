@@ -15,6 +15,14 @@
 		<constructor-arg ref="ViewFactory" />
 	</bean>
 
+	<bean id="ConnectionPool" class="kickstarter.model.dao.connection.ConnectionPoolImpl"
+		scope="singleton">
+	</bean>
+
+	<bean id="dao" class="kickstarter.model.dao.DAOImpl" scope="singleton">
+		<constructor-arg ref="ConnectionPool" />
+	</bean>
+
 	<bean id="QuoteView" class="kickstarter.view.QuoteView" scope="prototype" />
 	<bean id="CategoriesView" class="kickstarter.view.CategoriesView"
 		scope="prototype" />
@@ -26,16 +34,28 @@
 	<bean id="AskQuestionSubmitView" class="kickstarter.view.AskQuestionSubmitView"
 		scope="prototype" />
 
-	<bean id="QuoteModel" class="kickstarter.model.QuoteModel" scope="prototype" />
+	<bean id="QuoteModel" class="kickstarter.model.QuoteModel" scope="prototype">
+		<property name="dao" ref="dao" />
+	</bean>
 	<bean id="CategoriesModel" class="kickstarter.model.CategoriesModel"
-		scope="prototype" />
+		scope="prototype">
+		<property name="dao" ref="dao" />
+	</bean>
 	<bean id="ProjectsModel" class="kickstarter.model.ProjectsModel"
-		scope="prototype" />
+		scope="prototype">
+		<property name="dao" ref="dao" />
+	</bean>
 	<bean id="ProjectModel" class="kickstarter.model.ProjectModel"
-		scope="prototype" />
+		scope="prototype">
+		<property name="dao" ref="dao" />
+	</bean>
 	<bean id="AskQuestionModel" class="kickstarter.model.AskQuestionModel"
-		scope="prototype" />
+		scope="prototype">
+		<property name="dao" ref="dao" />
+	</bean>
 	<bean id="AskQuestionSubmitModel" class="kickstarter.model.AskQuestionSubmitModel"
-		scope="prototype" />
+		scope="prototype">
+		<property name="dao" ref="dao" />
+	</bean>
 
 </beans>

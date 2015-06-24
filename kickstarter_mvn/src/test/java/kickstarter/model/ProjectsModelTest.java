@@ -21,14 +21,14 @@ public class ProjectsModelTest {
 	public void shouldException_whenDaoIsNull() throws IncorrectInputException {
 		DAO dao = null;
 		Model model = new ProjectsModel();
-		model.init(dao);
+		model.setDao(dao);
 	}
 
 	@Test(expected = IncorrectInputException.class)
 	public void shouldException_whenParametersIsNull() throws IncorrectInputException, DataBaseException, SQLException {
 		DAO dao = mock(DAO.class);
 		Model model = new ProjectsModel();
-		model.init(dao);
+		model.setDao(dao);
 		model.getData(null);
 	}
 
@@ -39,7 +39,7 @@ public class ProjectsModelTest {
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 
 		Model model = new ProjectsModel();
-		model.init(dao);
+		model.setDao(dao);
 		model.getData(parameters);
 	}
 
@@ -52,7 +52,7 @@ public class ProjectsModelTest {
 		parameters.put("category", null);
 
 		Model model = new ProjectsModel();
-		model.init(dao);
+		model.setDao(dao);
 		model.getData(parameters);
 	}
 
@@ -75,7 +75,7 @@ public class ProjectsModelTest {
 		parameters.put("category", categoryId);
 
 		Model model = new ProjectsModel();
-		model.init(dao);
+		model.setDao(dao);
 		Map<String, Object> actual = model.getData(parameters);
 
 		@SuppressWarnings("unchecked")

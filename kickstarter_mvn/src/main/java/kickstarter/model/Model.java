@@ -11,7 +11,7 @@ public interface Model {
 	/**
 	 * initialize DAO for current Model
 	 */
-	void init(DAO dao) throws IncorrectInputException;
+	void setDao(DAO dao) throws IncorrectInputException;
 
 	/**
 	 * get data from DAO and return them
