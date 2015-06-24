@@ -22,10 +22,8 @@ public class DonateServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-		/*WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
+		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
 		Executor executor = (Executor) context.getBean("Executor");
-		executor.execute(ASK_QUESTION_SUBMIT, request, response);
-		
-		System.out.println(request.getParameter("id"));*/
+		executor.execute(DONATE_SUBMIT, request, response);
 	}
 }

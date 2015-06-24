@@ -18,13 +18,14 @@
 		action="/kickstarter/donate?project=${project.id}&category=${project.categoryId}">
 		<c:forEach var="paymentVariant" items="${paymentVariants}">
 			<p>
-				<input type="radio" name="id" value="${paymentVariant.id}">
+				<input type="radio" name="paymentVariant"
+					value="${paymentVariant.id}">
 				<c:out
 					value="${paymentVariant.amount} - ${paymentVariant.description}" />
 			</p>
 		</c:forEach>
 		<p>
-			<input type="radio" name="id" value="other">
+			<input type="radio" name="paymentVariant" value="other">
 			<c:out value="other:" />
 			<input type="text" name="amount">
 		</p>
