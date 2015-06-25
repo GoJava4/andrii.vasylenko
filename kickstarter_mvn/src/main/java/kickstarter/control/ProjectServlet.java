@@ -2,21 +2,22 @@ package kickstarter.control;
 
 import static kickstarter.control.state.State.*;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.context.ContextLoader;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.HttpRequestHandler;
 
 import kickstarter.control.executor.Executor;
 
-public class ProjectServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class ProjectServlet implements HttpRequestHandler {
+	private Executor executor;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
-		Executor executor = (Executor) context.getBean("Executor");
+	public ProjectServlet(Executor executor) {
+		this.executor = executor;
+	}
+
+	@Override
+	public void handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		executor.execute(PROJECT, request, response);
 	}
 }

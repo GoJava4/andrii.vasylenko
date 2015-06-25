@@ -5,48 +5,54 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>kickstarter</display-name>
 	<servlet>
+		<display-name>QuoteServlet</display-name>
 		<servlet-name>QuoteServlet</servlet-name>
-		<servlet-class>kickstarter.control.QuoteServlet</servlet-class>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>QuoteServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<display-name>CategoriesServlet</display-name>
 		<servlet-name>CategoriesServlet</servlet-name>
-		<servlet-class>kickstarter.control.CategoriesServlet</servlet-class>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>CategoriesServlet</servlet-name>
 		<url-pattern>/categories</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<display-name>ProjectsServlet</display-name>
 		<servlet-name>ProjectsServlet</servlet-name>
-		<servlet-class>kickstarter.control.ProjectsServlet</servlet-class>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ProjectsServlet</servlet-name>
 		<url-pattern>/projects</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<display-name>ProjectServlet</display-name>
 		<servlet-name>ProjectServlet</servlet-name>
-		<servlet-class>kickstarter.control.ProjectServlet</servlet-class>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ProjectServlet</servlet-name>
 		<url-pattern>/project</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<display-name>AskQuestionServlet</display-name>
 		<servlet-name>AskQuestionServlet</servlet-name>
-		<servlet-class>kickstarter.control.AskQuestionServlet</servlet-class>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>AskQuestionServlet</servlet-name>
 		<url-pattern>/ask_question</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<display-name>DonateServlet</display-name>
 		<servlet-name>DonateServlet</servlet-name>
-		<servlet-class>kickstarter.control.DonateServlet</servlet-class>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DonateServlet</servlet-name>

@@ -2,28 +2,33 @@ package kickstarter.control;
 
 import static kickstarter.control.state.State.*;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kickstarter.control.executor.Executor;
+import kickstarter.control.state.State;
 
-import org.springframework.web.context.ContextLoader;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.HttpRequestHandler;
 
-public class DonateServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class DonateServlet implements HttpRequestHandler {
+	private Executor executor;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
-		Executor executor = (Executor) context.getBean("Executor");
-		executor.execute(DONATE, request, response);
+	public DonateServlet(Executor executor) {
+		this.executor = executor;
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
-		Executor executor = (Executor) context.getBean("Executor");
-		executor.execute(DONATE_SUBMIT, request, response);
+	public void handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		State state = getState(request.getMethod());
+		executor.execute(state, request, response);
+	}
+
+	private State getState(String method) {
+		if ("GET".equalsIgnoreCase(method)) {
+			return DONATE;
+		} else if ("POST".equalsIgnoreCase(method)) {
+			return DONATE_SUBMIT;
+		}
+		return null;
 	}
 }
