@@ -50,6 +50,15 @@
 		<url-pattern>/ask_question</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<display-name>AskQuestionSubmitServlet</display-name>
+		<servlet-name>AskQuestionSubmitServlet</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AskQuestionSubmitServlet</servlet-name>
+		<url-pattern>/ask_question_submit</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<display-name>DonateServlet</display-name>
 		<servlet-name>DonateServlet</servlet-name>
 		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
@@ -57,6 +66,15 @@
 	<servlet-mapping>
 		<servlet-name>DonateServlet</servlet-name>
 		<url-pattern>/donate</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<display-name>DonateSubmitServlet</display-name>
+		<servlet-name>DonateSubmitServlet</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DonateSubmitServlet</servlet-name>
+		<url-pattern>/donate_submit</url-pattern>
 	</servlet-mapping>
 	<resource-ref>
 		<description>postgreSQLDatasource</description>

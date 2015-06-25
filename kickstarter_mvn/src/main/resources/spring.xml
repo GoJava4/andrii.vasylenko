@@ -3,32 +3,37 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
-	<bean id="QuoteServlet" class="kickstarter.control.QuoteServlet">
-		<constructor-arg ref="Executor" />
+	<bean id="QuoteServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="QuoteView" />
+		<constructor-arg ref="QuoteModel" />
 	</bean>
-	<bean id="CategoriesServlet" class="kickstarter.control.CategoriesServlet">
-		<constructor-arg ref="Executor" />
+	<bean id="CategoriesServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="CategoriesView" />
+		<constructor-arg ref="CategoriesModel" />
 	</bean>
-	<bean id="ProjectsServlet" class="kickstarter.control.ProjectsServlet">
-		<constructor-arg ref="Executor" />
+	<bean id="ProjectsServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="ProjectsView" />
+		<constructor-arg ref="ProjectsModel" />
 	</bean>
-	<bean id="ProjectServlet" class="kickstarter.control.ProjectServlet">
-		<constructor-arg ref="Executor" />
+	<bean id="ProjectServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="ProjectView" />
+		<constructor-arg ref="ProjectModel" />
 	</bean>
-	<bean id="AskQuestionServlet" class="kickstarter.control.AskQuestionServlet">
-		<constructor-arg ref="Executor" />
+	<bean id="AskQuestionServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="AskQuestionView" />
+		<constructor-arg ref="AskQuestionModel" />
 	</bean>
-	<bean id="DonateServlet" class="kickstarter.control.DonateServlet">
-		<constructor-arg ref="Executor" />
+	<bean id="AskQuestionSubmitServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="AskQuestionSubmitView" />
+		<constructor-arg ref="AskQuestionSubmitModel" />
 	</bean>
-
-	<bean id="ModelFactory" class="kickstarter.model.factory.ModelFactoryImpl" />
-
-	<bean id="ViewFactory" class="kickstarter.view.factory.ViewFactoryImpl" />
-
-	<bean id="Executor" class="kickstarter.control.executor.ExecutorImpl">
-		<constructor-arg ref="ModelFactory" />
-		<constructor-arg ref="ViewFactory" />
+	<bean id="DonateServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="DonateView" />
+		<constructor-arg ref="DonateModel" />
+	</bean>
+	<bean id="DonateSubmitServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="DonateSubmitView" />
+		<constructor-arg ref="DonateSubmitModel" />
 	</bean>
 
 	<bean id="QuoteView" class="kickstarter.view.QuoteView" />
@@ -39,6 +44,31 @@
 	<bean id="AskQuestionSubmitView" class="kickstarter.view.AskQuestionSubmitView" />
 	<bean id="DonateView" class="kickstarter.view.DonateView" />
 	<bean id="DonateSubmitView" class="kickstarter.view.DonateSubmitView" />
+
+	<bean id="QuoteModel" class="kickstarter.model.QuoteModel">
+		<property name="dao" ref="dao" />
+	</bean>
+	<bean id="CategoriesModel" class="kickstarter.model.CategoriesModel">
+		<property name="dao" ref="dao" />
+	</bean>
+	<bean id="ProjectsModel" class="kickstarter.model.ProjectsModel">
+		<property name="dao" ref="dao" />
+	</bean>
+	<bean id="ProjectModel" class="kickstarter.model.ProjectModel">
+		<property name="dao" ref="dao" />
+	</bean>
+	<bean id="AskQuestionModel" class="kickstarter.model.AskQuestionModel">
+		<property name="dao" ref="dao" />
+	</bean>
+	<bean id="AskQuestionSubmitModel" class="kickstarter.model.AskQuestionSubmitModel">
+		<property name="dao" ref="dao" />
+	</bean>
+	<bean id="DonateModel" class="kickstarter.model.DonateModel">
+		<property name="dao" ref="dao" />
+	</bean>
+	<bean id="DonateSubmitModel" class="kickstarter.model.DonateSubmitModel">
+		<property name="dao" ref="dao" />
+	</bean>
 
 	<bean id="dao" class="kickstarter.model.dao.DAOImpl">
 		<constructor-arg ref="QuotesDAO" />
@@ -64,31 +94,6 @@
 	</bean>
 	<bean id="PaymentsDAO" class="kickstarter.model.dao.sub.PaymentsDAOImpl">
 		<constructor-arg ref="ConnectionPool" />
-	</bean>
-
-	<bean id="QuoteModel" class="kickstarter.model.QuoteModel">
-		<property name="dao" ref="dao" />
-	</bean>
-	<bean id="CategoriesModel" class="kickstarter.model.CategoriesModel">
-		<property name="dao" ref="dao" />
-	</bean>
-	<bean id="ProjectsModel" class="kickstarter.model.ProjectsModel">
-		<property name="dao" ref="dao" />
-	</bean>
-	<bean id="ProjectModel" class="kickstarter.model.ProjectModel">
-		<property name="dao" ref="dao" />
-	</bean>
-	<bean id="AskQuestionModel" class="kickstarter.model.AskQuestionModel">
-		<property name="dao" ref="dao" />
-	</bean>
-	<bean id="AskQuestionSubmitModel" class="kickstarter.model.AskQuestionSubmitModel">
-		<property name="dao" ref="dao" />
-	</bean>
-	<bean id="DonateModel" class="kickstarter.model.DonateModel">
-		<property name="dao" ref="dao" />
-	</bean>
-	<bean id="DonateSubmitModel" class="kickstarter.model.DonateSubmitModel">
-		<property name="dao" ref="dao" />
 	</bean>
 
 	<bean id="Quote" class="kickstarter.model.entity.Quote" scope="prototype" />
