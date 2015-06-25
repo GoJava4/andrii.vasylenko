@@ -1,7 +1,7 @@
 package kickstarter.model.entity;
 
 import static org.junit.Assert.assertEquals;
-import kickstarter.model.entity.Quote;
+import kickstarter.entity.Quote;
 
 import org.junit.Test;
 

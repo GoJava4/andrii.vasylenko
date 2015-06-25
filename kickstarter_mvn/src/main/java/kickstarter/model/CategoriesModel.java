@@ -4,9 +4,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import kickstarter.dao.DAO;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
-import kickstarter.model.dao.DAO;
 
 public class CategoriesModel implements Model {
 	private DAO dao;

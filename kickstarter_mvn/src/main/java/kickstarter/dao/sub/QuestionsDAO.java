@@ -1,4 +1,4 @@
-package kickstarter.model.dao.sub;
+package kickstarter.dao.sub;
 
 import java.sql.SQLException;
 

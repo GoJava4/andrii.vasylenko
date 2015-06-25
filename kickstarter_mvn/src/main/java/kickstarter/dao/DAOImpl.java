@@ -1,18 +1,18 @@
-package kickstarter.model.dao;
+package kickstarter.dao;
 
 import java.sql.SQLException;
 import java.util.List;
 
+import kickstarter.dao.sub.CategoriesDAO;
+import kickstarter.dao.sub.PaymentsDAO;
+import kickstarter.dao.sub.ProjectsDAO;
+import kickstarter.dao.sub.QuestionsDAO;
+import kickstarter.dao.sub.QuotesDAO;
+import kickstarter.entity.Category;
+import kickstarter.entity.PaymentVariant;
+import kickstarter.entity.Project;
+import kickstarter.entity.Quote;
 import kickstarter.exception.DataBaseException;
-import kickstarter.model.dao.sub.CategoriesDAO;
-import kickstarter.model.dao.sub.PaymentsDAO;
-import kickstarter.model.dao.sub.ProjectsDAO;
-import kickstarter.model.dao.sub.QuestionsDAO;
-import kickstarter.model.dao.sub.QuotesDAO;
-import kickstarter.model.entity.Category;
-import kickstarter.model.entity.PaymentVariant;
-import kickstarter.model.entity.Project;
-import kickstarter.model.entity.Quote;
 
 public class DAOImpl implements DAO {
 	private QuotesDAO quotes;

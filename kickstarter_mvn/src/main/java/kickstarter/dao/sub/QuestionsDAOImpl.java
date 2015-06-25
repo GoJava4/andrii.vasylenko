@@ -1,11 +1,11 @@
-package kickstarter.model.dao.sub;
+package kickstarter.dao.sub;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import kickstarter.model.dao.connection.ConnectionPool;
+import kickstarter.dao.connection.ConnectionPool;
 
 public class QuestionsDAOImpl implements QuestionsDAO {
 	private ConnectionPool connectionPool;

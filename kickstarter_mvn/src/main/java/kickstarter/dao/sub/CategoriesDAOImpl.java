@@ -1,4 +1,4 @@
-package kickstarter.model.dao.sub;
+package kickstarter.dao.sub;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,9 +11,9 @@ import java.util.List;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
+import kickstarter.dao.connection.ConnectionPool;
+import kickstarter.entity.Category;
 import kickstarter.exception.DataBaseException;
-import kickstarter.model.dao.connection.ConnectionPool;
-import kickstarter.model.entity.Category;
 
 public class CategoriesDAOImpl implements CategoriesDAO {
 	private ConnectionPool connectionPool;

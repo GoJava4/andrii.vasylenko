@@ -1,6 +1,7 @@
 package kickstarter.model.entity;
 
 import static org.junit.Assert.assertEquals;
+import kickstarter.entity.Category;
 
 import org.junit.Test;
 

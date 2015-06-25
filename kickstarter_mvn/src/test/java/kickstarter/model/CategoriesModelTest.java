@@ -9,10 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kickstarter.dao.DAO;
+import kickstarter.entity.Category;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
-import kickstarter.model.dao.DAO;
-import kickstarter.model.entity.Category;
 
 import org.junit.Test;
 

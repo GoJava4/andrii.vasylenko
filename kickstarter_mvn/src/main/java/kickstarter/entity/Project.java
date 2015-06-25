@@ -1,4 +1,4 @@
-package kickstarter.model.entity;
+package kickstarter.entity;
 
 import java.util.List;
 

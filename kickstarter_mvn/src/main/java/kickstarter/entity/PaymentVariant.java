@@ -1,4 +1,4 @@
-package kickstarter.model.entity;
+package kickstarter.entity;
 
 public class PaymentVariant {
 	private int id;

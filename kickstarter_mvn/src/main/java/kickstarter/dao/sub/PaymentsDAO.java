@@ -1,10 +1,10 @@
-package kickstarter.model.dao.sub;
+package kickstarter.dao.sub;
 
 import java.sql.SQLException;
 import java.util.List;
 
+import kickstarter.entity.PaymentVariant;
 import kickstarter.exception.DataBaseException;
-import kickstarter.model.entity.PaymentVariant;
 
 public interface PaymentsDAO {
 	/**

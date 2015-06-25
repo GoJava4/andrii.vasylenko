@@ -1,9 +1,9 @@
-package kickstarter.model.dao.sub;
+package kickstarter.dao.sub;
 
 import java.sql.SQLException;
 
+import kickstarter.entity.Quote;
 import kickstarter.exception.DataBaseException;
-import kickstarter.model.entity.Quote;
 
 public interface QuotesDAO {
 	/**
