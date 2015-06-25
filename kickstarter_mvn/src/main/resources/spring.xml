@@ -70,7 +70,7 @@
 		<property name="dao" ref="dao" />
 	</bean>
 
-	<bean id="dao" class="kickstarter.model.dao.DAOImpl">
+	<bean id="dao" class="kickstarter.dao.DAOImpl">
 		<constructor-arg ref="QuotesDAO" />
 		<constructor-arg ref="CategoriesDAO" />
 		<constructor-arg ref="ProjectsDAO" />
@@ -78,28 +78,27 @@
 		<constructor-arg ref="PaymentsDAO" />
 	</bean>
 
-	<bean id="ConnectionPool" class="kickstarter.model.dao.connection.ConnectionPoolImpl" />
-
-	<bean id="QuotesDAO" class="kickstarter.model.dao.sub.QuotesDAOImpl">
+	<bean id="QuotesDAO" class="kickstarter.dao.sub.QuotesDAOImpl">
 		<constructor-arg ref="ConnectionPool" />
 	</bean>
-	<bean id="CategoriesDAO" class="kickstarter.model.dao.sub.CategoriesDAOImpl">
+	<bean id="CategoriesDAO" class="kickstarter.dao.sub.CategoriesDAOImpl">
 		<constructor-arg ref="ConnectionPool" />
 	</bean>
-	<bean id="ProjectsDAO" class="kickstarter.model.dao.sub.ProjectsDAOImpl">
+	<bean id="ProjectsDAO" class="kickstarter.dao.sub.ProjectsDAOImpl">
 		<constructor-arg ref="ConnectionPool" />
 	</bean>
-	<bean id="QuestionsDAO" class="kickstarter.model.dao.sub.QuestionsDAOImpl">
+	<bean id="QuestionsDAO" class="kickstarter.dao.sub.QuestionsDAOImpl">
 		<constructor-arg ref="ConnectionPool" />
 	</bean>
-	<bean id="PaymentsDAO" class="kickstarter.model.dao.sub.PaymentsDAOImpl">
+	<bean id="PaymentsDAO" class="kickstarter.dao.sub.PaymentsDAOImpl">
 		<constructor-arg ref="ConnectionPool" />
 	</bean>
 
-	<bean id="Quote" class="kickstarter.model.entity.Quote" scope="prototype" />
-	<bean id="Category" class="kickstarter.model.entity.Category"
-		scope="prototype" />
-	<bean id="Project" class="kickstarter.model.entity.Project" scope="prototype" />
-	<bean id="PaymentVariant" class="kickstarter.model.entity.PaymentVariant"
+	<bean id="ConnectionPool" class="kickstarter.dao.connection.ConnectionPoolImpl" />
+
+	<bean id="Quote" class="kickstarter.entity.Quote" scope="prototype" />
+	<bean id="Category" class="kickstarter.entity.Category" scope="prototype" />
+	<bean id="Project" class="kickstarter.entity.Project" scope="prototype" />
+	<bean id="PaymentVariant" class="kickstarter.entity.PaymentVariant"
 		scope="prototype" />
 </beans>
