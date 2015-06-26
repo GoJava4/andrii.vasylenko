@@ -36,14 +36,30 @@
 		<constructor-arg ref="DonateSubmitModel" />
 	</bean>
 
-	<bean id="QuoteView" class="kickstarter.view.QuoteView" />
-	<bean id="CategoriesView" class="kickstarter.view.CategoriesView" />
-	<bean id="ProjectsView" class="kickstarter.view.ProjectsView" />
-	<bean id="ProjectView" class="kickstarter.view.ProjectView" />
-	<bean id="AskQuestionView" class="kickstarter.view.AskQuestionView" />
-	<bean id="AskQuestionSubmitView" class="kickstarter.view.AskQuestionSubmitView" />
-	<bean id="DonateView" class="kickstarter.view.DonateView" />
-	<bean id="DonateSubmitView" class="kickstarter.view.DonateSubmitView" />
+	<bean id="QuoteView" class="kickstarter.view.JspView">
+		<constructor-arg value="/Quote.jsp" />
+	</bean>
+	<bean id="CategoriesView" class="kickstarter.view.JspView">
+		<constructor-arg value="/Categories.jsp" />
+	</bean>
+	<bean id="ProjectsView" class="kickstarter.view.JspView">
+		<constructor-arg value="/Projects.jsp" />
+	</bean>
+	<bean id="ProjectView" class="kickstarter.view.JspView">
+		<constructor-arg value="/Project.jsp" />
+	</bean>
+	<bean id="AskQuestionView" class="kickstarter.view.JspView">
+		<constructor-arg value="/AskQuestion.jsp" />
+	</bean>
+	<bean id="AskQuestionSubmitView" class="kickstarter.view.JspView">
+		<constructor-arg value="/AskQuestionSubmit.jsp" />
+	</bean>
+	<bean id="DonateView" class="kickstarter.view.JspView">
+		<constructor-arg value="/Donate.jsp" />
+	</bean>
+	<bean id="DonateSubmitView" class="kickstarter.view.JspView">
+		<constructor-arg value="/DonateSubmit.jsp" />
+	</bean>
 
 	<bean id="QuoteModel" class="kickstarter.model.QuoteModel">
 		<property name="dao" ref="dao" />

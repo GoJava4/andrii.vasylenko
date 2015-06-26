@@ -13,7 +13,7 @@ public interface View {
 	/**
 	 * return Parameters from input data
 	 */
-	Map<String, Object> getParameters(HttpServletRequest request, HttpServletResponse response)
+	Map<String, String[]> getParameters(HttpServletRequest request, HttpServletResponse response)
 			throws IncorrectInputException;
 
 	/**

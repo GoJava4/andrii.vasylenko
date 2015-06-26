@@ -4,23 +4,12 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.DAO;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
-public class AskQuestionSubmitModel implements Model {
-	private DAO dao;
-
+public class AskQuestionSubmitModel extends AbstractModel {
 	@Override
-	public void setDao(DAO dao) throws IncorrectInputException {
-		if (dao == null) {
-			throw new IncorrectInputException("can not init: dao is null");
-		}
-		this.dao = dao;
-	}
-
-	@Override
-	public Map<String, Object> getData(Map<String, Object> parameters) throws IncorrectInputException,
+	public Map<String, Object> getData(Map<String, String[]> parameters) throws IncorrectInputException,
 			DataBaseException, SQLException {
 		Map<String, Object> result = new HashMap<String, Object>();
 		if (parameters == null || parameters.get("project") == null || parameters.get("category") == null
@@ -28,17 +17,17 @@ public class AskQuestionSubmitModel implements Model {
 			throw new IncorrectInputException("can not init: parameters is null");
 		}
 
-		int id = (int) parameters.get("project");
-		int categoryId = (int) parameters.get("category");
-		String question = (String) parameters.get("question");
+		int id = getInt(parameters.get("project"));
+		int categoryId = getInt(parameters.get("category"));
+		String question = getString(parameters.get("question"));
 
 		if (question.isEmpty()) {
 			throw new IncorrectInputException("can not init: parameters is null");
 		}
 
-		dao.addQuestion(id, question);
+		getDao().addQuestion(id, question);
 
-		result.put("project", dao.getProject(id, categoryId));
+		result.put("project", getDao().getProject(id, categoryId));
 		result.put("question", question);
 
 		return result;

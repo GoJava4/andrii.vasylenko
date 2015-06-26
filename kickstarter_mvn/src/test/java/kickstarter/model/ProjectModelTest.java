@@ -35,7 +35,7 @@ public class ProjectModelTest {
 	public void shouldException_whenParametersIsEmpty() throws IncorrectInputException, DataBaseException, SQLException {
 		DAO dao = mock(DAO.class);
 
-		HashMap<String, Object> parameters = new HashMap<String, Object>();
+		HashMap<String, String[]> parameters = new HashMap<String, String[]>();
 
 		Model model = new ProjectModel();
 		model.setDao(dao);
@@ -47,9 +47,10 @@ public class ProjectModelTest {
 			SQLException {
 		DAO dao = mock(DAO.class);
 
-		HashMap<String, Object> parameters = new HashMap<String, Object>();
+		HashMap<String, String[]> parameters = new HashMap<String, String[]>();
+		String[] category = { "1" };
 		parameters.put("project", null);
-		parameters.put("category", 1);
+		parameters.put("category", category);
 
 		Model model = new ProjectModel();
 		model.setDao(dao);
@@ -61,8 +62,9 @@ public class ProjectModelTest {
 			SQLException {
 		DAO dao = mock(DAO.class);
 
-		HashMap<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("project", 1);
+		HashMap<String, String[]> parameters = new HashMap<String, String[]>();
+		String[] project = { "1" };
+		parameters.put("project", project);
 		parameters.put("category", null);
 
 		Model model = new ProjectModel();
@@ -80,9 +82,11 @@ public class ProjectModelTest {
 		DAO dao = mock(DAO.class);
 		when(dao.getProject(anyInt(), anyInt())).thenReturn(expectedProject);
 
-		HashMap<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("project", projectId);
-		parameters.put("category", categoryId);
+		HashMap<String, String[]> parameters = new HashMap<String, String[]>();
+		String[] project = { "" + projectId };
+		String[] category = { "" + categoryId };
+		parameters.put("project", project);
+		parameters.put("category", category);
 
 		Model model = new ProjectModel();
 		model.setDao(dao);

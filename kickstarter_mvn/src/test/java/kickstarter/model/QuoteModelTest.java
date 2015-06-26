@@ -38,7 +38,7 @@ public class QuoteModelTest {
 
 		Model model = new QuoteModel();
 		model.setDao(dao);
-		Map<String, Object> actual = model.getData(new HashMap<String, Object>());
+		Map<String, Object> actual = model.getData(new HashMap<String, String[]>());
 
 		Quote actualQuote = (Quote) actual.get("quote");
 		assertEquals(1, actual.size());

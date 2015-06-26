@@ -4,23 +4,12 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.DAO;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
-public class CategoriesModel implements Model {
-	private DAO dao;
-
+public class CategoriesModel extends AbstractModel {
 	@Override
-	public void setDao(DAO dao) throws IncorrectInputException {
-		if (dao == null) {
-			throw new IncorrectInputException("can not init: dao is null");
-		}
-		this.dao = dao;
-	}
-
-	@Override
-	public Map<String, Object> getData(Map<String, Object> parameters) throws IncorrectInputException,
+	public Map<String, Object> getData(Map<String, String[]> parameters) throws IncorrectInputException,
 			DataBaseException, SQLException {
 		if (parameters == null) {
 			throw new IncorrectInputException("can not getData: parameters is null");
@@ -28,7 +17,7 @@ public class CategoriesModel implements Model {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		result.put("categories", dao.getCategories());
+		result.put("categories", getDao().getCategories());
 
 		return result;
 	}

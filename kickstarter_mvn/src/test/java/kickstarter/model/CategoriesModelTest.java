@@ -46,7 +46,7 @@ public class CategoriesModelTest {
 
 		Model model = new CategoriesModel();
 		model.setDao(dao);
-		Map<String, Object> actual = model.getData(new HashMap<String, Object>());
+		Map<String, Object> actual = model.getData(new HashMap<String, String[]>());
 
 		@SuppressWarnings("unchecked")
 		List<Category> actualCategories = (List<Category>) actual.get("categories");

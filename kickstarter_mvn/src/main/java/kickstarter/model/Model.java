@@ -16,6 +16,6 @@ public interface Model {
 	/**
 	 * get data from DAO and return them
 	 */
-	Map<String, Object> getData(Map<String, Object> parameters) throws IncorrectInputException, DataBaseException,
+	Map<String, Object> getData(Map<String, String[]> parameters) throws IncorrectInputException, DataBaseException,
 			SQLException;
 }

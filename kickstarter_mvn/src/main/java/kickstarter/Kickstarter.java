@@ -31,7 +31,7 @@ public class Kickstarter implements HttpRequestHandler {
 	}
 
 	private void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Map<String, Object> parameters = view.getParameters(request, response);
+		Map<String, String[]> parameters = view.getParameters(request, response);
 		Map<String, Object> data = model.getData(parameters);
 
 		view.forward(request, response, data);
