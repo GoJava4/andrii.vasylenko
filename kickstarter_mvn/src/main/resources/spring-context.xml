@@ -29,6 +29,14 @@
 		<constructor-arg ref="AskQuestionSubmitView" />
 		<constructor-arg ref="AskQuestionSubmitModel" />
 	</bean>
+	<bean id="DonateServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="DonateView" />
+		<constructor-arg ref="DonateModel" />
+	</bean>
+	<bean id="DonateSubmitServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="DonateSubmitView" />
+		<constructor-arg ref="DonateSubmitModel" />
+	</bean>
 
 	<bean id="QuoteView" class="kickstarter.view.JspView">
 		<constructor-arg value="/Quote.jsp" />
@@ -47,6 +55,12 @@
 	</bean>
 	<bean id="AskQuestionSubmitView" class="kickstarter.view.JspView">
 		<constructor-arg value="/AskQuestionSubmit.jsp" />
+	</bean>
+	<bean id="DonateView" class="kickstarter.view.JspView">
+		<constructor-arg value="/Donate.jsp" />
+	</bean>
+	<bean id="DonateSubmitView" class="kickstarter.view.JspView">
+		<constructor-arg value="/DonateSubmit.jsp" />
 	</bean>
 
 	<bean id="QuoteModel" class="kickstarter.model.QuoteModel">
@@ -68,5 +82,14 @@
 	<bean id="AskQuestionSubmitModel" class="kickstarter.model.AskQuestionSubmitModel">
 		<property name="projectDAO" ref="ProjectDAO" />
 		<property name="questionDAO" ref="QuestionDAO" />
+	</bean>
+	<bean id="DonateModel" class="kickstarter.model.DonateModel">
+		<property name="projectDAO" ref="ProjectDAO" />
+		<property name="paymentVariantDAO" ref="PaymentVariantDAO" />
+	</bean>
+	<bean id="DonateSubmitModel" class="kickstarter.model.DonateSubmitModel">
+		<property name="projectDAO" ref="ProjectDAO" />
+		<property name="paymentVariantDAO" ref="PaymentVariantDAO" />
+		<property name="paymentDAO" ref="PaymentDAO" />
 	</bean>
 </beans>

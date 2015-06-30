@@ -4,17 +4,23 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import kickstarter.dao.PaymentVariantDAO;
 import kickstarter.dao.ProjectDAO;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class DonateModel implements Model {
 	private ProjectDAO projectDAO;
+	private PaymentVariantDAO paymentVariantDAO;
 
 	public void setProjectDAO(ProjectDAO projectDAO) {
 		this.projectDAO = projectDAO;
 	}
-	
+
+	public void setPaymentVariantDAO(PaymentVariantDAO paymentVariantDAO) {
+		this.paymentVariantDAO = paymentVariantDAO;
+	}
+
 	@Override
 	public Map<String, Object> getData(Map<String, String[]> parameters) throws IncorrectInputException,
 			DataBaseException, SQLException {
@@ -27,7 +33,7 @@ public class DonateModel implements Model {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("project", projectDAO.getProject(id, categoryId));
-		//result.put("paymentVariants", getDao().getPaymentVariants(id));
+		result.put("paymentVariants", paymentVariantDAO.getPaymentVariants(id));
 
 		return result;
 	}

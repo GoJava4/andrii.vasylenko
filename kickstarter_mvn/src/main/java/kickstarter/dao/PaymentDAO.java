@@ -1,5 +1,7 @@
 package kickstarter.dao;
 
+import kickstarter.entity.Payment;
+
 public interface PaymentDAO {
-	void donate(int projectId, int amount);
+	void addPayment(Payment payment);
 }

@@ -15,7 +15,7 @@
 	</h2>
 
 	<form method="POST"
-		action="/kickstarter/donate_submit?project=${project.id}&category=${project.categoryId}">
+		action="/kickstarter/donate_submit?project=${project.id}&category=${project.category.id}">
 		<c:forEach var="paymentVariant" items="${paymentVariants}">
 			<p>
 				<input type="radio" name="paymentVariant"
@@ -38,7 +38,7 @@
 	<br />
 	<h3>
 		<a
-			href="/kickstarter/project?project=${project.id}&category=${project.categoryId}">
+			href="/kickstarter/project?project=${project.id}&category=${project.category.id}">
 			<c:out value="<- back to project" />
 		</a>
 	</h3>

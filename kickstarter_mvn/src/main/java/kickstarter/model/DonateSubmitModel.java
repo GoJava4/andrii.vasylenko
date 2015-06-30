@@ -7,6 +7,8 @@ import java.util.Map;
 import kickstarter.dao.PaymentDAO;
 import kickstarter.dao.PaymentVariantDAO;
 import kickstarter.dao.ProjectDAO;
+import kickstarter.entity.Payment;
+import kickstarter.entity.Project;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
@@ -50,10 +52,14 @@ public class DonateSubmitModel implements Model {
 			throw new IncorrectInputException("can not donate: amount is not correct");
 		}
 
-		paymentDAO.donate(id, amount);
+		Project project = projectDAO.getProject(id, categoryId);
+		Payment payment = new Payment();
+		payment.setProject(project);
+		payment.setAmount(amount);
+		paymentDAO.addPayment(payment);
 
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("project", projectDAO.getProject(id, categoryId));
+		result.put("project", project);
 		result.put("amount", amount);
 
 		return result;
