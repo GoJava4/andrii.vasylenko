@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.DAO;
+
 import kickstarter.entity.Project;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;

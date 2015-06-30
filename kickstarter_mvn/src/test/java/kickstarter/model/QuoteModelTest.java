@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.DAO;
+
 import kickstarter.entity.Quote;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
