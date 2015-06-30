@@ -1,0 +1,20 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+	<import resource="classpath:hibernate-context.xml" />
+
+	<bean id="QuoteServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="QuoteView" />
+		<constructor-arg ref="QuoteModel" />
+	</bean>
+
+	<bean id="QuoteView" class="kickstarter.view.JspView">
+		<constructor-arg value="/Quote.jsp" />
+	</bean>
+
+	<bean id="QuoteModel" class="kickstarter.model.QuoteModel">
+		<property name="quoteDAO" ref="QuoteDAO" />
+	</bean>
+</beans>
