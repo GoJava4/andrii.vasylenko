@@ -6,6 +6,8 @@ import java.util.Map;
 
 import kickstarter.dao.ProjectDAO;
 import kickstarter.dao.QuestionDAO;
+import kickstarter.entity.Project;
+import kickstarter.entity.Question;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
@@ -38,9 +40,13 @@ public class AskQuestionSubmitModel implements Model {
 			throw new IncorrectInputException("can not init: parameters is null");
 		}
 
-		questionDAO.addQuestion(id, question);
+		Project project = projectDAO.getProject(id, categoryId);
+		Question entity = new Question();
+		entity.setProject(project);
+		entity.setQuestion(question);
+		questionDAO.addQuestion(entity);
 
-		result.put("project", projectDAO.getProject(id, categoryId));
+		result.put("project", project);
 		result.put("question", question);
 
 		return result;

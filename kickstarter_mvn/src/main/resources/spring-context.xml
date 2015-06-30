@@ -21,6 +21,14 @@
 		<constructor-arg ref="ProjectView" />
 		<constructor-arg ref="ProjectModel" />
 	</bean>
+	<bean id="AskQuestionServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="AskQuestionView" />
+		<constructor-arg ref="AskQuestionModel" />
+	</bean>
+	<bean id="AskQuestionSubmitServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="AskQuestionSubmitView" />
+		<constructor-arg ref="AskQuestionSubmitModel" />
+	</bean>
 
 	<bean id="QuoteView" class="kickstarter.view.JspView">
 		<constructor-arg value="/Quote.jsp" />
@@ -34,6 +42,12 @@
 	<bean id="ProjectView" class="kickstarter.view.JspView">
 		<constructor-arg value="/Project.jsp" />
 	</bean>
+	<bean id="AskQuestionView" class="kickstarter.view.JspView">
+		<constructor-arg value="/AskQuestion.jsp" />
+	</bean>
+	<bean id="AskQuestionSubmitView" class="kickstarter.view.JspView">
+		<constructor-arg value="/AskQuestionSubmit.jsp" />
+	</bean>
 
 	<bean id="QuoteModel" class="kickstarter.model.QuoteModel">
 		<property name="quoteDAO" ref="QuoteDAO" />
@@ -46,5 +60,13 @@
 	</bean>
 	<bean id="ProjectModel" class="kickstarter.model.ProjectModel">
 		<property name="projectDAO" ref="ProjectDAO" />
+		<property name="questionDAO" ref="QuestionDAO" />
+	</bean>
+	<bean id="AskQuestionModel" class="kickstarter.model.AskQuestionModel">
+		<property name="projectDAO" ref="ProjectDAO" />
+	</bean>
+	<bean id="AskQuestionSubmitModel" class="kickstarter.model.AskQuestionSubmitModel">
+		<property name="projectDAO" ref="ProjectDAO" />
+		<property name="questionDAO" ref="QuestionDAO" />
 	</bean>
 </beans>

@@ -27,6 +27,14 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="QuestionDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="QuestionDAOImpl" />
+		<property name="interceptorNames">
+			<list>
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
 
 	<bean id="QuoteDAOImpl" class="kickstarter.dao.QuoteDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
@@ -37,6 +45,9 @@
 	<bean id="ProjectDAOImpl" class="kickstarter.dao.ProjectDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="QuestionDAOImpl" class="kickstarter.dao.QuestionDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
 	<bean id="transactionInterceptor"
 		class="org.springframework.transaction.interceptor.TransactionInterceptor">
@@ -44,6 +55,7 @@
 		<property name="transactionAttributes">
 			<props>
 				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="add*">PROPAGATION_REQUIRED</prop>
 			</props>
 		</property>
 	</bean>
