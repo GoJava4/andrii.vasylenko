@@ -1,6 +1,5 @@
 package kickstarter.model;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,16 +17,23 @@ public class ProjectsModel implements Model {
 
 	@Override
 	public Map<String, Object> getData(Map<String, String[]> parameters) throws IncorrectInputException,
-			DataBaseException, SQLException {
-		if (parameters == null || parameters.get("category") == null) {
-			throw new IncorrectInputException("can not init: parameters is null");
-		}
+			DataBaseException {
+		checkInput(parameters);
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		int categoryId = Integer.parseInt(parameters.get("category")[0]);
-		result.put("projects", projectDAO.getEntities(categoryId));
+		result.put("projects", projectDAO.getEntities(getCategoryId(parameters)));
 
 		return result;
+	}
+
+	private int getCategoryId(Map<String, String[]> parameters) {
+		return Integer.parseInt(parameters.get("category")[0]);
+	}
+
+	private void checkInput(Map<String, String[]> parameters) throws IncorrectInputException {
+		if (parameters == null || parameters.get("category") == null) {
+			throw new IncorrectInputException("can not init: parameters is null");
+		}
 	}
 }

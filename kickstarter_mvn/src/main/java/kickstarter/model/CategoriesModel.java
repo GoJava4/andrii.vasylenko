@@ -1,6 +1,5 @@
 package kickstarter.model;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,10 +17,7 @@ public class CategoriesModel implements Model {
 
 	@Override
 	public Map<String, Object> getData(Map<String, String[]> parameters) throws IncorrectInputException,
-			DataBaseException, SQLException {
-		if (parameters == null) {
-			throw new IncorrectInputException("can not getData: parameters is null");
-		}
+			DataBaseException {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 

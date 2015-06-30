@@ -1,6 +1,5 @@
 package kickstarter.model;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,37 +29,75 @@ public class DonateSubmitModel implements Model {
 
 	@Override
 	public Map<String, Object> getData(Map<String, String[]> parameters) throws IncorrectInputException,
-			DataBaseException, SQLException {
-		if (parameters == null || parameters.get("project") == null || parameters.get("category") == null
-				|| parameters.get("paymentVariant") == null) {
-			throw new IncorrectInputException("can not init: parameters is null");
-		}
+			DataBaseException {
+		checkInput(parameters);
 
-		int id = Integer.parseInt(parameters.get("project")[0]);
-		int categoryId = Integer.parseInt(parameters.get("category")[0]);
+		int projectId = getProjectId(parameters);
+		int categoryId = getCategoryId(parameters);
 
-		String paymentVariant = parameters.get("paymentVariant")[0];
+		int amount = getAmount(parameters);
+		Project project = projectDAO.getEntity(projectId, categoryId);
+
+		donate(amount, project);
+
+		Map<String, Object> result = new HashMap<String, Object>();
+
+		result.put("project", project);
+		result.put("amount", amount);
+
+		return result;
+	}
+
+	private void donate(int amount, Project project) throws DataBaseException {
+		Payment payment = new Payment();
+		payment.setProject(project);
+		payment.setAmount(amount);
+		paymentDAO.addEntity(payment);
+	}
+
+	private int getAmount(Map<String, String[]> parameters) throws DataBaseException, IncorrectInputException {
+
+		String paymentVariant = getPaymentVariant(parameters);
+
 		int amount;
-		if (paymentVariant.equals("other")) {
-			amount = Integer.parseInt(parameters.get("amount")[0]);
+		if ("other".equals(paymentVariant)) {
+			amount = getAmountFromParameters(parameters);
 		} else {
-			amount = paymentVariantDAO.getEntity(Integer.parseInt(paymentVariant), id).getAmount();
+			amount = getAmountFromPaymentVariant(paymentVariant, getProjectId(parameters));
 		}
 
 		if (amount <= 0) {
 			throw new IncorrectInputException("can not donate: amount is not correct");
 		}
+		return amount;
+	}
 
-		Project project = projectDAO.getEntity(id, categoryId);
-		Payment payment = new Payment();
-		payment.setProject(project);
-		payment.setAmount(amount);
-		paymentDAO.addEntity(payment);
+	private int getAmountFromPaymentVariant(String paymentVariant, int projectId) throws DataBaseException {
+		int paymentVariantId = Integer.parseInt(paymentVariant);
+		PaymentVariant entity = paymentVariantDAO.getEntity(paymentVariantId, projectId);
+		return entity.getAmount();
+	}
 
-		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("project", project);
-		result.put("amount", amount);
+	private int getAmountFromParameters(Map<String, String[]> parameters) {
+		return Integer.parseInt(parameters.get("amount")[0]);
+	}
 
-		return result;
+	private String getPaymentVariant(Map<String, String[]> parameters) {
+		return parameters.get("paymentVariant")[0];
+	}
+
+	private int getCategoryId(Map<String, String[]> parameters) {
+		return Integer.parseInt(parameters.get("category")[0]);
+	}
+
+	private int getProjectId(Map<String, String[]> parameters) {
+		return Integer.parseInt(parameters.get("project")[0]);
+	}
+
+	private void checkInput(Map<String, String[]> parameters) throws IncorrectInputException {
+		if (parameters == null || parameters.get("project") == null || parameters.get("category") == null
+				|| parameters.get("paymentVariant") == null) {
+			throw new IncorrectInputException("can not init: parameters is null");
+		}
 	}
 }

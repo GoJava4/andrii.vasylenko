@@ -1,6 +1,5 @@
 package kickstarter.model;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,31 +23,52 @@ public class AskQuestionSubmitModel implements Model {
 
 	@Override
 	public Map<String, Object> getData(Map<String, String[]> parameters) throws IncorrectInputException,
-			DataBaseException, SQLException {
+			DataBaseException {
+		checkInput(parameters);
+
+		int projectId = getProjectId(parameters);
+		int categoryId = getCategoryId(parameters);
+		String question = getQuestion(parameters);
+		Project project = projectDAO.getEntity(projectId, categoryId);
+
+		addQuestion(question, project);
+
 		Map<String, Object> result = new HashMap<String, Object>();
-		if (parameters == null || parameters.get("project") == null || parameters.get("category") == null
-				|| parameters.get("question") == null) {
-			throw new IncorrectInputException("can not init: parameters is null");
-		}
-
-		int id = Integer.parseInt(parameters.get("project")[0]);
-		int categoryId = Integer.parseInt(parameters.get("category")[0]);
-		String question = parameters.get("question")[0];
-
-		if (question.isEmpty()) {
-			throw new IncorrectInputException("can not init: parameters is null");
-		}
-
-		Project project = projectDAO.getEntity(id, categoryId);
-		Question entity = new Question();
-		entity.setProject(project);
-		entity.setQuestion(question);
-		questionDAO.addEntity(entity);
 
 		result.put("project", project);
 		result.put("question", question);
 
 		return result;
+	}
+
+	private void addQuestion(String question, Project project) throws IncorrectInputException, DataBaseException {
+		if (question.isEmpty()) {
+			throw new IncorrectInputException("can not init: parameters is null");
+		}
+
+		Question entity = new Question();
+		entity.setProject(project);
+		entity.setQuestion(question);
+		questionDAO.addEntity(entity);
+	}
+
+	private String getQuestion(Map<String, String[]> parameters) {
+		return parameters.get("question")[0];
+	}
+
+	private int getCategoryId(Map<String, String[]> parameters) {
+		return Integer.parseInt(parameters.get("category")[0]);
+	}
+
+	private int getProjectId(Map<String, String[]> parameters) {
+		return Integer.parseInt(parameters.get("project")[0]);
+	}
+
+	private void checkInput(Map<String, String[]> parameters) throws IncorrectInputException {
+		if (parameters == null || parameters.get("project") == null || parameters.get("category") == null
+				|| parameters.get("question") == null) {
+			throw new IncorrectInputException("can not init: parameters is null");
+		}
 	}
 
 }
