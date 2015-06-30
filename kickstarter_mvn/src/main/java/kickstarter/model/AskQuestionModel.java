@@ -4,14 +4,15 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.ProjectDAO;
+import kickstarter.dao.DAO;
+import kickstarter.entity.Project;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class AskQuestionModel implements Model {
-	private ProjectDAO projectDAO;
+	private DAO<Project> projectDAO;
 
-	public void setProjectDAO(ProjectDAO projectDAO) {
+	public void setProjectDAO(DAO<Project> projectDAO) {
 		this.projectDAO = projectDAO;
 	}
 
@@ -25,7 +26,7 @@ public class AskQuestionModel implements Model {
 
 		int id = Integer.parseInt(parameters.get("project")[0]);
 		int categoryId = Integer.parseInt(parameters.get("category")[0]);
-		result.put("project", projectDAO.getProject(id, categoryId));
+		result.put("project", projectDAO.getEntity(id, categoryId));
 
 		return result;
 	}

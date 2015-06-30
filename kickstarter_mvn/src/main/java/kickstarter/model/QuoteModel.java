@@ -4,15 +4,17 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.QuoteDAO;
+import kickstarter.dao.DAO;
+
+import kickstarter.entity.Quote;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class QuoteModel implements Model {
 
-	private QuoteDAO quoteDAO;
+	private DAO<Quote> quoteDAO;
 
-	public void setQuoteDAO(QuoteDAO quoteDAO) {
+	public void setQuoteDAO(DAO<Quote> quoteDAO) {
 		this.quoteDAO = quoteDAO;
 	}
 
@@ -22,7 +24,7 @@ public class QuoteModel implements Model {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		result.put("quote", quoteDAO.getRandomQuote());
+		result.put("quote", quoteDAO.getEntity());
 
 		return result;
 	}

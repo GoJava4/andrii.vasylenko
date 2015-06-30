@@ -4,14 +4,15 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.CategoryDAO;
+import kickstarter.dao.DAO;
+import kickstarter.entity.Category;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class CategoriesModel implements Model {
-	private CategoryDAO categoryDAO;
+	private DAO<Category> categoryDAO;
 
-	public void setCategoryDAO(CategoryDAO categoryDAO) {
+	public void setCategoryDAO(DAO<Category> categoryDAO) {
 		this.categoryDAO = categoryDAO;
 	}
 
@@ -24,7 +25,7 @@ public class CategoriesModel implements Model {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		result.put("categories", categoryDAO.getCategories());
+		result.put("categories", categoryDAO.getEntities());
 
 		return result;
 	}

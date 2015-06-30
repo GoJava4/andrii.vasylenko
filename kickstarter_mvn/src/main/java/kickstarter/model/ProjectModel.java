@@ -4,20 +4,21 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.ProjectDAO;
-import kickstarter.dao.QuestionDAO;
+import kickstarter.dao.DAO;
+import kickstarter.entity.Project;
+import kickstarter.entity.Question;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class ProjectModel implements Model {
-	private ProjectDAO projectDAO;
-	private QuestionDAO questionDAO;
+	private DAO<Project> projectDAO;
+	private DAO<Question> questionDAO;
 
-	public void setProjectDAO(ProjectDAO projectDAO) {
+	public void setProjectDAO(DAO<Project> projectDAO) {
 		this.projectDAO = projectDAO;
 	}
 
-	public void setQuestionDAO(QuestionDAO questionDAO) {
+	public void setQuestionDAO(DAO<Question> questionDAO) {
 		this.questionDAO = questionDAO;
 	}
 
@@ -31,8 +32,8 @@ public class ProjectModel implements Model {
 
 		int id = Integer.parseInt(parameters.get("project")[0]);
 		int categoryId = Integer.parseInt(parameters.get("category")[0]);
-		result.put("project", projectDAO.getProject(id, categoryId));
-		result.put("questions", questionDAO.getQuestions(id));
+		result.put("project", projectDAO.getEntity(id, categoryId));
+		result.put("questions", questionDAO.getEntities(id));
 
 		return result;
 	}

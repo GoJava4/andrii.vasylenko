@@ -4,28 +4,27 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.PaymentDAO;
-import kickstarter.dao.PaymentVariantDAO;
-import kickstarter.dao.ProjectDAO;
+import kickstarter.dao.DAO;
 import kickstarter.entity.Payment;
+import kickstarter.entity.PaymentVariant;
 import kickstarter.entity.Project;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class DonateSubmitModel implements Model {
-	private ProjectDAO projectDAO;
-	private PaymentVariantDAO paymentVariantDAO;
-	private PaymentDAO paymentDAO;
+	private DAO<Project> projectDAO;
+	private DAO<PaymentVariant> paymentVariantDAO;
+	private DAO<Payment> paymentDAO;
 
-	public void setProjectDAO(ProjectDAO projectDAO) {
+	public void setProjectDAO(DAO<Project> projectDAO) {
 		this.projectDAO = projectDAO;
 	}
 
-	public void setPaymentVariantDAO(PaymentVariantDAO paymentVariantDAO) {
+	public void setPaymentVariantDAO(DAO<PaymentVariant> paymentVariantDAO) {
 		this.paymentVariantDAO = paymentVariantDAO;
 	}
 
-	public void setPaymentDAO(PaymentDAO paymentDAO) {
+	public void setPaymentDAO(DAO<Payment> paymentDAO) {
 		this.paymentDAO = paymentDAO;
 	}
 
@@ -45,18 +44,18 @@ public class DonateSubmitModel implements Model {
 		if (paymentVariant.equals("other")) {
 			amount = Integer.parseInt(parameters.get("amount")[0]);
 		} else {
-			amount = paymentVariantDAO.getPaymentVariant(Integer.parseInt(paymentVariant), id).getAmount();
+			amount = paymentVariantDAO.getEntity(Integer.parseInt(paymentVariant), id).getAmount();
 		}
 
 		if (amount <= 0) {
 			throw new IncorrectInputException("can not donate: amount is not correct");
 		}
 
-		Project project = projectDAO.getProject(id, categoryId);
+		Project project = projectDAO.getEntity(id, categoryId);
 		Payment payment = new Payment();
 		payment.setProject(project);
 		payment.setAmount(amount);
-		paymentDAO.addPayment(payment);
+		paymentDAO.addEntity(payment);
 
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("project", project);

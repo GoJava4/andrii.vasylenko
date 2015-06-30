@@ -4,22 +4,21 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.ProjectDAO;
-import kickstarter.dao.QuestionDAO;
+import kickstarter.dao.DAO;
 import kickstarter.entity.Project;
 import kickstarter.entity.Question;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class AskQuestionSubmitModel implements Model {
-	private ProjectDAO projectDAO;
-	private QuestionDAO questionDAO;
+	private DAO<Project> projectDAO;
+	private DAO<Question> questionDAO;
 
-	public void setProjectDAO(ProjectDAO projectDAO) {
+	public void setProjectDAO(DAO<Project> projectDAO) {
 		this.projectDAO = projectDAO;
 	}
 
-	public void setQuestionDAO(QuestionDAO questionDAO) {
+	public void setQuestionDAO(DAO<Question> questionDAO) {
 		this.questionDAO = questionDAO;
 	}
 
@@ -40,11 +39,11 @@ public class AskQuestionSubmitModel implements Model {
 			throw new IncorrectInputException("can not init: parameters is null");
 		}
 
-		Project project = projectDAO.getProject(id, categoryId);
+		Project project = projectDAO.getEntity(id, categoryId);
 		Question entity = new Question();
 		entity.setProject(project);
 		entity.setQuestion(question);
-		questionDAO.addQuestion(entity);
+		questionDAO.addEntity(entity);
 
 		result.put("project", project);
 		result.put("question", question);
