@@ -4,10 +4,17 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import kickstarter.dao.ProjectDAO;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
-public class ProjectModel extends AbstractModel {
+public class ProjectModel implements Model {
+	private ProjectDAO projectDAO;
+
+	public void setProjectDAO(ProjectDAO projectDAO) {
+		this.projectDAO = projectDAO;
+	}
+
 	@Override
 	public Map<String, Object> getData(Map<String, String[]> parameters) throws IncorrectInputException,
 			DataBaseException, SQLException {
@@ -16,9 +23,9 @@ public class ProjectModel extends AbstractModel {
 			throw new IncorrectInputException("can not init: parameters is null");
 		}
 
-		int id = getInt(parameters.get("project"));
-		int categoryId = getInt(parameters.get("category"));
-		result.put("project", getDao().getProject(id, categoryId));
+		int id = Integer.parseInt(parameters.get("project")[0]);
+		int categoryId = Integer.parseInt(parameters.get("category")[0]);
+		result.put("project", projectDAO.getProject(id, categoryId));
 
 		return result;
 	}

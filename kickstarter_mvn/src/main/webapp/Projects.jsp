@@ -11,7 +11,8 @@
 	<h1>CHOOSE PROJECT:</h1>
 	<c:forEach var="project" items="${projects}">
 		<h2>
-			<a href="/kickstarter/project?project=${project.id}&category=${project.categoryId}"> 
+			<a
+				href="/kickstarter/project?project=${project.id}&category=${project.category.id}">
 				<c:out value="${project.name}" />
 			</a>
 		</h2>
@@ -32,8 +33,8 @@
 	<br />
 	<br />
 	<h3>
-		<a href="/kickstarter/categories"> 
-			<c:out value="<- back to categories" />
+		<a href="/kickstarter/categories"> <c:out
+				value="<- back to categories" />
 		</a>
 	</h3>
 </body>

@@ -6,10 +6,10 @@ import kickstarter.entity.Quote;
 import org.junit.Test;
 
 public class QuoteTest {
-	@Test
-	public void shouldGetTheSameQuote_whenNewQuote() {
-		Quote quote = new Quote(3, "test quote");
-		assertEquals(3, quote.getId());
-		assertEquals("test quote", quote.getQuote());
-	}
+//	@Test
+//	public void shouldGetTheSameQuote_whenNewQuote() {
+//		Quote quote = new Quote(3, "test quote");
+//		assertEquals(3, quote.getId());
+//		assertEquals("test quote", quote.getQuote());
+//	}
 }

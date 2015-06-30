@@ -31,28 +31,28 @@
 		<c:out value=" link= ${project.link}" />
 	</h3>
 	<h3>Questions and answers:</h3>
-	<c:forEach var="question" items="${project.questionsAndAnswers}">
+	<%-- <c:forEach var="question" items="${project.questions}">
 		<h3>
-			<c:out value=" question= ${question}" />
+			<c:out value=" question= ${question.question}" />
 		</h3>
-	</c:forEach>
+	</c:forEach>--%>
 	<br />
 	<br />
 	<h2>
 		<a
-			href="/kickstarter/donate?project=${project.id}&category=${project.categoryId}">
+			href="/kickstarter/donate?project=${project.id}&category=${project.category.id}">
 			<c:out value="Donate" />
 		</a>
 	</h2>
 	<h2>
 		<a
-			href="/kickstarter/ask_question?project=${project.id}&category=${project.categoryId}">
+			href="/kickstarter/ask_question?project=${project.id}&category=${project.category.id}">
 			<c:out value="Ask a question" />
 		</a>
 	</h2>
 	<br />
 	<h3>
-		<a href="/kickstarter/projects?category=${project.categoryId}"> <c:out
+		<a href="/kickstarter/projects?category=${project.category.id}"> <c:out
 				value="<- back to projects" />
 		</a>
 	</h3>

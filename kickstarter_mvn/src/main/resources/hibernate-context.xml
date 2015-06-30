@@ -4,7 +4,23 @@
 	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
 	<bean id="QuoteDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="target" ref="QuoteDAORef" />
+		<property name="target" ref="QuoteDAOImpl" />
+		<property name="interceptorNames">
+			<list>
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="CategoryDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="CategoryDAOImpl" />
+		<property name="interceptorNames">
+			<list>
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="ProjectDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="ProjectDAOImpl" />
 		<property name="interceptorNames">
 			<list>
 				<value>transactionInterceptor</value>
@@ -12,7 +28,13 @@
 		</property>
 	</bean>
 
-	<bean id="QuoteDAORef" class="kickstarter.dao.QuoteDAOImpl">
+	<bean id="QuoteDAOImpl" class="kickstarter.dao.QuoteDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="CategoryDAOImpl" class="kickstarter.dao.CategoryDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="ProjectDAOImpl" class="kickstarter.dao.ProjectDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
@@ -63,6 +85,11 @@
 		<property name="mappingResources">
 			<list>
 				<value>\hibernate\Quote.hbm.xml</value>
+				<value>\hibernate\Category.hbm.xml</value>
+				<value>\hibernate\Project.hbm.xml</value>
+				<value>\hibernate\Payment.hbm.xml</value>
+				<value>\hibernate\PaymentVariant.hbm.xml</value>
+				<value>\hibernate\Question.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

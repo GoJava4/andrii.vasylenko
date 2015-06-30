@@ -2,13 +2,12 @@ package kickstarter.entity;
 
 import java.io.Serializable;
 
-public class PaymentVariant implements Serializable {
-	private static final long serialVersionUID = 7418662851675861768L;
+public class Payment implements Serializable {
+	private static final long serialVersionUID = -3116811010948870329L;
 
 	private int id;
 	private Project project;
 	private int amount;
-	private String description;
 
 	public int getId() {
 		return id;
@@ -32,13 +31,5 @@ public class PaymentVariant implements Serializable {
 
 	public void setAmount(int amount) {
 		this.amount = amount;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 }

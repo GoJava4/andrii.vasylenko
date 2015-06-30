@@ -9,12 +9,42 @@
 		<constructor-arg ref="QuoteView" />
 		<constructor-arg ref="QuoteModel" />
 	</bean>
+	<bean id="CategoriesServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="CategoriesView" />
+		<constructor-arg ref="CategoriesModel" />
+	</bean>
+	<bean id="ProjectsServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="ProjectsView" />
+		<constructor-arg ref="ProjectsModel" />
+	</bean>
+	<bean id="ProjectServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="ProjectView" />
+		<constructor-arg ref="ProjectModel" />
+	</bean>
 
 	<bean id="QuoteView" class="kickstarter.view.JspView">
 		<constructor-arg value="/Quote.jsp" />
 	</bean>
+	<bean id="CategoriesView" class="kickstarter.view.JspView">
+		<constructor-arg value="/Categories.jsp" />
+	</bean>
+	<bean id="ProjectsView" class="kickstarter.view.JspView">
+		<constructor-arg value="/Projects.jsp" />
+	</bean>
+	<bean id="ProjectView" class="kickstarter.view.JspView">
+		<constructor-arg value="/Project.jsp" />
+	</bean>
 
 	<bean id="QuoteModel" class="kickstarter.model.QuoteModel">
 		<property name="quoteDAO" ref="QuoteDAO" />
+	</bean>
+	<bean id="CategoriesModel" class="kickstarter.model.CategoriesModel">
+		<property name="categoryDAO" ref="CategoryDAO" />
+	</bean>
+	<bean id="ProjectsModel" class="kickstarter.model.ProjectsModel">
+		<property name="projectDAO" ref="ProjectDAO" />
+	</bean>
+	<bean id="ProjectModel" class="kickstarter.model.ProjectModel">
+		<property name="projectDAO" ref="ProjectDAO" />
 	</bean>
 </beans>

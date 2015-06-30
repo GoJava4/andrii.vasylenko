@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="kickstarter.entity.Question" table="Questions">
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="identity" />
+		</id>
+
+		<many-to-one name="project" class="kickstarter.entity.Project"
+			fetch="select">
+			<column name="id_project" not-null="true" />
+		</many-to-one>
+
+		<property name="question" type="string">
+			<column name="question" length="255" />
+		</property>
+	</class>
+</hibernate-mapping>

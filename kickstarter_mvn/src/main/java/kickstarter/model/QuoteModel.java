@@ -8,8 +8,8 @@ import kickstarter.dao.QuoteDAO;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
-public class QuoteModel extends AbstractModel {
-	
+public class QuoteModel implements Model {
+
 	private QuoteDAO quoteDAO;
 
 	public void setQuoteDAO(QuoteDAO quoteDAO) {

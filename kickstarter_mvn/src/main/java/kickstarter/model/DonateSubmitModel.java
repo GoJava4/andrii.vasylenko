@@ -4,10 +4,29 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import kickstarter.dao.PaymentDAO;
+import kickstarter.dao.PaymentVariantDAO;
+import kickstarter.dao.ProjectDAO;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
-public class DonateSubmitModel extends AbstractModel {
+public class DonateSubmitModel implements Model {
+	private ProjectDAO projectDAO;
+	private PaymentVariantDAO paymentVariantDAO;
+	private PaymentDAO paymentDAO;
+
+	public void setProjectDAO(ProjectDAO projectDAO) {
+		this.projectDAO = projectDAO;
+	}
+
+	public void setPaymentVariantDAO(PaymentVariantDAO paymentVariantDAO) {
+		this.paymentVariantDAO = paymentVariantDAO;
+	}
+
+	public void setPaymentDAO(PaymentDAO paymentDAO) {
+		this.paymentDAO = paymentDAO;
+	}
+
 	@Override
 	public Map<String, Object> getData(Map<String, String[]> parameters) throws IncorrectInputException,
 			DataBaseException, SQLException {
@@ -16,25 +35,25 @@ public class DonateSubmitModel extends AbstractModel {
 			throw new IncorrectInputException("can not init: parameters is null");
 		}
 
-		int id = getInt(parameters.get("project"));
-		int categoryId = getInt(parameters.get("category"));
+		int id = Integer.parseInt(parameters.get("project")[0]);
+		int categoryId = Integer.parseInt(parameters.get("category")[0]);
 
-		String paymentVariant = getString(parameters.get("paymentVariant"));
+		String paymentVariant = parameters.get("paymentVariant")[0];
 		int amount;
 		if (paymentVariant.equals("other")) {
-			amount = getInt(parameters.get("amount"));
+			amount = Integer.parseInt(parameters.get("amount")[0]);
 		} else {
-			amount = getDao().getPaymentVariant(Integer.parseInt(paymentVariant), id).getAmount();
+			amount = paymentVariantDAO.getPaymentVariant(Integer.parseInt(paymentVariant), id).getAmount();
 		}
 
 		if (amount <= 0) {
 			throw new IncorrectInputException("can not donate: amount is not correct");
 		}
 
-		getDao().donate(id, amount);
+		paymentDAO.donate(id, amount);
 
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("project", getDao().getProject(id, categoryId));
+		result.put("project", projectDAO.getProject(id, categoryId));
 		result.put("amount", amount);
 
 		return result;

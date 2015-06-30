@@ -4,10 +4,17 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import kickstarter.dao.ProjectDAO;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
-public class ProjectsModel extends AbstractModel {
+public class ProjectsModel implements Model {
+	private ProjectDAO projectDAO;
+
+	public void setProjectDAO(ProjectDAO projectDAO) {
+		this.projectDAO = projectDAO;
+	}
+
 	@Override
 	public Map<String, Object> getData(Map<String, String[]> parameters) throws IncorrectInputException,
 			DataBaseException, SQLException {
@@ -17,8 +24,8 @@ public class ProjectsModel extends AbstractModel {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		int categoryId = getInt(parameters.get("category"));
-		result.put("projects", getDao().getProjects(categoryId));
+		int categoryId = Integer.parseInt(parameters.get("category")[0]);
+		result.put("projects", projectDAO.getProjects(categoryId));
 
 		return result;
 	}

@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="kickstarter.entity.Project" table="Projects">
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="identity" />
+		</id>
+
+		<many-to-one name="category" class="kickstarter.entity.Category"
+			fetch="select">
+			<column name="id_category" not-null="true" />
+		</many-to-one>
+
+		<property name="name" type="string">
+			<column name="name" length="255" />
+		</property>
+
+		<property name="description" type="string">
+			<column name="description" length="255" />
+		</property>
+
+		<property name="totalAmount" type="java.lang.Integer">
+			<column name="total_amount" length="255" />
+		</property>
+
+		<property name="daysLeft" type="java.lang.Integer">
+			<column name="days_left" length="255" />
+		</property>
+
+		<property name="history" type="string">
+			<column name="history" length="255" />
+		</property>
+
+		<property name="link" type="string">
+			<column name="link" length="255" />
+		</property>
+
+		<set name="payments" table="Payments" inverse="true" lazy="true"
+			fetch="select">
+			<key>
+				<column name="id_project" not-null="true" />
+			</key>
+			<one-to-many class="kickstarter.entity.Payment" />
+		</set>
+
+		<set name="questions" table="Questions" inverse="true" lazy="true"
+			fetch="select">
+			<key>
+				<column name="id_project" not-null="true" />
+			</key>
+			<one-to-many class="kickstarter.entity.Question" />
+		</set>
+
+		<set name="paymentVariants" table="PaymentVariants" inverse="true"
+			lazy="true" fetch="select">
+			<key>
+				<column name="id_project" not-null="true" />
+			</key>
+			<one-to-many class="kickstarter.entity.PaymentVariant" />
+		</set>
+	</class>
+</hibernate-mapping>
