@@ -63,33 +63,20 @@
 		<constructor-arg value="/DonateSubmit.jsp" />
 	</bean>
 
-	<bean id="QuoteModel" class="kickstarter.model.QuoteModel">
-		<property name="quoteDAO" ref="QuoteDAO" />
-	</bean>
-	<bean id="CategoriesModel" class="kickstarter.model.CategoriesModel">
-		<property name="categoryDAO" ref="CategoryDAO" />
-	</bean>
-	<bean id="ProjectsModel" class="kickstarter.model.ProjectsModel">
-		<property name="projectDAO" ref="ProjectDAO" />
-	</bean>
-	<bean id="ProjectModel" class="kickstarter.model.ProjectModel">
-		<property name="projectDAO" ref="ProjectDAO" />
-		<property name="questionDAO" ref="QuestionDAO" />
-	</bean>
-	<bean id="AskQuestionModel" class="kickstarter.model.AskQuestionModel">
-		<property name="projectDAO" ref="ProjectDAO" />
-	</bean>
-	<bean id="AskQuestionSubmitModel" class="kickstarter.model.AskQuestionSubmitModel">
-		<property name="projectDAO" ref="ProjectDAO" />
-		<property name="questionDAO" ref="QuestionDAO" />
-	</bean>
-	<bean id="DonateModel" class="kickstarter.model.DonateModel">
-		<property name="projectDAO" ref="ProjectDAO" />
-		<property name="paymentVariantDAO" ref="PaymentVariantDAO" />
-	</bean>
-	<bean id="DonateSubmitModel" class="kickstarter.model.DonateSubmitModel">
-		<property name="projectDAO" ref="ProjectDAO" />
-		<property name="paymentVariantDAO" ref="PaymentVariantDAO" />
-		<property name="paymentDAO" ref="PaymentDAO" />
-	</bean>
+	<bean id="QuoteModel" class="kickstarter.model.QuoteModel"
+		autowire="byName" />
+	<bean id="CategoriesModel" class="kickstarter.model.CategoriesModel"
+		autowire="byName" />
+	<bean id="ProjectsModel" class="kickstarter.model.ProjectsModel"
+		autowire="byName" />
+	<bean id="ProjectModel" class="kickstarter.model.ProjectModel"
+		autowire="byName" />
+	<bean id="AskQuestionModel" class="kickstarter.model.AskQuestionModel"
+		autowire="byName" />
+	<bean id="AskQuestionSubmitModel" class="kickstarter.model.AskQuestionSubmitModel"
+		autowire="byName" />
+	<bean id="DonateModel" class="kickstarter.model.DonateModel"
+		autowire="byName" />
+	<bean id="DonateSubmitModel" class="kickstarter.model.DonateSubmitModel"
+		autowire="byName" />
 </beans>

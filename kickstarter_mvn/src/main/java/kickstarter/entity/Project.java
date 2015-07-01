@@ -23,13 +23,6 @@ public class Project implements Serializable {
 		return collectAmount;
 	}
 
-	private void calcCollectAmount() {
-		collectAmount = 0;
-		for (Payment payment : payments) {
-			collectAmount += payment.getAmount();
-		}
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -117,5 +110,12 @@ public class Project implements Serializable {
 
 	public void setPaymentVariants(Set<PaymentVariant> paymentVariants) {
 		this.paymentVariants = paymentVariants;
+	}
+
+	private void calcCollectAmount() {
+		collectAmount = 0;
+		for (Payment payment : payments) {
+			collectAmount += payment.getAmount();
+		}
 	}
 }

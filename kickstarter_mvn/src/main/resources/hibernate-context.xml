@@ -3,72 +3,45 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
-	<bean id="QuoteDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="target" ref="QuoteDAOImpl" />
-		<property name="interceptorNames">
-			<list>
-				<value>transactionInterceptor</value>
-			</list>
-		</property>
+	<bean id="quoteDao" parent="proxy">
+		<property name="target" ref="basicQuoteDao" />
 	</bean>
-	<bean id="CategoryDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="target" ref="CategoryDAOImpl" />
-		<property name="interceptorNames">
-			<list>
-				<value>transactionInterceptor</value>
-			</list>
-		</property>
+	<bean id="categoryDao" parent="proxy">
+		<property name="target" ref="basicCategoryDao" />
 	</bean>
-	<bean id="ProjectDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="target" ref="ProjectDAOImpl" />
-		<property name="interceptorNames">
-			<list>
-				<value>transactionInterceptor</value>
-			</list>
-		</property>
+	<bean id="projectDao" parent="proxy">
+		<property name="target" ref="basicProjectDao" />
 	</bean>
-	<bean id="QuestionDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="target" ref="QuestionDAOImpl" />
-		<property name="interceptorNames">
-			<list>
-				<value>transactionInterceptor</value>
-			</list>
-		</property>
+	<bean id="questionDao" parent="proxy">
+		<property name="target" ref="basicQuestionDao" />
 	</bean>
-	<bean id="PaymentVariantDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="target" ref="PaymentVariantDAOImpl" />
-		<property name="interceptorNames">
-			<list>
-				<value>transactionInterceptor</value>
-			</list>
-		</property>
+	<bean id="paymentVariantDao" parent="proxy">
+		<property name="target" ref="basicPaymentVariantDao" />
 	</bean>
-	<bean id="PaymentDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="target" ref="PaymentDAOImpl" />
-		<property name="interceptorNames">
-			<list>
-				<value>transactionInterceptor</value>
-			</list>
-		</property>
+	<bean id="paymentDao" parent="proxy">
+		<property name="target" ref="basicPaymentDao" />
 	</bean>
 
-	<bean id="QuoteDAOImpl" class="kickstarter.dao.QuoteDao">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	<bean id="CategoryDAOImpl" class="kickstarter.dao.CategoryDao">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	<bean id="ProjectDAOImpl" class="kickstarter.dao.ProjectDao">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	<bean id="QuestionDAOImpl" class="kickstarter.dao.QuestionDao">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	<bean id="PaymentVariantDAOImpl" class="kickstarter.dao.PaymentVariantDao">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	<bean id="PaymentDAOImpl" class="kickstarter.dao.PaymentDao">
-		<property name="sessionFactory" ref="sessionFactory" />
+	<bean id="basicQuoteDao" class="kickstarter.dao.QuoteDao"
+		autowire="byName" />
+	<bean id="basicCategoryDao" class="kickstarter.dao.CategoryDao"
+		autowire="byName" />
+	<bean id="basicProjectDao" class="kickstarter.dao.ProjectDao"
+		autowire="byName" />
+	<bean id="basicQuestionDao" class="kickstarter.dao.QuestionDao"
+		autowire="byName" />
+	<bean id="basicPaymentVariantDao" class="kickstarter.dao.PaymentVariantDao"
+		autowire="byName" />
+	<bean id="basicPaymentDao" class="kickstarter.dao.PaymentDao"
+		autowire="byName" />
+
+	<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean"
+		abstract="true">
+		<property name="interceptorNames">
+			<list>
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="transactionInterceptor"
@@ -83,15 +56,12 @@
 	</bean>
 
 	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+		autowire="byName" />
 
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location">
-			<value>classpath:hibernate\database.properties</value>
-		</property>
+		<property name="location" value="classpath:hibernate\database.properties" />
 	</bean>
 
 	<bean id="dataSource"
@@ -104,18 +74,13 @@
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-
-		<property name="dataSource">
-			<ref bean="dataSource" />
-		</property>
-
+		<property name="dataSource" ref="dataSource" />
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 			</props>
 		</property>
-
 		<property name="mappingResources">
 			<list>
 				<value>\hibernate\Quote.hbm.xml</value>

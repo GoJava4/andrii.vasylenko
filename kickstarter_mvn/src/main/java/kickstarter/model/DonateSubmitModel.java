@@ -11,20 +11,20 @@ import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class DonateSubmitModel implements Model {
-	private Dao<Project> projectDAO;
-	private Dao<PaymentVariant> paymentVariantDAO;
-	private Dao<Payment> paymentDAO;
+	private Dao<Project> projectDao;
+	private Dao<PaymentVariant> paymentVariantDao;
+	private Dao<Payment> paymentDao;
 
-	public void setProjectDAO(Dao<Project> projectDAO) {
-		this.projectDAO = projectDAO;
+	public void setProjectDao(Dao<Project> projectDao) {
+		this.projectDao = projectDao;
 	}
 
-	public void setPaymentVariantDAO(Dao<PaymentVariant> paymentVariantDAO) {
-		this.paymentVariantDAO = paymentVariantDAO;
+	public void setPaymentVariantDao(Dao<PaymentVariant> paymentVariantDao) {
+		this.paymentVariantDao = paymentVariantDao;
 	}
 
-	public void setPaymentDAO(Dao<Payment> paymentDAO) {
-		this.paymentDAO = paymentDAO;
+	public void setPaymentDao(Dao<Payment> paymentDao) {
+		this.paymentDao = paymentDao;
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class DonateSubmitModel implements Model {
 		int categoryId = getCategoryId(parameters);
 
 		int amount = getAmount(parameters);
-		Project project = projectDAO.getEntity(projectId, categoryId);
+		Project project = projectDao.getEntity(projectId, categoryId);
 
 		donate(amount, project);
 
@@ -52,7 +52,7 @@ public class DonateSubmitModel implements Model {
 		Payment payment = new Payment();
 		payment.setProject(project);
 		payment.setAmount(amount);
-		paymentDAO.addEntity(payment);
+		paymentDao.addEntity(payment);
 	}
 
 	private int getAmount(Map<String, String[]> parameters) throws DataBaseException, IncorrectInputException {
@@ -75,7 +75,7 @@ public class DonateSubmitModel implements Model {
 	private int getAmountFromPaymentVariant(String paymentVariant, int projectId) throws DataBaseException,
 			IncorrectInputException {
 		int paymentVariantId = Integer.parseInt(paymentVariant);
-		PaymentVariant entity = paymentVariantDAO.getEntity(paymentVariantId, projectId);
+		PaymentVariant entity = paymentVariantDao.getEntity(paymentVariantId, projectId);
 		return entity.getAmount();
 	}
 

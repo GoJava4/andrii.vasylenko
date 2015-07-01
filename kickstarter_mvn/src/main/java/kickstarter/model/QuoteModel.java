@@ -10,10 +10,10 @@ import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class QuoteModel implements Model {
-	private Dao<Quote> quoteDAO;
+	private Dao<Quote> quoteDao;
 
-	public void setQuoteDAO(Dao<Quote> quoteDAO) {
-		this.quoteDAO = quoteDAO;
+	public void setQuoteDao(Dao<Quote> quoteDao) {
+		this.quoteDao = quoteDao;
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class QuoteModel implements Model {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		result.put("quote", quoteDAO.getEntity());
+		result.put("quote", quoteDao.getEntity());
 
 		return result;
 	}

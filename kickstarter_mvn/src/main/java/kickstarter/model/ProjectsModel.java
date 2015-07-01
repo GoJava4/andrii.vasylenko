@@ -9,10 +9,10 @@ import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class ProjectsModel implements Model {
-	private Dao<Project> projectDAO;
+	private Dao<Project> projectDao;
 
-	public void setProjectDAO(Dao<Project> projectDAO) {
-		this.projectDAO = projectDAO;
+	public void setProjectDao(Dao<Project> projectDao) {
+		this.projectDao = projectDao;
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class ProjectsModel implements Model {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		result.put("projects", projectDAO.getEntities(getCategoryId(parameters)));
+		result.put("projects", projectDao.getEntities(getCategoryId(parameters)));
 
 		return result;
 	}

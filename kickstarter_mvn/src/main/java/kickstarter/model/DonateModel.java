@@ -10,15 +10,15 @@ import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class DonateModel implements Model {
-	private Dao<Project> projectDAO;
-	private Dao<PaymentVariant> paymentVariantDAO;
+	private Dao<Project> projectDao;
+	private Dao<PaymentVariant> paymentVariantDao;
 
-	public void setProjectDAO(Dao<Project> projectDAO) {
-		this.projectDAO = projectDAO;
+	public void setProjectDao(Dao<Project> projectDao) {
+		this.projectDao = projectDao;
 	}
 
-	public void setPaymentVariantDAO(Dao<PaymentVariant> paymentVariantDAO) {
-		this.paymentVariantDAO = paymentVariantDAO;
+	public void setPaymentVariantDao(Dao<PaymentVariant> paymentVariantDao) {
+		this.paymentVariantDao = paymentVariantDao;
 	}
 
 	@Override
@@ -30,8 +30,8 @@ public class DonateModel implements Model {
 
 		int projectId = getProjectId(parameters);
 		int categoryId = getCategoryId(parameters);
-		result.put("project", projectDAO.getEntity(projectId, categoryId));
-		result.put("paymentVariants", paymentVariantDAO.getEntities(projectId));
+		result.put("project", projectDao.getEntity(projectId, categoryId));
+		result.put("paymentVariants", paymentVariantDao.getEntities(projectId));
 
 		return result;
 	}

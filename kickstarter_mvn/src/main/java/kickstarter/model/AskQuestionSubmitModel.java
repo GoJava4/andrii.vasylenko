@@ -10,15 +10,15 @@ import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class AskQuestionSubmitModel implements Model {
-	private Dao<Project> projectDAO;
-	private Dao<Question> questionDAO;
+	private Dao<Project> projectDao;
+	private Dao<Question> questionDao;
 
-	public void setProjectDAO(Dao<Project> projectDAO) {
-		this.projectDAO = projectDAO;
+	public void setProjectDao(Dao<Project> projectDao) {
+		this.projectDao = projectDao;
 	}
 
-	public void setQuestionDAO(Dao<Question> questionDAO) {
-		this.questionDAO = questionDAO;
+	public void setQuestionDao(Dao<Question> questionDao) {
+		this.questionDao = questionDao;
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class AskQuestionSubmitModel implements Model {
 		int projectId = getProjectId(parameters);
 		int categoryId = getCategoryId(parameters);
 		String question = getQuestion(parameters);
-		Project project = projectDAO.getEntity(projectId, categoryId);
+		Project project = projectDao.getEntity(projectId, categoryId);
 
 		addQuestion(question, project);
 
@@ -49,7 +49,7 @@ public class AskQuestionSubmitModel implements Model {
 		Question entity = new Question();
 		entity.setProject(project);
 		entity.setQuestion(question);
-		questionDAO.addEntity(entity);
+		questionDao.addEntity(entity);
 	}
 
 	private String getQuestion(Map<String, String[]> parameters) {

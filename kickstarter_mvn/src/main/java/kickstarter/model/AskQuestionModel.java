@@ -9,10 +9,10 @@ import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class AskQuestionModel implements Model {
-	private Dao<Project> projectDAO;
+	private Dao<Project> projectDao;
 
-	public void setProjectDAO(Dao<Project> projectDAO) {
-		this.projectDAO = projectDAO;
+	public void setProjectDao(Dao<Project> projectDao) {
+		this.projectDao = projectDao;
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class AskQuestionModel implements Model {
 
 		int projectId = getProjectId(parameters);
 		int categoryId = getCategoryId(parameters);
-		result.put("project", projectDAO.getEntity(projectId, categoryId));
+		result.put("project", projectDao.getEntity(projectId, categoryId));
 
 		return result;
 	}
