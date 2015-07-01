@@ -52,22 +52,22 @@
 		</property>
 	</bean>
 
-	<bean id="QuoteDAOImpl" class="kickstarter.dao.QuoteDAOImpl">
+	<bean id="QuoteDAOImpl" class="kickstarter.dao.QuoteDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<bean id="CategoryDAOImpl" class="kickstarter.dao.CategoryDAOImpl">
+	<bean id="CategoryDAOImpl" class="kickstarter.dao.CategoryDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<bean id="ProjectDAOImpl" class="kickstarter.dao.ProjectDAOImpl">
+	<bean id="ProjectDAOImpl" class="kickstarter.dao.ProjectDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<bean id="QuestionDAOImpl" class="kickstarter.dao.QuestionDAOImpl">
+	<bean id="QuestionDAOImpl" class="kickstarter.dao.QuestionDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<bean id="PaymentVariantDAOImpl" class="kickstarter.dao.PaymentVariantDAOImpl">
+	<bean id="PaymentVariantDAOImpl" class="kickstarter.dao.PaymentVariantDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-		<bean id="PaymentDAOImpl" class="kickstarter.dao.PaymentDAOImpl">
+	<bean id="PaymentDAOImpl" class="kickstarter.dao.PaymentDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 

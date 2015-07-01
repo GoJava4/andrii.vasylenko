@@ -3,21 +3,21 @@ package kickstarter.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.DAO;
+import kickstarter.dao.Dao;
 import kickstarter.entity.Project;
 import kickstarter.entity.Question;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class ProjectModel implements Model {
-	private DAO<Project> projectDAO;
-	private DAO<Question> questionDAO;
+	private Dao<Project> projectDAO;
+	private Dao<Question> questionDAO;
 
-	public void setProjectDAO(DAO<Project> projectDAO) {
+	public void setProjectDAO(Dao<Project> projectDAO) {
 		this.projectDAO = projectDAO;
 	}
 
-	public void setQuestionDAO(DAO<Question> questionDAO) {
+	public void setQuestionDAO(Dao<Question> questionDAO) {
 		this.questionDAO = questionDAO;
 	}
 

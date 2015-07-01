@@ -3,7 +3,7 @@ package kickstarter.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.DAO;
+import kickstarter.dao.Dao;
 import kickstarter.entity.Payment;
 import kickstarter.entity.PaymentVariant;
 import kickstarter.entity.Project;
@@ -11,19 +11,19 @@ import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class DonateSubmitModel implements Model {
-	private DAO<Project> projectDAO;
-	private DAO<PaymentVariant> paymentVariantDAO;
-	private DAO<Payment> paymentDAO;
+	private Dao<Project> projectDAO;
+	private Dao<PaymentVariant> paymentVariantDAO;
+	private Dao<Payment> paymentDAO;
 
-	public void setProjectDAO(DAO<Project> projectDAO) {
+	public void setProjectDAO(Dao<Project> projectDAO) {
 		this.projectDAO = projectDAO;
 	}
 
-	public void setPaymentVariantDAO(DAO<PaymentVariant> paymentVariantDAO) {
+	public void setPaymentVariantDAO(Dao<PaymentVariant> paymentVariantDAO) {
 		this.paymentVariantDAO = paymentVariantDAO;
 	}
 
-	public void setPaymentDAO(DAO<Payment> paymentDAO) {
+	public void setPaymentDAO(Dao<Payment> paymentDAO) {
 		this.paymentDAO = paymentDAO;
 	}
 
@@ -48,7 +48,7 @@ public class DonateSubmitModel implements Model {
 		return result;
 	}
 
-	private void donate(int amount, Project project) throws DataBaseException {
+	private void donate(int amount, Project project) throws DataBaseException, IncorrectInputException {
 		Payment payment = new Payment();
 		payment.setProject(project);
 		payment.setAmount(amount);
@@ -72,7 +72,8 @@ public class DonateSubmitModel implements Model {
 		return amount;
 	}
 
-	private int getAmountFromPaymentVariant(String paymentVariant, int projectId) throws DataBaseException {
+	private int getAmountFromPaymentVariant(String paymentVariant, int projectId) throws DataBaseException,
+			IncorrectInputException {
 		int paymentVariantId = Integer.parseInt(paymentVariant);
 		PaymentVariant entity = paymentVariantDAO.getEntity(paymentVariantId, projectId);
 		return entity.getAmount();

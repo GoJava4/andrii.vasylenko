@@ -3,15 +3,15 @@ package kickstarter.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.DAO;
+import kickstarter.dao.Dao;
 import kickstarter.entity.Project;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class ProjectsModel implements Model {
-	private DAO<Project> projectDAO;
+	private Dao<Project> projectDAO;
 
-	public void setProjectDAO(DAO<Project> projectDAO) {
+	public void setProjectDAO(Dao<Project> projectDAO) {
 		this.projectDAO = projectDAO;
 	}
 

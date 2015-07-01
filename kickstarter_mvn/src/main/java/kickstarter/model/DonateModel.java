@@ -3,21 +3,21 @@ package kickstarter.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.DAO;
+import kickstarter.dao.Dao;
 import kickstarter.entity.PaymentVariant;
 import kickstarter.entity.Project;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class DonateModel implements Model {
-	private DAO<Project> projectDAO;
-	private DAO<PaymentVariant> paymentVariantDAO;
+	private Dao<Project> projectDAO;
+	private Dao<PaymentVariant> paymentVariantDAO;
 
-	public void setProjectDAO(DAO<Project> projectDAO) {
+	public void setProjectDAO(Dao<Project> projectDAO) {
 		this.projectDAO = projectDAO;
 	}
 
-	public void setPaymentVariantDAO(DAO<PaymentVariant> paymentVariantDAO) {
+	public void setPaymentVariantDAO(Dao<PaymentVariant> paymentVariantDAO) {
 		this.paymentVariantDAO = paymentVariantDAO;
 	}
 
