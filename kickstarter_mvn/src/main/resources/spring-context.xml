@@ -5,78 +5,78 @@
 
 	<import resource="classpath:hibernate-context.xml" />
 
-	<bean id="QuoteServlet" class="kickstarter.Kickstarter">
-		<constructor-arg ref="QuoteView" />
-		<constructor-arg ref="QuoteModel" />
+	<bean id="quoteServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="quoteView" />
+		<constructor-arg ref="quoteModel" />
 	</bean>
-	<bean id="CategoriesServlet" class="kickstarter.Kickstarter">
-		<constructor-arg ref="CategoriesView" />
-		<constructor-arg ref="CategoriesModel" />
+	<bean id="categoriesServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="categoriesView" />
+		<constructor-arg ref="categoriesModel" />
 	</bean>
-	<bean id="ProjectsServlet" class="kickstarter.Kickstarter">
-		<constructor-arg ref="ProjectsView" />
-		<constructor-arg ref="ProjectsModel" />
+	<bean id="projectsServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="projectsView" />
+		<constructor-arg ref="projectsModel" />
 	</bean>
-	<bean id="ProjectServlet" class="kickstarter.Kickstarter">
-		<constructor-arg ref="ProjectView" />
-		<constructor-arg ref="ProjectModel" />
+	<bean id="projectServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="projectView" />
+		<constructor-arg ref="projectModel" />
 	</bean>
-	<bean id="AskQuestionServlet" class="kickstarter.Kickstarter">
-		<constructor-arg ref="AskQuestionView" />
-		<constructor-arg ref="AskQuestionModel" />
+	<bean id="askQuestionServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="askQuestionView" />
+		<constructor-arg ref="askQuestionModel" />
 	</bean>
-	<bean id="AskQuestionSubmitServlet" class="kickstarter.Kickstarter">
-		<constructor-arg ref="AskQuestionSubmitView" />
-		<constructor-arg ref="AskQuestionSubmitModel" />
+	<bean id="askQuestionSubmitServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="askQuestionSubmitView" />
+		<constructor-arg ref="askQuestionSubmitModel" />
 	</bean>
-	<bean id="DonateServlet" class="kickstarter.Kickstarter">
-		<constructor-arg ref="DonateView" />
-		<constructor-arg ref="DonateModel" />
+	<bean id="donateServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="donateView" />
+		<constructor-arg ref="donateModel" />
 	</bean>
-	<bean id="DonateSubmitServlet" class="kickstarter.Kickstarter">
-		<constructor-arg ref="DonateSubmitView" />
-		<constructor-arg ref="DonateSubmitModel" />
+	<bean id="donateSubmitServlet" class="kickstarter.Kickstarter">
+		<constructor-arg ref="donateSubmitView" />
+		<constructor-arg ref="donateSubmitModel" />
 	</bean>
 
-	<bean id="QuoteView" class="kickstarter.view.JspView">
+	<bean id="quoteView" class="kickstarter.view.JspView">
 		<constructor-arg value="/Quote.jsp" />
 	</bean>
-	<bean id="CategoriesView" class="kickstarter.view.JspView">
+	<bean id="categoriesView" class="kickstarter.view.JspView">
 		<constructor-arg value="/Categories.jsp" />
 	</bean>
-	<bean id="ProjectsView" class="kickstarter.view.JspView">
+	<bean id="projectsView" class="kickstarter.view.JspView">
 		<constructor-arg value="/Projects.jsp" />
 	</bean>
-	<bean id="ProjectView" class="kickstarter.view.JspView">
+	<bean id="projectView" class="kickstarter.view.JspView">
 		<constructor-arg value="/Project.jsp" />
 	</bean>
-	<bean id="AskQuestionView" class="kickstarter.view.JspView">
+	<bean id="askQuestionView" class="kickstarter.view.JspView">
 		<constructor-arg value="/AskQuestion.jsp" />
 	</bean>
-	<bean id="AskQuestionSubmitView" class="kickstarter.view.JspView">
+	<bean id="askQuestionSubmitView" class="kickstarter.view.JspView">
 		<constructor-arg value="/AskQuestionSubmit.jsp" />
 	</bean>
-	<bean id="DonateView" class="kickstarter.view.JspView">
+	<bean id="donateView" class="kickstarter.view.JspView">
 		<constructor-arg value="/Donate.jsp" />
 	</bean>
-	<bean id="DonateSubmitView" class="kickstarter.view.JspView">
+	<bean id="donateSubmitView" class="kickstarter.view.JspView">
 		<constructor-arg value="/DonateSubmit.jsp" />
 	</bean>
 
-	<bean id="QuoteModel" class="kickstarter.model.QuoteModel"
+	<bean id="quoteModel" class="kickstarter.model.QuoteModel"
 		autowire="byName" />
-	<bean id="CategoriesModel" class="kickstarter.model.CategoriesModel"
+	<bean id="categoriesModel" class="kickstarter.model.CategoriesModel"
 		autowire="byName" />
-	<bean id="ProjectsModel" class="kickstarter.model.ProjectsModel"
+	<bean id="projectsModel" class="kickstarter.model.ProjectsModel"
 		autowire="byName" />
-	<bean id="ProjectModel" class="kickstarter.model.ProjectModel"
+	<bean id="projectModel" class="kickstarter.model.ProjectModel"
 		autowire="byName" />
-	<bean id="AskQuestionModel" class="kickstarter.model.AskQuestionModel"
+	<bean id="askQuestionModel" class="kickstarter.model.AskQuestionModel"
 		autowire="byName" />
-	<bean id="AskQuestionSubmitModel" class="kickstarter.model.AskQuestionSubmitModel"
+	<bean id="askQuestionSubmitModel" class="kickstarter.model.AskQuestionSubmitModel"
 		autowire="byName" />
-	<bean id="DonateModel" class="kickstarter.model.DonateModel"
+	<bean id="donateModel" class="kickstarter.model.DonateModel"
 		autowire="byName" />
-	<bean id="DonateSubmitModel" class="kickstarter.model.DonateSubmitModel"
+	<bean id="donateSubmitModel" class="kickstarter.model.DonateSubmitModel"
 		autowire="byName" />
 </beans>

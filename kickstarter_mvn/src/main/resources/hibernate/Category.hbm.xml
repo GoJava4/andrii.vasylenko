@@ -20,6 +20,5 @@
 			</key>
 			<one-to-many class="kickstarter.entity.Project" />
 		</set>
-
 	</class>
 </hibernate-mapping>
