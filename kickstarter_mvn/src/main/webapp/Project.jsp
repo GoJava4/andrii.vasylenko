@@ -31,7 +31,7 @@
 		<c:out value=" link= ${project.link}" />
 	</h3>
 	<h3>Questions and answers:</h3>
-	<c:forEach var="question" items="${questions}">
+	<c:forEach var="question" items="${project.questions}">
 		<h3>
 			<c:out value=" question= ${question.question}" />
 		</h3>

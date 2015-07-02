@@ -8,6 +8,7 @@ import kickstarter.exception.IncorrectInputException;
 
 public class QuestionDao extends AbstractDao<Question> {
 	private final static String CONDITION_FOR_LIST_OF_ENTITIES = "where id_project = ?";
+	private final static String CONDITION_FOR_ONE_ENTITY = "where id = ? and id_project = ?";
 
 	/**
 	 * expect one parameter - id of project
@@ -19,11 +20,13 @@ public class QuestionDao extends AbstractDao<Question> {
 	}
 
 	/**
-	 * do not need any parameters
+	 * expect two parameters: 0 - id of question, 1 - id of project
 	 */
 	@Override
 	public Question getEntity(Object... parameters) throws DataBaseException, IncorrectInputException {
-		return find("", 1).get(0);
+		int questionId = getIntParameter(0, parameters);
+		int projectId = getIntParameter(1, parameters);
+		return find(CONDITION_FOR_ONE_ENTITY, 1, questionId, projectId).get(0);
 	}
 
 	@Override

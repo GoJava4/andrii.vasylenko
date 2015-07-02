@@ -5,20 +5,14 @@ import java.util.Map;
 
 import kickstarter.dao.Dao;
 import kickstarter.entity.Project;
-import kickstarter.entity.Question;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class ProjectModel implements Model {
 	private Dao<Project> projectDao;
-	private Dao<Question> questionDao;
 
 	public void setProjectDao(Dao<Project> projectDao) {
 		this.projectDao = projectDao;
-	}
-
-	public void setQuestionDao(Dao<Question> questionDao) {
-		this.questionDao = questionDao;
 	}
 
 	@Override
@@ -31,7 +25,6 @@ public class ProjectModel implements Model {
 		int projectId = getProjectId(parameters);
 		int categoryId = getCategoryId(parameters);
 		result.put("project", projectDao.getEntity(projectId, categoryId));
-		result.put("questions", questionDao.getEntities(projectId));
 
 		return result;
 	}

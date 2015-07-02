@@ -6,14 +6,14 @@ import kickstarter.entity.Quote;
 import kickstarter.exception.DataBaseException;
 
 public class QuoteDao extends AbstractDao<Quote> {
-	private final static String CONDITION_FOR_ONE_ENTITY = "order by random()";
+	private final static String RANDOM_ORDER = "order by random()";
 
 	/**
 	 * do not need any parameters
 	 */
 	@Override
 	public List<Quote> getEntities(Object... parameters) throws DataBaseException {
-		return find("", 0);
+		return find(RANDOM_ORDER, 0);
 	}
 
 	/**
@@ -21,7 +21,7 @@ public class QuoteDao extends AbstractDao<Quote> {
 	 */
 	@Override
 	public Quote getEntity(Object... parameters) throws DataBaseException {
-		return find(CONDITION_FOR_ONE_ENTITY, 1).get(0);
+		return find(RANDOM_ORDER, 1).get(0);
 	}
 
 	@Override

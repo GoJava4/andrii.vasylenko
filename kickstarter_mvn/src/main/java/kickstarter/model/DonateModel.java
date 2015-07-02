@@ -4,21 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import kickstarter.dao.Dao;
-import kickstarter.entity.PaymentVariant;
 import kickstarter.entity.Project;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class DonateModel implements Model {
 	private Dao<Project> projectDao;
-	private Dao<PaymentVariant> paymentVariantDao;
 
 	public void setProjectDao(Dao<Project> projectDao) {
 		this.projectDao = projectDao;
-	}
-
-	public void setPaymentVariantDao(Dao<PaymentVariant> paymentVariantDao) {
-		this.paymentVariantDao = paymentVariantDao;
 	}
 
 	@Override
@@ -31,7 +25,6 @@ public class DonateModel implements Model {
 		int projectId = getProjectId(parameters);
 		int categoryId = getCategoryId(parameters);
 		result.put("project", projectDao.getEntity(projectId, categoryId));
-		result.put("paymentVariants", paymentVariantDao.getEntities(projectId));
 
 		return result;
 	}
