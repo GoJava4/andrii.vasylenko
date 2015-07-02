@@ -14,7 +14,7 @@
 		</property>
 
 		<set name="projects" table="Projects" inverse="true" lazy="true"
-			fetch="select">
+			fetch="subselect">
 			<key>
 				<column name="id_category" not-null="true" />
 			</key>

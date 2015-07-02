@@ -10,7 +10,7 @@
 		</id>
 
 		<many-to-one name="project" class="kickstarter.entity.Project"
-			fetch="select">
+			fetch="join">
 			<column name="id_project" not-null="true" />
 		</many-to-one>
 

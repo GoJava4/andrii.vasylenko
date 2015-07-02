@@ -10,7 +10,7 @@
 		</id>
 
 		<many-to-one name="category" class="kickstarter.entity.Category"
-			fetch="select">
+			fetch="join">
 			<column name="id_category" not-null="true" />
 		</many-to-one>
 
@@ -39,7 +39,7 @@
 		</property>
 
 		<set name="payments" table="Payments" inverse="true" lazy="true"
-			fetch="select">
+			fetch="subselect">
 			<key>
 				<column name="id_project" not-null="true" />
 			</key>
@@ -47,7 +47,7 @@
 		</set>
 
 		<set name="questions" table="Questions" inverse="true" lazy="true"
-			fetch="select">
+			fetch="subselect">
 			<key>
 				<column name="id_project" not-null="true" />
 			</key>
@@ -55,7 +55,7 @@
 		</set>
 
 		<set name="paymentVariants" table="PaymentVariants" inverse="true"
-			lazy="true" fetch="select">
+			lazy="true" fetch="subselect">
 			<key>
 				<column name="id_project" not-null="true" />
 			</key>
