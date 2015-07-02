@@ -3,21 +3,22 @@ package kickstarter.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.Dao;
+import kickstarter.dao.ProjectDao;
+import kickstarter.dao.QuestionDao;
 import kickstarter.entity.Project;
 import kickstarter.entity.Question;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class AskQuestionSubmitModel implements Model {
-	private Dao<Project> projectDao;
-	private Dao<Question> questionDao;
+	private ProjectDao projectDao;
+	private QuestionDao questionDao;
 
-	public void setProjectDao(Dao<Project> projectDao) {
+	public void setProjectDao(ProjectDao projectDao) {
 		this.projectDao = projectDao;
 	}
 
-	public void setQuestionDao(Dao<Question> questionDao) {
+	public void setQuestionDao(QuestionDao questionDao) {
 		this.questionDao = questionDao;
 	}
 
@@ -29,7 +30,7 @@ public class AskQuestionSubmitModel implements Model {
 		int projectId = getProjectId(parameters);
 		int categoryId = getCategoryId(parameters);
 		String question = getQuestion(parameters);
-		Project project = projectDao.getEntity(projectId, categoryId);
+		Project project = projectDao.getProject(projectId, categoryId);
 
 		addQuestion(question, project);
 
@@ -49,7 +50,7 @@ public class AskQuestionSubmitModel implements Model {
 		Question entity = new Question();
 		entity.setProject(project);
 		entity.setQuestion(question);
-		questionDao.addEntity(entity);
+		questionDao.addQuestion(entity);
 	}
 
 	private String getQuestion(Map<String, String[]> parameters) {

@@ -3,7 +3,9 @@ package kickstarter.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.Dao;
+import kickstarter.dao.PaymentDao;
+import kickstarter.dao.PaymentVariantDao;
+import kickstarter.dao.ProjectDao;
 import kickstarter.entity.Payment;
 import kickstarter.entity.PaymentVariant;
 import kickstarter.entity.Project;
@@ -11,19 +13,19 @@ import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class DonateSubmitModel implements Model {
-	private Dao<Project> projectDao;
-	private Dao<PaymentVariant> paymentVariantDao;
-	private Dao<Payment> paymentDao;
+	private ProjectDao projectDao;
+	private PaymentVariantDao paymentVariantDao;
+	private PaymentDao paymentDao;
 
-	public void setProjectDao(Dao<Project> projectDao) {
+	public void setProjectDao(ProjectDao projectDao) {
 		this.projectDao = projectDao;
 	}
 
-	public void setPaymentVariantDao(Dao<PaymentVariant> paymentVariantDao) {
+	public void setPaymentVariantDao(PaymentVariantDao paymentVariantDao) {
 		this.paymentVariantDao = paymentVariantDao;
 	}
 
-	public void setPaymentDao(Dao<Payment> paymentDao) {
+	public void setPaymentDao(PaymentDao paymentDao) {
 		this.paymentDao = paymentDao;
 	}
 
@@ -36,7 +38,7 @@ public class DonateSubmitModel implements Model {
 		int categoryId = getCategoryId(parameters);
 
 		int amount = getAmount(parameters);
-		Project project = projectDao.getEntity(projectId, categoryId);
+		Project project = projectDao.getProject(projectId, categoryId);
 
 		donate(amount, project);
 
@@ -52,7 +54,7 @@ public class DonateSubmitModel implements Model {
 		Payment payment = new Payment();
 		payment.setProject(project);
 		payment.setAmount(amount);
-		paymentDao.addEntity(payment);
+		paymentDao.addPayment(payment);
 	}
 
 	private int getAmount(Map<String, String[]> parameters) throws DataBaseException, IncorrectInputException {
@@ -75,7 +77,7 @@ public class DonateSubmitModel implements Model {
 	private int getAmountFromPaymentVariant(String paymentVariant, int projectId) throws DataBaseException,
 			IncorrectInputException {
 		int paymentVariantId = Integer.parseInt(paymentVariant);
-		PaymentVariant entity = paymentVariantDao.getEntity(paymentVariantId, projectId);
+		PaymentVariant entity = paymentVariantDao.getPaymentVariant(paymentVariantId, projectId);
 		return entity.getAmount();
 	}
 

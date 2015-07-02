@@ -3,16 +3,14 @@ package kickstarter.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.Dao;
-
-import kickstarter.entity.Quote;
+import kickstarter.dao.QuoteDao;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class QuoteModel implements Model {
-	private Dao<Quote> quoteDao;
+	private QuoteDao quoteDao;
 
-	public void setQuoteDao(Dao<Quote> quoteDao) {
+	public void setQuoteDao(QuoteDao quoteDao) {
 		this.quoteDao = quoteDao;
 	}
 
@@ -22,7 +20,7 @@ public class QuoteModel implements Model {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		result.put("quote", quoteDao.getEntity());
+		result.put("quote", quoteDao.getRandomQuote());
 
 		return result;
 	}

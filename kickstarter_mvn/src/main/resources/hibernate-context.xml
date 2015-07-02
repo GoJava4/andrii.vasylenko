@@ -22,17 +22,24 @@
 		<property name="target" ref="basicPaymentDao" />
 	</bean>
 
-	<bean id="basicQuoteDao" class="kickstarter.dao.QuoteDao"
-		autowire="byName" />
-	<bean id="basicCategoryDao" class="kickstarter.dao.CategoryDao"
-		autowire="byName" />
-	<bean id="basicProjectDao" class="kickstarter.dao.ProjectDao"
-		autowire="byName" />
-	<bean id="basicQuestionDao" class="kickstarter.dao.QuestionDao"
-		autowire="byName" />
-	<bean id="basicPaymentVariantDao" class="kickstarter.dao.PaymentVariantDao"
-		autowire="byName" />
-	<bean id="basicPaymentDao" class="kickstarter.dao.PaymentDao"
+	<bean id="basicQuoteDao" class="kickstarter.dao.QuoteDaoImpl"
+		parent="basicDao" />
+	<bean id="basicCategoryDao" class="kickstarter.dao.CategoryDaoImpl"
+		parent="basicDao" />
+	<bean id="basicProjectDao" class="kickstarter.dao.ProjectDaoImpl"
+		parent="basicDao" />
+	<bean id="basicQuestionDao" class="kickstarter.dao.QuestionDaoImpl"
+		parent="basicDao" />
+	<bean id="basicPaymentVariantDao" class="kickstarter.dao.PaymentVariantDaoImpl"
+		parent="basicDao" />
+	<bean id="basicPaymentDao" class="kickstarter.dao.PaymentDaoImpl"
+		parent="basicDao" />
+
+	<bean id="basicDao" abstract="true">
+		<constructor-arg ref="daoSupport" />
+	</bean>
+
+	<bean id="daoSupport" class="kickstarter.dao.support.DaoSupportImpl"
 		autowire="byName" />
 
 	<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean"

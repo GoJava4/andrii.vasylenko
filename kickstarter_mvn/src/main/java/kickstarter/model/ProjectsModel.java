@@ -3,15 +3,14 @@ package kickstarter.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import kickstarter.dao.Dao;
-import kickstarter.entity.Project;
+import kickstarter.dao.ProjectDao;
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
 public class ProjectsModel implements Model {
-	private Dao<Project> projectDao;
+	private ProjectDao projectDao;
 
-	public void setProjectDao(Dao<Project> projectDao) {
+	public void setProjectDao(ProjectDao projectDao) {
 		this.projectDao = projectDao;
 	}
 
@@ -22,7 +21,7 @@ public class ProjectsModel implements Model {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		result.put("projects", projectDao.getEntities(getCategoryId(parameters)));
+		result.put("projects", projectDao.getProjects(getCategoryId(parameters)));
 
 		return result;
 	}
