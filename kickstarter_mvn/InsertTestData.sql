@@ -17,29 +17,29 @@ insert into Categories
 
 insert into Projects ( 
 id_category, name, description, 
-total_amount, days_left,  
+total_amount, final_date,  
 history, link 
 ) 
 values(1, 'velo parking', 'velo parking in Kiev', 
-10000, 100,  
+10000, '2015-09-30',  
 'History1', 'www.project1.com');
 
 insert into Projects ( 
 id_category, name, description, 
-total_amount, days_left,  
+total_amount, final_date,  
 history, link 
 ) 
 values(1, 'velo track', 'velo track in Kiev', 
-100000, 200,  
+100000, '2015-12-31',  
 'History2', 'www.project2.com');
 		
 insert into Projects ( 
 id_category, name, description, 
-total_amount, days_left,  
+total_amount, final_date,  
 history, link 
 ) 
 values(2, 'IT-school', 'IT - future of Ukraine', 
-1000000, 1000,  
+1000000, '2016-05-31',  
 'History3', 'www.project3.com');
 
 

@@ -24,7 +24,7 @@ CREATE TABLE Projects
   name character varying(255),
   description character varying(255),
   total_amount integer,
-  days_left integer,
+  final_date date,
   history character varying(255),
   link character varying(255),
   CONSTRAINT projects_pkey PRIMARY KEY (id),

@@ -26,8 +26,8 @@
 			<column name="total_amount" length="255" />
 		</property>
 
-		<property name="daysLeft" type="java.lang.Integer">
-			<column name="days_left" length="255" />
+		<property name="finalDate" type="java.util.Date">
+			<column name="final_date" />
 		</property>
 
 		<property name="history" type="string">

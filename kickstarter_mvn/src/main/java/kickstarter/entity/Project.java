@@ -1,6 +1,7 @@
 package kickstarter.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 public class Project implements Serializable {
@@ -12,16 +13,13 @@ public class Project implements Serializable {
 	private String description;
 	private int totalAmount;
 	private int daysLeft;
+	private Date finalDate;
 	private int collectAmount;
 	private String history;
 	private String link;
 	private Set<Payment> payments;
 	private Set<Question> questions;
 	private Set<PaymentVariant> paymentVariants;
-
-	public int getCollectAmount() {
-		return collectAmount;
-	}
 
 	public int getId() {
 		return id;
@@ -63,14 +61,6 @@ public class Project implements Serializable {
 		this.totalAmount = totalAmount;
 	}
 
-	public int getDaysLeft() {
-		return daysLeft;
-	}
-
-	public void setDaysLeft(int daysLeft) {
-		this.daysLeft = daysLeft;
-	}
-
 	public String getHistory() {
 		return history;
 	}
@@ -87,15 +77,6 @@ public class Project implements Serializable {
 		this.link = link;
 	}
 
-	public Set<Payment> getPayments() {
-		return payments;
-	}
-
-	public void setPayments(Set<Payment> payments) {
-		this.payments = payments;
-		calcCollectAmount();
-	}
-
 	public Set<Question> getQuestions() {
 		return questions;
 	}
@@ -110,6 +91,37 @@ public class Project implements Serializable {
 
 	public void setPaymentVariants(Set<PaymentVariant> paymentVariants) {
 		this.paymentVariants = paymentVariants;
+	}
+
+	public int getDaysLeft() {
+		return daysLeft;
+	}
+
+	public Date getFinalDate() {
+		return finalDate;
+	}
+
+	public int getCollectAmount() {
+		return collectAmount;
+	}
+
+	public Set<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setFinalDate(Date finalDate) {
+		this.finalDate = finalDate;
+		calcDaysLeft();
+	}
+
+	public void setPayments(Set<Payment> payments) {
+		this.payments = payments;
+		calcCollectAmount();
+	}
+
+	private void calcDaysLeft() {
+		long diff = finalDate.getTime() - System.currentTimeMillis();
+		daysLeft = (int) (diff / 1000 / 60 / 60 / 24);
 	}
 
 	private void calcCollectAmount() {
