@@ -1,4 +1,4 @@
-package kickstarter.model.entity;
+package kickstarter.entity;
 
 import static org.junit.Assert.assertEquals;
 
