@@ -2,6 +2,8 @@ package kickstarter.dao.support;
 
 import java.util.List;
 
+import org.hibernate.criterion.DetachedCriteria;
+
 import kickstarter.exception.DataBaseException;
 import kickstarter.exception.IncorrectInputException;
 
@@ -17,14 +19,20 @@ public interface DaoSupport<T> {
 	/**
 	 * return list of entities from table of DB
 	 * 
-	 * @param tableName
-	 *            - name of DB table
-	 * @param condition
-	 *            - additional condition for 'SELECT' query
-	 * @param maxResults
-	 *            - the maximum number of rows in result
-	 * @param parameters
-	 *            - values which uses in condition
+	 * @param criteria
+	 *            - the detached Hibernate criteria object.
 	 */
-	List<T> find(String tableName, String condition, int maxResults, Object... parameters) throws DataBaseException;
+	List<T> find(DetachedCriteria criteria) throws DataBaseException;
+
+	/**
+	 * return list of entities from table of DB
+	 * 
+	 * @param query
+	 *            - a query expressed in Hibernate's query language
+	 * @param maxResults
+	 *            - maximum number of rows for result
+	 * @param parameters
+	 *            - the values of the parameters
+	 */
+	List<T> find(String query, int maxResults, Object... parameters) throws DataBaseException;
 }

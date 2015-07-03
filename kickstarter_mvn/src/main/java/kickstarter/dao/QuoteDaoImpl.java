@@ -5,8 +5,7 @@ import kickstarter.entity.Quote;
 import kickstarter.exception.DataBaseException;
 
 public class QuoteDaoImpl implements QuoteDao {
-	private final static String RANDOM_ORDER = "order by random()";
-	private final static String TABLE_NAME = Quote.class.getSimpleName();
+	private final static String QUERY_FOR_GET_RANDOM_ENTITY = "from %s order by random()";
 
 	private DaoSupport<Quote> daoSupport;
 
@@ -16,6 +15,7 @@ public class QuoteDaoImpl implements QuoteDao {
 
 	@Override
 	public Quote getRandomQuote() throws DataBaseException {
-		return daoSupport.find(TABLE_NAME, RANDOM_ORDER, 1).get(0);
+		String query = String.format(QUERY_FOR_GET_RANDOM_ENTITY, Quote.class.getSimpleName());
+		return daoSupport.find(query, 1).get(0);
 	}
 }

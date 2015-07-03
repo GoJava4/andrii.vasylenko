@@ -2,15 +2,14 @@ package kickstarter.dao;
 
 import java.util.List;
 
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
+
 import kickstarter.dao.support.DaoSupport;
 import kickstarter.entity.Project;
 import kickstarter.exception.DataBaseException;
 
 public class ProjectDaoImpl implements ProjectDao {
-	private final static String CONDITION_FOR_LIST_OF_ENTITIES = "where id_category = ?";
-	private final static String CONDITION_FOR_ONE_ENTITY = "where id = ? and id_category = ?";
-	private final static String TABLE_NAME = Project.class.getSimpleName();
-
 	private DaoSupport<Project> daoSupport;
 
 	public ProjectDaoImpl(DaoSupport<Project> daoSupport) {
@@ -19,11 +18,16 @@ public class ProjectDaoImpl implements ProjectDao {
 
 	@Override
 	public List<Project> getProjects(int categoryId) throws DataBaseException {
-		return daoSupport.find(TABLE_NAME, CONDITION_FOR_LIST_OF_ENTITIES, 0, categoryId);
+		DetachedCriteria criteria = DetachedCriteria.forClass(Project.class);
+		criteria.add(Restrictions.eq("category.id", categoryId));
+		return daoSupport.find(criteria);
 	}
 
 	@Override
 	public Project getProject(int projectId, int categoryId) throws DataBaseException {
-		return daoSupport.find(TABLE_NAME, CONDITION_FOR_ONE_ENTITY, 1, projectId, categoryId).get(0);
+		DetachedCriteria criteria = DetachedCriteria.forClass(Project.class);
+		criteria.add(Restrictions.idEq(projectId));
+		criteria.add(Restrictions.eq("category.id", categoryId));
+		return daoSupport.find(criteria).get(0);
 	}
 }
