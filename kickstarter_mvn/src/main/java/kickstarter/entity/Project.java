@@ -12,14 +12,25 @@ public class Project implements Serializable {
 	private String name;
 	private String description;
 	private int totalAmount;
-	private int daysLeft;
 	private Date finalDate;
-	private int collectAmount;
 	private String history;
 	private String link;
 	private Set<Payment> payments;
 	private Set<Question> questions;
 	private Set<PaymentVariant> paymentVariants;
+
+	public int getCollectAmount() {
+		int collectAmount = 0;
+		for (Payment payment : payments) {
+			collectAmount += payment.getAmount();
+		}
+		return collectAmount;
+	}
+
+	public int getDaysLeft() {
+		long diff = finalDate.getTime() - System.currentTimeMillis();
+		return (int) (diff / 1000 / 60 / 60 / 24);
+	}
 
 	public int getId() {
 		return id;
@@ -61,6 +72,14 @@ public class Project implements Serializable {
 		this.totalAmount = totalAmount;
 	}
 
+	public Date getFinalDate() {
+		return finalDate;
+	}
+
+	public void setFinalDate(Date finalDate) {
+		this.finalDate = finalDate;
+	}
+
 	public String getHistory() {
 		return history;
 	}
@@ -77,6 +96,14 @@ public class Project implements Serializable {
 		this.link = link;
 	}
 
+	public Set<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(Set<Payment> payments) {
+		this.payments = payments;
+	}
+
 	public Set<Question> getQuestions() {
 		return questions;
 	}
@@ -91,44 +118,5 @@ public class Project implements Serializable {
 
 	public void setPaymentVariants(Set<PaymentVariant> paymentVariants) {
 		this.paymentVariants = paymentVariants;
-	}
-
-	public int getDaysLeft() {
-		return daysLeft;
-	}
-
-	public Date getFinalDate() {
-		return finalDate;
-	}
-
-	public int getCollectAmount() {
-		return collectAmount;
-	}
-
-	public Set<Payment> getPayments() {
-		return payments;
-	}
-
-	public void setFinalDate(Date finalDate) {
-		this.finalDate = finalDate;
-		this.daysLeft = calcDaysLeft();
-	}
-
-	public void setPayments(Set<Payment> payments) {
-		this.payments = payments;
-		this.collectAmount = calcCollectAmount();
-	}
-
-	private int calcDaysLeft() {
-		long diff = finalDate.getTime() - System.currentTimeMillis();
-		return (int) (diff / 1000 / 60 / 60 / 24);
-	}
-
-	private int calcCollectAmount() {
-		int collectAmount = 0;
-		for (Payment payment : payments) {
-			collectAmount += payment.getAmount();
-		}
-		return collectAmount;
 	}
 }
