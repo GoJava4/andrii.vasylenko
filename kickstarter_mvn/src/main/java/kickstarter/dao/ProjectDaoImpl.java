@@ -2,32 +2,49 @@ package kickstarter.dao;
 
 import java.util.List;
 
-import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.transaction.annotation.Transactional;
 
-import kickstarter.dao.support.DaoSupport;
 import kickstarter.entity.Project;
 import kickstarter.exception.DataBaseException;
 
 public class ProjectDaoImpl implements ProjectDao {
-	private DaoSupport<Project> daoSupport;
+	private SessionFactory sessionFactory;
 
-	public ProjectDaoImpl(DaoSupport<Project> daoSupport) {
-		this.daoSupport = daoSupport;
+	public ProjectDaoImpl(SessionFactory sessionFactory) throws DataBaseException {
+		if (sessionFactory == null) {
+			throw new DataBaseException("sessionFactory is null");
+		}
+		this.sessionFactory = sessionFactory;
 	}
 
+	@Transactional(readOnly = true)
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Project> getProjects(int categoryId) throws DataBaseException {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Project.class);
-		criteria.add(Restrictions.eq("category.id", categoryId));
-		return daoSupport.find(criteria);
+		List<?> result = sessionFactory.getCurrentSession().createCriteria(Project.class)
+				.add(Restrictions.eq("category.id", categoryId)).list();
+
+		check(result);
+
+		return (List<Project>) result;
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public Project getProject(int projectId, int categoryId) throws DataBaseException {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Project.class);
-		criteria.add(Restrictions.idEq(projectId));
-		criteria.add(Restrictions.eq("category.id", categoryId));
-		return daoSupport.find(criteria).get(0);
+		List<?> result = sessionFactory.getCurrentSession().createCriteria(Project.class)
+				.add(Restrictions.idEq(projectId)).add(Restrictions.eq("category.id", categoryId)).list();
+
+		check(result);
+
+		return (Project) result.get(0);
+	}
+
+	private void check(List<?> result) throws DataBaseException {
+		if (result == null || result.isEmpty()) {
+			throw new DataBaseException("there is no data in Project table");
+		}
 	}
 }

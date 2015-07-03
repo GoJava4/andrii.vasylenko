@@ -2,22 +2,36 @@ package kickstarter.dao;
 
 import java.util.List;
 
-import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Transactional;
 
-import kickstarter.dao.support.DaoSupport;
 import kickstarter.entity.Category;
 import kickstarter.exception.DataBaseException;
 
 public class CategoryDaoImpl implements CategoryDao {
-	private DaoSupport<Category> daoSupport;
+	private SessionFactory sessionFactory;
 
-	public CategoryDaoImpl(DaoSupport<Category> daoSupport) {
-		this.daoSupport = daoSupport;
+	public CategoryDaoImpl(SessionFactory sessionFactory) throws DataBaseException {
+		if (sessionFactory == null) {
+			throw new DataBaseException("sessionFactory is null");
+		}
+		this.sessionFactory = sessionFactory;
 	}
 
+	@Transactional(readOnly = true)
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Category> getCategories() throws DataBaseException {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Category.class);
-		return daoSupport.find(criteria);
+		List<?> result = sessionFactory.getCurrentSession().createCriteria(Category.class).list();
+
+		check(result);
+
+		return (List<Category>) result;
+	}
+
+	private void check(List<?> result) throws DataBaseException {
+		if (result == null || result.isEmpty()) {
+			throw new DataBaseException("there is no data in Category table");
+		}
 	}
 }

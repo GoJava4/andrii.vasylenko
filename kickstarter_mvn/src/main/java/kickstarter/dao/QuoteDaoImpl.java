@@ -1,21 +1,39 @@
 package kickstarter.dao;
 
-import kickstarter.dao.support.DaoSupport;
+import java.util.List;
+
+import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Transactional;
+
 import kickstarter.entity.Quote;
 import kickstarter.exception.DataBaseException;
 
 public class QuoteDaoImpl implements QuoteDao {
-	private final static String QUERY_FOR_GET_RANDOM_ENTITY = "from %s order by random()";
+	private final static String QUERY_FOR_GET_RANDOM_ENTITY = String.format("from %s order by random()",
+			Quote.class.getSimpleName());
 
-	private DaoSupport<Quote> daoSupport;
+	private SessionFactory sessionFactory;
 
-	public QuoteDaoImpl(DaoSupport<Quote> daoSupport) {
-		this.daoSupport = daoSupport;
+	public QuoteDaoImpl(SessionFactory sessionFactory) throws DataBaseException {
+		if (sessionFactory == null) {
+			throw new DataBaseException("sessionFactory is null");
+		}
+		this.sessionFactory = sessionFactory;
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public Quote getRandomQuote() throws DataBaseException {
-		String query = String.format(QUERY_FOR_GET_RANDOM_ENTITY, Quote.class.getSimpleName());
-		return daoSupport.find(query, 1).get(0);
+		List<?> result = sessionFactory.getCurrentSession().createQuery(QUERY_FOR_GET_RANDOM_ENTITY).list();
+
+		check(result);
+
+		return (Quote) result.get(0);
+	}
+
+	private void check(List<?> result) throws DataBaseException {
+		if (result == null || result.isEmpty()) {
+			throw new DataBaseException("there is no data in Quote table");
+		}
 	}
 }
