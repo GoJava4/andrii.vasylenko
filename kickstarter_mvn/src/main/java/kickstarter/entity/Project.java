@@ -111,23 +111,24 @@ public class Project implements Serializable {
 
 	public void setFinalDate(Date finalDate) {
 		this.finalDate = finalDate;
-		calcDaysLeft();
+		this.daysLeft = calcDaysLeft();
 	}
 
 	public void setPayments(Set<Payment> payments) {
 		this.payments = payments;
-		calcCollectAmount();
+		this.collectAmount = calcCollectAmount();
 	}
 
-	private void calcDaysLeft() {
+	private int calcDaysLeft() {
 		long diff = finalDate.getTime() - System.currentTimeMillis();
-		daysLeft = (int) (diff / 1000 / 60 / 60 / 24);
+		return (int) (diff / 1000 / 60 / 60 / 24);
 	}
 
-	private void calcCollectAmount() {
-		collectAmount = 0;
+	private int calcCollectAmount() {
+		int collectAmount = 0;
 		for (Payment payment : payments) {
 			collectAmount += payment.getAmount();
 		}
+		return collectAmount;
 	}
 }
