@@ -20,6 +20,10 @@
 		autowire="byName">
 		<property name="view" value="Projects" />
 	</bean>
+	<bean id="projectController" class="kickstarter.controller.ProjectController"
+		autowire="byName">
+		<property name="view" value="Project" />
+	</bean>
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">

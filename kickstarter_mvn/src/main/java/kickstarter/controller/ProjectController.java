@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class ProjectsController {
+public class ProjectController {
 	private ProjectService projectService;
 	private String view;
 
@@ -20,9 +20,9 @@ public class ProjectsController {
 		this.view = view;
 	}
 
-	@RequestMapping("/projects")
-	public String showProjectsPage(Model model, @RequestParam("category") int categoryId) {
-		model.addAttribute("projects", projectService.loadProjectsInCategory(categoryId));
+	@RequestMapping("/project")
+	public String showProjectPage(Model model, @RequestParam("project") int projectId) {
+		model.addAttribute("project", projectService.loadProject(projectId));
 		return view;
 	}
 }

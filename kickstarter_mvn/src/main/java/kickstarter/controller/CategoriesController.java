@@ -1,6 +1,5 @@
 package kickstarter.controller;
 
-import kickstarter.exception.DataBaseException;
 import kickstarter.service.CategoryService;
 
 import org.springframework.stereotype.Controller;
@@ -21,7 +20,7 @@ public class CategoriesController {
 	}
 
 	@RequestMapping("/categories")
-	public String showCategoriesPage(Model model) throws DataBaseException {
+	public String showCategoriesPage(Model model) {
 		model.addAttribute("categories", categoryService.loadAllCategories());
 		return view;
 	}
