@@ -39,7 +39,7 @@
 		</property>
 
 		<set name="payments" table="Payments" inverse="true" lazy="true"
-			fetch="subselect">
+			fetch="subselect" order-by="id">
 			<key>
 				<column name="id_project" not-null="true" />
 			</key>
@@ -47,7 +47,7 @@
 		</set>
 
 		<set name="questions" table="Questions" inverse="true" lazy="true"
-			fetch="subselect">
+			fetch="subselect" order-by="id">
 			<key>
 				<column name="id_project" not-null="true" />
 			</key>
@@ -55,7 +55,7 @@
 		</set>
 
 		<set name="paymentVariants" table="PaymentVariants" inverse="true"
-			lazy="true" fetch="subselect">
+			lazy="true" fetch="subselect" order-by="id">
 			<key>
 				<column name="id_project" not-null="true" />
 			</key>
