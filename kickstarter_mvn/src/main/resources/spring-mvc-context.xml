@@ -12,6 +12,10 @@
 		autowire="byName">
 		<property name="view" value="Quote" />
 	</bean>
+	<bean id="categoriesController" class="kickstarter.controller.CategoriesController"
+		autowire="byName">
+		<property name="view" value="Categories" />
+	</bean>
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">

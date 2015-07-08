@@ -7,7 +7,7 @@
 
 	<bean id="quoteService" class="kickstarter.service.QuoteService"
 		autowire="byName" />
-	<bean id="categoriesModel" class="kickstarter.model.CategoriesModel"
+	<bean id="categoryService" class="kickstarter.service.CategoryService"
 		autowire="byName" />
 	<bean id="projectsModel" class="kickstarter.model.ProjectsModel"
 		autowire="byName" />

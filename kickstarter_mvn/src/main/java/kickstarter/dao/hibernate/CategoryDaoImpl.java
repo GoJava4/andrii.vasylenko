@@ -2,8 +2,6 @@ package kickstarter.dao.hibernate;
 
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import kickstarter.dao.CategoryDao;
 import kickstarter.dao.hibernate.support.DaoSupport;
 import kickstarter.entity.Category;
@@ -16,13 +14,11 @@ public class CategoryDaoImpl implements CategoryDao {
 		this.daoSupport = daoSupport;
 	}
 
-	@Transactional
 	@Override
 	public void persist(Category category) throws DataBaseException {
 		daoSupport.persist(category);
 	}
 
-	@Transactional(readOnly = true)
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Category> loadAll() throws DataBaseException {
@@ -33,7 +29,6 @@ public class CategoryDaoImpl implements CategoryDao {
 		return (List<Category>) result;
 	}
 
-	@Transactional(readOnly = true)
 	@Override
 	public Category load(int id) throws DataBaseException {
 		return daoSupport.load(id, Category.class);

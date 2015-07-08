@@ -1,6 +1,5 @@
 package kickstarter.controller;
 
-import kickstarter.dao.CategoryDao;
 import kickstarter.dao.ProjectDao;
 import kickstarter.dao.QuestionDao;
 import kickstarter.entity.Project;
@@ -16,13 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class KickstarterController {
-	private CategoryDao categoryDao;
 	private ProjectDao projectDao;
 	private QuestionDao questionDao;
-
-	public void setCategoryDao(CategoryDao categoryDao) {
-		this.categoryDao = categoryDao;
-	}
 
 	public void setProjectDao(ProjectDao projectDao) {
 		this.projectDao = projectDao;
@@ -30,12 +24,6 @@ public class KickstarterController {
 
 	public void setQuestionDao(QuestionDao questionDao) {
 		this.questionDao = questionDao;
-	}
-
-	@RequestMapping("/categories")
-	public String showCategoriesPage(Model model) throws DataBaseException {
-		model.addAttribute("categories", categoryDao.loadAll());
-		return "Categories";
 	}
 
 	@RequestMapping("/projects")
@@ -82,9 +70,9 @@ public class KickstarterController {
 	}
 
 	/*
-	 * @RequestMapping(value = "/donate_submit", method = RequestMethod.POST) public String submitDonatePage(Model
-	 * model, @RequestParam("category") int categoryId) throws DataBaseException
-	 * { // model.addAttribute("projects", projectDao.getProjects(categoryId));
-	 * return "DonateSubmit"; }
+	 * @RequestMapping(value = "/donate_submit", method = RequestMethod.POST)
+	 * public String submitDonatePage(Model model, @RequestParam("category") int
+	 * categoryId) throws DataBaseException { // model.addAttribute("projects",
+	 * projectDao.getProjects(categoryId)); return "DonateSubmit"; }
 	 */
 }
