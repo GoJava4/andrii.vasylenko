@@ -40,13 +40,13 @@
 	<br />
 	<h2>
 		<a
-			href="/kickstarter/donate?project=${project.id}&category=${project.category.id}">
+			href="/kickstarter/donate?project=${project.id}">
 			<c:out value="Donate" />
 		</a>
 	</h2>
 	<h2>
 		<a
-			href="/kickstarter/ask_question?project=${project.id}&category=${project.category.id}">
+			href="/kickstarter/ask_question?project=${project.id}">
 			<c:out value="Ask a question" />
 		</a>
 	</h2>

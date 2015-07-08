@@ -15,7 +15,7 @@
 	</h2>
 
 	<form method="POST"
-		action="/kickstarter/ask_question?project=${project.id}&category=${project.category.id}">
+		action="/kickstarter/ask_question?project=${project.id}">
 		<p>
 			<input type="text" name="question">
 		</p>
@@ -28,7 +28,7 @@
 	<br />
 	<h3>
 		<a
-			href="/kickstarter/project?project=${project.id}&category=${project.category.id}">
+			href="/kickstarter/project?project=${project.id}">
 			<c:out value="<- back to project" />
 		</a>
 	</h3>
