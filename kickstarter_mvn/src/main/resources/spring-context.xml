@@ -5,65 +5,7 @@
 
 	<import resource="classpath:hibernate-context.xml" />
 
-	<bean id="quoteServlet" class="kickstarter.Kickstarter">
-		<constructor-arg ref="quoteView" />
-		<constructor-arg ref="quoteModel" />
-	</bean>
-	<bean id="categoriesServlet" class="kickstarter.Kickstarter">
-		<constructor-arg ref="categoriesView" />
-		<constructor-arg ref="categoriesModel" />
-	</bean>
-	<bean id="projectsServlet" class="kickstarter.Kickstarter">
-		<constructor-arg ref="projectsView" />
-		<constructor-arg ref="projectsModel" />
-	</bean>
-	<bean id="projectServlet" class="kickstarter.Kickstarter">
-		<constructor-arg ref="projectView" />
-		<constructor-arg ref="projectModel" />
-	</bean>
-	<bean id="askQuestionServlet" class="kickstarter.Kickstarter">
-		<constructor-arg ref="askQuestionView" />
-		<constructor-arg ref="askQuestionModel" />
-	</bean>
-	<bean id="askQuestionSubmitServlet" class="kickstarter.Kickstarter">
-		<constructor-arg ref="askQuestionSubmitView" />
-		<constructor-arg ref="askQuestionSubmitModel" />
-	</bean>
-	<bean id="donateServlet" class="kickstarter.Kickstarter">
-		<constructor-arg ref="donateView" />
-		<constructor-arg ref="donateModel" />
-	</bean>
-	<bean id="donateSubmitServlet" class="kickstarter.Kickstarter">
-		<constructor-arg ref="donateSubmitView" />
-		<constructor-arg ref="donateSubmitModel" />
-	</bean>
-
-	<bean id="quoteView" class="kickstarter.view.JspView">
-		<constructor-arg value="/Quote.jsp" />
-	</bean>
-	<bean id="categoriesView" class="kickstarter.view.JspView">
-		<constructor-arg value="/Categories.jsp" />
-	</bean>
-	<bean id="projectsView" class="kickstarter.view.JspView">
-		<constructor-arg value="/Projects.jsp" />
-	</bean>
-	<bean id="projectView" class="kickstarter.view.JspView">
-		<constructor-arg value="/Project.jsp" />
-	</bean>
-	<bean id="askQuestionView" class="kickstarter.view.JspView">
-		<constructor-arg value="/AskQuestion.jsp" />
-	</bean>
-	<bean id="askQuestionSubmitView" class="kickstarter.view.JspView">
-		<constructor-arg value="/AskQuestionSubmit.jsp" />
-	</bean>
-	<bean id="donateView" class="kickstarter.view.JspView">
-		<constructor-arg value="/Donate.jsp" />
-	</bean>
-	<bean id="donateSubmitView" class="kickstarter.view.JspView">
-		<constructor-arg value="/DonateSubmit.jsp" />
-	</bean>
-
-	<bean id="quoteModel" class="kickstarter.model.QuoteModel"
+	<bean id="quoteService" class="kickstarter.service.QuoteService"
 		autowire="byName" />
 	<bean id="categoriesModel" class="kickstarter.model.CategoriesModel"
 		autowire="byName" />

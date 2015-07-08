@@ -8,6 +8,11 @@
 
 	<mvc:annotation-driven />
 
+	<bean id="welcomeController" class="kickstarter.controller.WelcomeController"
+		autowire="byName">
+		<property name="view" value="Quote" />
+	</bean>
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"

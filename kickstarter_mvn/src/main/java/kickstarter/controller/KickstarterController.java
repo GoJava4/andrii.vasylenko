@@ -3,7 +3,6 @@ package kickstarter.controller;
 import kickstarter.dao.CategoryDao;
 import kickstarter.dao.ProjectDao;
 import kickstarter.dao.QuestionDao;
-import kickstarter.dao.QuoteDao;
 import kickstarter.entity.Project;
 import kickstarter.entity.Question;
 import kickstarter.exception.DataBaseException;
@@ -17,14 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class KickstarterController {
-	private QuoteDao quoteDao;
 	private CategoryDao categoryDao;
 	private ProjectDao projectDao;
 	private QuestionDao questionDao;
-
-	public void setQuoteDao(QuoteDao quoteDao) {
-		this.quoteDao = quoteDao;
-	}
 
 	public void setCategoryDao(CategoryDao categoryDao) {
 		this.categoryDao = categoryDao;
@@ -36,12 +30,6 @@ public class KickstarterController {
 
 	public void setQuestionDao(QuestionDao questionDao) {
 		this.questionDao = questionDao;
-	}
-
-	@RequestMapping("/")
-	public String showWelcomePage(Model model) throws DataBaseException {
-		model.addAttribute("quote", quoteDao.loadRandom());
-		return "Quote";
 	}
 
 	@RequestMapping("/categories")

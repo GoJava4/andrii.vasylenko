@@ -2,8 +2,6 @@ package kickstarter.dao.hibernate;
 
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import kickstarter.dao.QuoteDao;
 import kickstarter.dao.hibernate.support.DaoSupport;
 import kickstarter.entity.Quote;
@@ -16,13 +14,11 @@ public class QuoteDaoImpl implements QuoteDao {
 		this.daoSupport = daoSupport;
 	}
 
-	@Transactional
 	@Override
 	public void persist(Quote quote) throws DataBaseException {
 		daoSupport.persist(quote);
 	}
 
-	@Transactional(readOnly = true)
 	@Override
 	public Quote loadRandom() throws DataBaseException {
 		List<?> result = daoSupport.getCurrentSession().getNamedQuery("loadRandomQuote").setMaxResults(1).list();
@@ -32,7 +28,6 @@ public class QuoteDaoImpl implements QuoteDao {
 		return (Quote) result.get(0);
 	}
 
-	@Transactional(readOnly = true)
 	@Override
 	public Quote load(int id) throws DataBaseException {
 		return daoSupport.load(id, Quote.class);
