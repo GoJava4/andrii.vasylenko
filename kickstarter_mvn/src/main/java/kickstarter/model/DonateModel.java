@@ -22,15 +22,11 @@ public class DonateModel implements Model {
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		int projectId = getProjectId(parameters);
-		int categoryId = getCategoryId(parameters);
-		result.put("project", projectDao.getProject(projectId, categoryId));
+		result.put("project", projectDao.load(projectId));
 
 		return result;
 	}
 
-	private int getCategoryId(Map<String, String[]> parameters) {
-		return Integer.parseInt(parameters.get("category")[0]);
-	}
 
 	private int getProjectId(Map<String, String[]> parameters) {
 		return Integer.parseInt(parameters.get("project")[0]);

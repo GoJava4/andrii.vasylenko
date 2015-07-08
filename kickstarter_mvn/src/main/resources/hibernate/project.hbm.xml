@@ -10,7 +10,7 @@
 		</id>
 
 		<many-to-one name="category" class="kickstarter.entity.Category"
-			fetch="join">
+			fetch="join" foreign-key="projects_id_category_fkey">
 			<column name="id_category" not-null="true" />
 		</many-to-one>
 

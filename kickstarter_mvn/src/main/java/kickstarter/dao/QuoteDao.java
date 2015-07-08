@@ -3,9 +3,9 @@ package kickstarter.dao;
 import kickstarter.entity.Quote;
 import kickstarter.exception.DataBaseException;
 
-public interface QuoteDao {
+public interface QuoteDao extends GenericDao<Quote> {
 	/**
 	 * return random quote from DB
 	 */
-	Quote getRandomQuote() throws DataBaseException;
+	Quote loadRandom() throws DataBaseException;
 }

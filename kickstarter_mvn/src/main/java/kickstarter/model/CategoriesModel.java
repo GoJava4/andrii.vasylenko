@@ -20,7 +20,7 @@ public class CategoriesModel implements Model {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		result.put("categories", categoryDao.getCategories());
+		result.put("categories", categoryDao.loadAll());
 
 		return result;
 	}

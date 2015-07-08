@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">validate</property>
+		<property name="hibernate.enable_lazy_load_no_trans">true</property>
+
+		<!-- List of XML mapping files -->
+		<mapping resource="\hibernate\quote.hbm.xml" />
+		<mapping resource="\hibernate\category.hbm.xml" />
+		<mapping resource="\hibernate\project.hbm.xml" />
+		<mapping resource="\hibernate\payment.hbm.xml" />
+		<mapping resource="\hibernate\paymentVariant.hbm.xml" />
+		<mapping resource="\hibernate\question.hbm.xml" />
+
+	</session-factory>
+</hibernate-configuration>

@@ -21,7 +21,7 @@ public class ProjectsModel implements Model {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		result.put("projects", projectDao.getProjects(getCategoryId(parameters)));
+		result.put("projects", projectDao.loadProjectsInCategory(getCategoryId(parameters)));
 
 		return result;
 	}

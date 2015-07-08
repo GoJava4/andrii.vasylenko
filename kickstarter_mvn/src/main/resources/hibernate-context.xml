@@ -6,21 +6,21 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<bean id="quoteDao" class="kickstarter.dao.QuoteDaoImpl" parent="dao" />
-	<bean id="categoryDao" class="kickstarter.dao.CategoryDaoImpl"
-		parent="dao" />
-	<bean id="projectDao" class="kickstarter.dao.ProjectDaoImpl"
-		parent="dao" />
-	<bean id="questionDao" class="kickstarter.dao.QuestionDaoImpl"
-		parent="dao" />
-	<bean id="paymentVariantDao" class="kickstarter.dao.PaymentVariantDaoImpl"
-		parent="dao" />
-	<bean id="paymentDao" class="kickstarter.dao.PaymentDaoImpl"
-		parent="dao" />
+	<bean id="quoteDao" class="kickstarter.dao.hibernate.QuoteDaoImpl"
+		autowire="byName" />
+	<bean id="categoryDao" class="kickstarter.dao.hibernate.CategoryDaoImpl"
+		autowire="byName" />
+	<bean id="projectDao" class="kickstarter.dao.hibernate.ProjectDaoImpl"
+		autowire="byName" />
+	<bean id="questionDao" class="kickstarter.dao.hibernate.QuestionDaoImpl"
+		autowire="byName" />
+	<bean id="paymentVariantDao" class="kickstarter.dao.hibernate.PaymentVariantDaoImpl"
+		autowire="byName" />
+	<bean id="paymentDao" class="kickstarter.dao.hibernate.PaymentDaoImpl"
+		autowire="byName" />
 
-	<bean id="dao" abstract="true">
-		<constructor-arg ref="sessionFactory" />
-	</bean>
+	<bean id="daoSupport" class="kickstarter.dao.hibernate.support.HibernateDaoSupport"
+		autowire="byName" />
 
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -38,29 +38,12 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
-				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-				<prop key="hibernate.enable_lazy_load_no_trans">${hibernate.enable_lazy_load_no_trans}</prop>
-			</props>
-		</property>
-		<property name="mappingResources">
-			<list>
-				<value>\hibernate\Quote.hbm.xml</value>
-				<value>\hibernate\Category.hbm.xml</value>
-				<value>\hibernate\Project.hbm.xml</value>
-				<value>\hibernate\Payment.hbm.xml</value>
-				<value>\hibernate\PaymentVariant.hbm.xml</value>
-				<value>\hibernate\Question.hbm.xml</value>
-			</list>
-		</property>
+		<property name="configLocation" value="classpath:hibernate\hibernate.cfg.xml" />
 	</bean>
 
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager"
 		autowire="byName" />
-
 
 	<tx:annotation-driven />
 

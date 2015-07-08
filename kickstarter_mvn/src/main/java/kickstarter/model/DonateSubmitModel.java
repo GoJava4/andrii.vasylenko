@@ -35,10 +35,9 @@ public class DonateSubmitModel implements Model {
 		checkInput(parameters);
 
 		int projectId = getProjectId(parameters);
-		int categoryId = getCategoryId(parameters);
 
 		int amount = getAmount(parameters);
-		Project project = projectDao.getProject(projectId, categoryId);
+		Project project = projectDao.load(projectId);
 
 		donate(amount, project);
 
@@ -54,7 +53,7 @@ public class DonateSubmitModel implements Model {
 		Payment payment = new Payment();
 		payment.setProject(project);
 		payment.setAmount(amount);
-		paymentDao.addPayment(payment);
+		paymentDao.persist(payment);
 	}
 
 	private int getAmount(Map<String, String[]> parameters) throws DataBaseException, IncorrectInputException {
@@ -77,7 +76,7 @@ public class DonateSubmitModel implements Model {
 	private int getAmountFromPaymentVariant(String paymentVariant, int projectId) throws DataBaseException,
 			IncorrectInputException {
 		int paymentVariantId = Integer.parseInt(paymentVariant);
-		PaymentVariant entity = paymentVariantDao.getPaymentVariant(paymentVariantId, projectId);
+		PaymentVariant entity = paymentVariantDao.load(paymentVariantId);
 		return entity.getAmount();
 	}
 
@@ -87,10 +86,6 @@ public class DonateSubmitModel implements Model {
 
 	private String getPaymentVariant(Map<String, String[]> parameters) {
 		return parameters.get("paymentVariant")[0];
-	}
-
-	private int getCategoryId(Map<String, String[]> parameters) {
-		return Integer.parseInt(parameters.get("category")[0]);
 	}
 
 	private int getProjectId(Map<String, String[]> parameters) {

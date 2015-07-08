@@ -20,7 +20,7 @@ public class QuoteModel implements Model {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		result.put("quote", quoteDao.getRandomQuote());
+		result.put("quote", quoteDao.loadRandom());
 
 		return result;
 	}

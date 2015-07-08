@@ -5,9 +5,9 @@ import java.util.List;
 import kickstarter.entity.Category;
 import kickstarter.exception.DataBaseException;
 
-public interface CategoryDao {
+public interface CategoryDao extends GenericDao<Category> {
 	/**
 	 * return all categories from DB
 	 */
-	List<Category> getCategories() throws DataBaseException;
+	List<Category> loadAll() throws DataBaseException;
 }

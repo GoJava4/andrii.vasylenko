@@ -28,9 +28,8 @@ public class AskQuestionSubmitModel implements Model {
 		checkInput(parameters);
 
 		int projectId = getProjectId(parameters);
-		int categoryId = getCategoryId(parameters);
 		String question = getQuestion(parameters);
-		Project project = projectDao.getProject(projectId, categoryId);
+		Project project = projectDao.load(projectId);
 
 		addQuestion(question, project);
 
@@ -50,16 +49,13 @@ public class AskQuestionSubmitModel implements Model {
 		Question entity = new Question();
 		entity.setProject(project);
 		entity.setQuestion(question);
-		questionDao.addQuestion(entity);
+		questionDao.persist(entity);
 	}
 
 	private String getQuestion(Map<String, String[]> parameters) {
 		return parameters.get("question")[0];
 	}
 
-	private int getCategoryId(Map<String, String[]> parameters) {
-		return Integer.parseInt(parameters.get("category")[0]);
-	}
 
 	private int getProjectId(Map<String, String[]> parameters) {
 		return Integer.parseInt(parameters.get("project")[0]);
