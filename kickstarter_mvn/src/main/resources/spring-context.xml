@@ -11,9 +11,7 @@
 		autowire="byName" />
 	<bean id="projectService" class="kickstarter.service.ProjectService"
 		autowire="byName" />
-	<bean id="askQuestionModel" class="kickstarter.model.AskQuestionModel"
-		autowire="byName" />
-	<bean id="askQuestionSubmitModel" class="kickstarter.model.AskQuestionSubmitModel"
+	<bean id="questionService" class="kickstarter.service.QuestionService"
 		autowire="byName" />
 	<bean id="donateModel" class="kickstarter.model.DonateModel"
 		autowire="byName" />

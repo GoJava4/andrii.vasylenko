@@ -25,6 +25,12 @@
 		<property name="view" value="Project" />
 	</bean>
 
+	<bean id="askQuestionController" class="kickstarter.controller.AskQuestionController"
+		autowire="byName">
+		<property name="view" value="AskQuestion" />
+		<property name="submitView" value="AskQuestionSubmit" />
+	</bean>
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"

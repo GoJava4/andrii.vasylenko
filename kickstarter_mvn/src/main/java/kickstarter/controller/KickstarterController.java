@@ -26,28 +26,9 @@ public class KickstarterController {
 		this.questionDao = questionDao;
 	}
 
-	@RequestMapping("/ask_question")
-	public String showAskQuestionPage(Model model, @RequestParam("category") int categoryId,
-			@RequestParam("project") int projectId) throws DataBaseException {
-		model.addAttribute("project", projectDao.load(projectId));
-		return "AskQuestion";
-	}
 
-	@RequestMapping(value = "/ask_question_submit", method = RequestMethod.POST)
-	public String submitAskQuestionPage(Model model, @RequestParam("category") int categoryId,
-			@RequestParam("project") int projectId, @RequestParam("question") String question)
-			throws DataBaseException, IncorrectInputException {
-		Project project = projectDao.load(projectId);
-		Question entity = new Question();
-		entity.setProject(project);
-		entity.setQuestion(question);
-		questionDao.persist(entity);
 
-		model.addAttribute("project", project);
-		model.addAttribute("question", question);
 
-		return "AskQuestionSubmit";
-	}
 
 	@RequestMapping("/donate")
 	public String showDonatePage(Model model, @RequestParam("category") int categoryId,
