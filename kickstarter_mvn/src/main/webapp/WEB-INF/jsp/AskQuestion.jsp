@@ -15,7 +15,7 @@
 	</h2>
 
 	<form method="POST"
-		action="/kickstarter/ask_question_submit?project=${project.id}&category=${project.category.id}">
+		action="/kickstarter/ask_question?project=${project.id}&category=${project.category.id}">
 		<p>
 			<input type="text" name="question">
 		</p>

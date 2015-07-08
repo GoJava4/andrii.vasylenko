@@ -11,19 +11,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/donate")
 public class DonateController {
 	private ProjectService projectService;
 	private PaymentService paymentService;
 	private String view;
 	private String submitView;
 
-	@RequestMapping(value = "/donate", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public String showDonatePage(Model model, @RequestParam("project") int projectId) {
 		model.addAttribute("project", projectService.loadProject(projectId));
 		return view;
 	}
 
-	@RequestMapping(value = "/donate_submit", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public String submitDonatePage(Model model, @RequestParam("project") int projectId,
 			@RequestParam("paymentVariant") String paymentVariant, @RequestParam("amount") String amount) {
 

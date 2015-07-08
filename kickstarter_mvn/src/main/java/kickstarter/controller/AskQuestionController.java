@@ -1,7 +1,6 @@
 package kickstarter.controller;
 
 import kickstarter.entity.Question;
-
 import kickstarter.service.ProjectService;
 import kickstarter.service.QuestionService;
 
@@ -12,19 +11,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/ask_question")
 public class AskQuestionController {
 	private ProjectService projectService;
 	private QuestionService questionService;
 	private String view;
 	private String submitView;
 
-	@RequestMapping(value = "/ask_question", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public String showAskQuestionPage(Model model, @RequestParam("project") int projectId) {
 		model.addAttribute("project", projectService.loadProject(projectId));
 		return view;
 	}
 
-	@RequestMapping(value = "/ask_question_submit", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public String submitAskQuestionPage(Model model, @RequestParam("project") int projectId,
 			@RequestParam("question") String question) {
 
