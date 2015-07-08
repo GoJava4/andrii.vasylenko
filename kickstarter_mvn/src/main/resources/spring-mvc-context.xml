@@ -30,6 +30,11 @@
 		<property name="view" value="AskQuestion" />
 		<property name="submitView" value="AskQuestionSubmit" />
 	</bean>
+	<bean id="donateController" class="kickstarter.controller.DonateController"
+		autowire="byName">
+		<property name="view" value="Donate" />
+		<property name="submitView" value="DonateSubmit" />
+	</bean>
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -38,8 +43,4 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
-	<bean id="kickstarterController" class="kickstarter.controller.KickstarterController"
-		autowire="byName" />
-
 </beans>
