@@ -26,12 +26,6 @@ public class KickstarterController {
 		this.questionDao = questionDao;
 	}
 
-	@RequestMapping("/projects")
-	public String showProjectsPage(Model model, @RequestParam("category") int categoryId) throws DataBaseException {
-		model.addAttribute("projects", projectDao.loadProjectsInCategory(categoryId));
-		return "Projects";
-	}
-
 	@RequestMapping("/project")
 	public String showProjectPage(Model model, @RequestParam("category") int categoryId,
 			@RequestParam("project") int projectId) throws DataBaseException {

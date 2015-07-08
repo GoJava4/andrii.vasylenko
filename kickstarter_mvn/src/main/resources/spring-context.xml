@@ -9,9 +9,7 @@
 		autowire="byName" />
 	<bean id="categoryService" class="kickstarter.service.CategoryService"
 		autowire="byName" />
-	<bean id="projectsModel" class="kickstarter.model.ProjectsModel"
-		autowire="byName" />
-	<bean id="projectModel" class="kickstarter.model.ProjectModel"
+	<bean id="projectService" class="kickstarter.service.ProjectService"
 		autowire="byName" />
 	<bean id="askQuestionModel" class="kickstarter.model.AskQuestionModel"
 		autowire="byName" />

@@ -3,7 +3,6 @@ package kickstarter.dao.hibernate;
 import java.util.List;
 
 import org.hibernate.criterion.Restrictions;
-import org.springframework.transaction.annotation.Transactional;
 
 import kickstarter.dao.ProjectDao;
 import kickstarter.dao.hibernate.support.DaoSupport;
@@ -17,13 +16,11 @@ public class ProjectDaoImpl implements ProjectDao {
 		this.daoSupport = daoSupport;
 	}
 
-	@Transactional
 	@Override
 	public void persist(Project project) throws DataBaseException {
 		daoSupport.persist(project);
 	}
 
-	@Transactional(readOnly = true)
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Project> loadProjectsInCategory(int categoryId) throws DataBaseException {
@@ -35,7 +32,6 @@ public class ProjectDaoImpl implements ProjectDao {
 		return (List<Project>) result;
 	}
 
-	@Transactional(readOnly = true)
 	@Override
 	public Project load(int id) throws DataBaseException {
 		return daoSupport.load(id, Project.class);
