@@ -21,7 +21,7 @@ public class ProjectTest {
 	Date testFinalDate;
 
 	@Test
-	public void shouldGetTheSameProject_whenNewProject() {
+	public void getDaysLeftTest() {
 		assertEquals(expectedDaysLeft(), testProject.getDaysLeft());
 	}
 
