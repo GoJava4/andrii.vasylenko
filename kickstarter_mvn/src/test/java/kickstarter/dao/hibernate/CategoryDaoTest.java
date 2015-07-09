@@ -35,7 +35,7 @@ public class CategoryDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 
 	@Test
 	@Rollback(true)
-	public void loadRandomTest() throws DataBaseException {
+	public void loadAllTest() throws DataBaseException {
 		List<Category> result = categoryDao.loadAll();
 		assertNotNull(result);
 	}
