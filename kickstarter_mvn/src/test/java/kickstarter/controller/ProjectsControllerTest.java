@@ -1,8 +1,8 @@
 package kickstarter.controller;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.*;
+
 import kickstarter.service.ProjectService;
 
 import org.junit.Before;
