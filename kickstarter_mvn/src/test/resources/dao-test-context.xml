@@ -10,6 +10,9 @@
 	<bean name="existingCategory" class="kickstarter.entity.Category">
 		<property name="id" value="1" />
 	</bean>
+	<bean name="existingProject" class="kickstarter.entity.Project">
+		<property name="id" value="1" />
+	</bean>
 
 	<bean name="testQuote" class="kickstarter.entity.Quote" scope="prototype">
 		<property name="quote" value="testQuote" />
@@ -30,5 +33,9 @@
 		</property>
 		<property name="history" value="testHistory" />
 		<property name="link" value="testLink" />
+	</bean>
+	<bean name="testPayment" class="kickstarter.entity.Payment" scope="prototype">
+		<property name="project" ref="existingProject" />
+		<property name="amount" value="1000" />
 	</bean>
 </beans>
