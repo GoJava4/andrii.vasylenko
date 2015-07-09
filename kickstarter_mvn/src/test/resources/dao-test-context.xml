@@ -44,4 +44,9 @@
 		<property name="amount" value="1000" />
 		<property name="description" value="testDescription" />
 	</bean>
+	<bean name="testQuestion" class="kickstarter.entity.Question"
+		scope="prototype">
+		<property name="project" ref="existingProject" />
+		<property name="question" value="testQuestion" />
+	</bean>
 </beans>
