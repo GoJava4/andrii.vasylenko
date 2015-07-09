@@ -10,4 +10,6 @@
 	<jdbc:initialize-database data-source="dataSource">
 		<jdbc:script location="classpath:sql\data.sql" />
 	</jdbc:initialize-database>
+
+	<import resource="classpath:dao-test-context.xml" />
 </beans>
