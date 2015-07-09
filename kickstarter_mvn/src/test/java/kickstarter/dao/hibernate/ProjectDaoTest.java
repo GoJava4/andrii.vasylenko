@@ -3,7 +3,6 @@ package kickstarter.dao.hibernate;
 import static org.junit.Assert.*;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class ProjectDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	@Autowired
 	private Project testProject;
 	@Autowired
-	SimpleDateFormat dateFormat;
+	Date testFinalDate;
 
 	@Test
 	@Rollback(true)
@@ -38,10 +37,9 @@ public class ProjectDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 		assertEquals(1, result.getCategory().getId());
 		assertEquals("testDescription", result.getDescription());
 		assertEquals(10000, result.getTotalAmount());
-		assertEquals(expectedFinalDate(), result.getFinalDate());
+		assertEquals(testFinalDate, result.getFinalDate());
 		assertEquals("testHistory", result.getHistory());
 		assertEquals("testLink", result.getLink());
-		assertEquals(expectedDaysLeft(), result.getDaysLeft());
 	}
 
 	@Test
@@ -61,14 +59,5 @@ public class ProjectDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	@Rollback(true)
 	public void shouldThrowException_whenIncorrectId() throws DataBaseException {
 		projectDao.load(-1);
-	}
-
-	private int expectedDaysLeft() throws ParseException {
-		long diff = expectedFinalDate().getTime() - System.currentTimeMillis();
-		return (int) (diff / 1000 / 60 / 60 / 24);
-	}
-
-	private Date expectedFinalDate() throws ParseException {
-		return dateFormat.parse("2020-01-01");
 	}
 }
