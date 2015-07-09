@@ -1,9 +1,13 @@
 package kickstarter.dao.hibernate;
 
-import kickstarter.dao.QuoteDao;
-import kickstarter.entity.Quote;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
+
+import kickstarter.dao.CategoryDao;
+import kickstarter.entity.Category;
 import kickstarter.exception.DataBaseException;
-import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,39 +16,39 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
 @ContextConfiguration("classpath:spring-test-context.xml")
-public class QuoteDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
+public class CategoryDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Autowired
-	private QuoteDao quoteDao;
+	private CategoryDao categoryDao;
 
 	@Test
 	@Rollback(true)
 	public void persistTest() throws DataBaseException {
-		Quote quote = new Quote();
-		quote.setQuote("quoteTest");
+		Category category = new Category();
+		category.setName("testName");
 
-		quoteDao.persist(quote);
-		int id = quote.getId();
+		categoryDao.persist(category);
+		int id = category.getId();
 
-		Quote result = quoteDao.load(id);
-		assertEquals("quoteTest", result.getQuote());
+		Category result = categoryDao.load(id);
+		assertEquals("testName", result.getName());
 	}
 
 	@Test
 	@Rollback(true)
 	public void loadRandomTest() throws DataBaseException {
-		Quote result = quoteDao.loadRandom();
+		List<Category> result = categoryDao.loadAll();
 		assertNotNull(result);
 	}
 
 	@Test(expected = DataBaseException.class)
 	@Rollback(true)
 	public void shouldThrowException_whenPersistNull() throws DataBaseException {
-		quoteDao.persist(null);
+		categoryDao.persist(null);
 	}
 
 	@Test(expected = DataBaseException.class)
 	@Rollback(true)
 	public void shouldThrowException_whenIncorrectId() throws DataBaseException {
-		quoteDao.load(-1);
+		categoryDao.load(-1);
 	}
 }
