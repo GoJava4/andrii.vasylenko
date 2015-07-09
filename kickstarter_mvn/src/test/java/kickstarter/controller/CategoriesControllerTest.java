@@ -1,0 +1,44 @@
+package kickstarter.controller;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
+import kickstarter.service.CategoryService;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.ui.Model;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:spring-test-context.xml")
+public class CategoriesControllerTest {
+	@Mock
+	private CategoryService categoryService;
+	@Mock
+	private Model model;
+	@Autowired
+	@InjectMocks
+	private CategoriesController categoriesController;
+
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void showCategoriesPageTest() {
+		when(categoryService.loadAllCategories()).thenReturn(null);
+
+		String result = categoriesController.showCategoriesPage(model);
+
+		verify(model, times(1)).addAttribute("categories", null);
+		assertEquals("Categories", result);
+	}
+}
