@@ -12,7 +12,7 @@ import java.util.Map;
 
 import kickstarter.entity.Category;
 import kickstarter.exception.DataBaseException;
-import kickstarter.exception.IncorrectInputException;
+
 
 import org.junit.Test;
 
