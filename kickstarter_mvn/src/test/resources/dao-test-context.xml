@@ -38,4 +38,10 @@
 		<property name="project" ref="existingProject" />
 		<property name="amount" value="1000" />
 	</bean>
+	<bean name="testPaymentVariant" class="kickstarter.entity.PaymentVariant"
+		scope="prototype">
+		<property name="project" ref="existingProject" />
+		<property name="amount" value="1000" />
+		<property name="description" value="testDescription" />
+	</bean>
 </beans>
