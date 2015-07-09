@@ -11,6 +11,9 @@
 		<property name="id" value="1" />
 	</bean>
 
+	<bean name="testQuote" class="kickstarter.entity.Quote" scope="prototype">
+		<property name="quote" value="testQuote" />
+	</bean>
 	<bean name="testCategory" class="kickstarter.entity.Category"
 		scope="prototype">
 		<property name="name" value="testName" />

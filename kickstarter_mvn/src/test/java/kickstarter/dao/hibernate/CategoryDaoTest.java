@@ -1,7 +1,6 @@
 package kickstarter.dao.hibernate;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -19,17 +18,17 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 public class CategoryDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Autowired
 	private CategoryDao categoryDao;
+	@Autowired
+	private Category testCategory;
 
 	@Test
 	@Rollback(true)
 	public void persistTest() throws DataBaseException {
-		Category category = new Category();
-		category.setName("testName");
+		categoryDao.persist(testCategory);
 
-		categoryDao.persist(category);
-		int id = category.getId();
-
+		int id = testCategory.getId();
 		Category result = categoryDao.load(id);
+
 		assertEquals("testName", result.getName());
 	}
 
