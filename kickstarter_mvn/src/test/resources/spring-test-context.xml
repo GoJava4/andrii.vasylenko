@@ -6,6 +6,7 @@
 		http://www.springframework.org/schema/jdbc/spring-jdbc-4.1.xsd">
 
 	<import resource="classpath:spring-context.xml" />
+	<import resource="classpath:spring-mvc-context.xml" />
 
 	<jdbc:initialize-database data-source="dataSource">
 		<jdbc:script location="classpath:sql\data.sql" />
