@@ -18,19 +18,8 @@ public class Project implements Serializable {
 	private Set<Payment> payments;
 	private Set<Question> questions;
 	private Set<PaymentVariant> paymentVariants;
-
-	public int getCollectAmount() {
-		int collectAmount = 0;
-		for (Payment payment : payments) {
-			collectAmount += payment.getAmount();
-		}
-		return collectAmount;
-	}
-
-	public int getDaysLeft() {
-		long diff = finalDate.getTime() - System.currentTimeMillis();
-		return (int) (diff / 1000 / 60 / 60 / 24);
-	}
+	private int collectAmount;
+	private int daysLeft;
 
 	public int getId() {
 		return id;
@@ -118,5 +107,21 @@ public class Project implements Serializable {
 
 	public void setPaymentVariants(Set<PaymentVariant> paymentVariants) {
 		this.paymentVariants = paymentVariants;
+	}
+
+	public int getCollectAmount() {
+		return collectAmount;
+	}
+
+	public void setCollectAmount(int collectAmount) {
+		this.collectAmount = collectAmount;
+	}
+
+	public int getDaysLeft() {
+		return daysLeft;
+	}
+
+	public void setDaysLeft(int daysLeft) {
+		this.daysLeft = daysLeft;
 	}
 }

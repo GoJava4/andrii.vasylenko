@@ -61,5 +61,14 @@
 			</key>
 			<one-to-many class="kickstarter.entity.PaymentVariant" />
 		</set>
+
+		<property name="collectAmount" type="java.lang.Integer">
+			<formula>(SELECT SUM(payments.amount) FROM payments WHERE
+				payments.id_project = id)</formula>
+		</property>
+
+		<property name="daysLeft" type="java.lang.Integer">
+			<formula>EXTRACT(EPOCH FROM (final_date-current_timestamp)) /24/60/60</formula>
+		</property>
 	</class>
 </hibernate-mapping>
