@@ -25,7 +25,7 @@ public class QuestionDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 
 		assertEquals(1, result.getProject().getId());
 		assertEquals("velo parking", result.getProject().getName());
-		assertEquals("WTF №1?", result.getQuestion());
+		assertEquals("Question 1?", result.getQuestion());
 	}
 
 	@Test

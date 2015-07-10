@@ -62,17 +62,17 @@ values(3, 50000);
 insert into Questions ( 
 id_project, question 
 ) 
-values(1, 'WTF №1?'); 
+values(1, 'Question 1?'); 
 
 insert into Questions ( 
 id_project, question 
 ) 
-values(2, 'WTF №2?'); 
+values(2, 'Question 2?'); 
 
 insert into Questions ( 
 id_project, question 
 ) 
-values(3, 'WTF №3?'); 
+values(3, 'Question 3?'); 
 
 
 insert into PaymentVariants ( 
