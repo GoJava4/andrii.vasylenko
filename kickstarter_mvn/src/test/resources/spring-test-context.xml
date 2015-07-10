@@ -12,5 +12,59 @@
 		<jdbc:script location="classpath:sql\data.sql" />
 	</jdbc:initialize-database>
 
-	<import resource="classpath:dao-test-context.xml" />
+	<bean name="fakeQuote" class="kickstarter.entity.Quote" scope="prototype">
+		<property name="quote" value="testQuote" />
+	</bean>
+	<bean name="fakeCategory" class="kickstarter.entity.Category"
+		scope="prototype">
+		<property name="name" value="testName" />
+	</bean>
+	<bean name="fakeProject" class="kickstarter.entity.Project" scope="prototype">
+		<property name="category">
+			<bean class="kickstarter.entity.Category">
+				<property name="id" value="1" />
+			</bean>
+		</property>
+		<property name="name" value="testName" />
+		<property name="description" value="testDescription" />
+		<property name="totalAmount" value="10000" />
+		<property name="finalDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2020-01-01" />
+			</bean>
+		</property>
+		<property name="history" value="testHistory" />
+		<property name="link" value="testLink" />
+	</bean>
+	<bean name="fakePayment" class="kickstarter.entity.Payment" scope="prototype">
+		<property name="project">
+			<bean class="kickstarter.entity.Project">
+				<property name="id" value="1" />
+			</bean>
+		</property>
+		<property name="amount" value="1000" />
+	</bean>
+	<bean name="fakePaymentVariant" class="kickstarter.entity.PaymentVariant"
+		scope="prototype">
+		<property name="project">
+			<bean class="kickstarter.entity.Project">
+				<property name="id" value="1" />
+			</bean>
+		</property>
+		<property name="amount" value="1000" />
+		<property name="description" value="testDescription" />
+	</bean>
+	<bean name="fakeQuestion" class="kickstarter.entity.Question"
+		scope="prototype">
+		<property name="project">
+			<bean class="kickstarter.entity.Project">
+				<property name="id" value="1" />
+			</bean>
+		</property>
+		<property name="question" value="testQuestion" />
+	</bean>
+
+	<bean id="dateFormat" class="java.text.SimpleDateFormat">
+		<constructor-arg value="yyyy-MM-dd" />
+	</bean>
 </beans>

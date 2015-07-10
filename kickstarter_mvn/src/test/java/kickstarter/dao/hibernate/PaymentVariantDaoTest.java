@@ -16,14 +16,25 @@ public class PaymentVariantDaoTest extends AbstractTransactionalJUnit4SpringCont
 	@Autowired
 	private PaymentVariantDao paymentVariantDao;
 	@Autowired
-	private PaymentVariant testPaymentVariant;
+	private PaymentVariant fakePaymentVariant;
+
+	@Test
+	@Rollback(true)
+	public void loadTest() throws DataBaseException {
+		PaymentVariant result = paymentVariantDao.load(1);
+
+		assertEquals(1, result.getProject().getId());
+		assertEquals("velo parking", result.getProject().getName());
+		assertEquals(10, result.getAmount());
+		assertEquals("minimum", result.getDescription());
+	}
 
 	@Test
 	@Rollback(true)
 	public void persistTest() throws DataBaseException {
-		paymentVariantDao.persist(testPaymentVariant);
+		paymentVariantDao.persist(fakePaymentVariant);
 
-		int id = testPaymentVariant.getId();
+		int id = fakePaymentVariant.getId();
 		PaymentVariant result = paymentVariantDao.load(id);
 
 		assertEquals(1000, result.getAmount());

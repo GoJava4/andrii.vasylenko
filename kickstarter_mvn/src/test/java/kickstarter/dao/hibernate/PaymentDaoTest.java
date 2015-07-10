@@ -17,14 +17,24 @@ public class PaymentDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	@Autowired
 	private PaymentDao paymentDao;
 	@Autowired
-	private Payment testPayment;
+	private Payment fakePayment;
+
+	@Test
+	@Rollback(true)
+	public void loadTest() throws DataBaseException {
+		Payment result = paymentDao.load(1);
+
+		assertEquals(1, result.getProject().getId());
+		assertEquals("velo parking", result.getProject().getName());
+		assertEquals(500, result.getAmount());
+	}
 
 	@Test
 	@Rollback(true)
 	public void persistTest() throws DataBaseException {
-		paymentDao.persist(testPayment);
+		paymentDao.persist(fakePayment);
 
-		int id = testPayment.getId();
+		int id = fakePayment.getId();
 		Payment result = paymentDao.load(id);
 
 		assertEquals(1000, result.getAmount());

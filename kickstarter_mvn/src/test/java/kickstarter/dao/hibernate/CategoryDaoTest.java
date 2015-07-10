@@ -19,14 +19,22 @@ public class CategoryDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 	@Autowired
 	private CategoryDao categoryDao;
 	@Autowired
-	private Category testCategory;
+	private Category fakeCategory;
+
+	@Test
+	@Rollback(true)
+	public void loadTest() throws DataBaseException {
+		Category result = categoryDao.load(1);
+
+		assertEquals("Sport", result.getName());
+	}
 
 	@Test
 	@Rollback(true)
 	public void persistTest() throws DataBaseException {
-		categoryDao.persist(testCategory);
+		categoryDao.persist(fakeCategory);
 
-		int id = testCategory.getId();
+		int id = fakeCategory.getId();
 		Category result = categoryDao.load(id);
 
 		assertEquals("testName", result.getName());

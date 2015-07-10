@@ -3,7 +3,7 @@ package kickstarter.dao.hibernate;
 import static org.junit.Assert.*;
 
 import java.text.ParseException;
-import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import kickstarter.dao.ProjectDao;
@@ -21,23 +21,40 @@ public class ProjectDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	@Autowired
 	private ProjectDao projectDao;
 	@Autowired
-	private Project testProject;
-	@Autowired
-	Date testFinalDate;
+	private Project fakeProject;
+
+	@Test
+	@Rollback(true)
+	public void loadTest() throws DataBaseException, ParseException {
+		Project result = projectDao.load(1);
+
+		assertEquals(1, result.getCategory().getId());
+		assertEquals("Sport", result.getCategory().getName());
+		assertEquals("velo parking", result.getName());
+		assertEquals("velo parking in Kiev", result.getDescription());
+		assertEquals(10000, result.getTotalAmount());
+		assertEquals(new SimpleDateFormat("yyyy-MM-dd").parse("2015-09-30"), result.getFinalDate());
+		assertEquals("History1", result.getHistory());
+		assertEquals("www.project1.com", result.getLink());
+		assertEquals(500, result.getCollectAmount());
+		assertEquals(1, result.getPayments().size());
+		assertEquals(3, result.getPaymentVariants().size());
+		assertEquals(1, result.getQuestions().size());
+	}
 
 	@Test
 	@Rollback(true)
 	public void persistTest() throws DataBaseException, ParseException {
-		projectDao.persist(testProject);
+		projectDao.persist(fakeProject);
 
-		int id = testProject.getId();
+		int id = fakeProject.getId();
 		Project result = projectDao.load(id);
 
 		assertEquals("testName", result.getName());
 		assertEquals(1, result.getCategory().getId());
 		assertEquals("testDescription", result.getDescription());
 		assertEquals(10000, result.getTotalAmount());
-		assertEquals(testFinalDate, result.getFinalDate());
+		assertEquals(new SimpleDateFormat("yyyy-MM-dd").parse("2020-01-01"), result.getFinalDate());
 		assertEquals("testHistory", result.getHistory());
 		assertEquals("testLink", result.getLink());
 	}

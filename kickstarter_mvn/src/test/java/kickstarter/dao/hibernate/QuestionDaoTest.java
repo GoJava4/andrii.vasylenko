@@ -1,7 +1,6 @@
 package kickstarter.dao.hibernate;
 
 import static org.junit.Assert.*;
-
 import kickstarter.dao.QuestionDao;
 import kickstarter.entity.Question;
 import kickstarter.exception.DataBaseException;
@@ -17,14 +16,24 @@ public class QuestionDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 	@Autowired
 	private QuestionDao questionDao;
 	@Autowired
-	private Question testQuestion;
+	private Question fakeQuestion;
+
+	@Test
+	@Rollback(true)
+	public void loadTest() throws DataBaseException {
+		Question result = questionDao.load(1);
+
+		assertEquals(1, result.getProject().getId());
+		assertEquals("velo parking", result.getProject().getName());
+		assertEquals("WTF №1?", result.getQuestion());
+	}
 
 	@Test
 	@Rollback(true)
 	public void persistTest() throws DataBaseException {
-		questionDao.persist(testQuestion);
+		questionDao.persist(fakeQuestion);
 
-		int id = testQuestion.getId();
+		int id = fakeQuestion.getId();
 		Question result = questionDao.load(id);
 
 		assertEquals("testQuestion", result.getQuestion());

@@ -16,14 +16,22 @@ public class QuoteDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 	@Autowired
 	private QuoteDao quoteDao;
 	@Autowired
-	private Quote testQuote;
+	private Quote fakeQuote;
+
+	@Test
+	@Rollback(true)
+	public void loadTest() throws DataBaseException {
+		Quote result = quoteDao.load(1);
+
+		assertEquals("Don't cry because it's over, smile because it happened", result.getQuote());
+	}
 
 	@Test
 	@Rollback(true)
 	public void persistTest() throws DataBaseException {
-		quoteDao.persist(testQuote);
+		quoteDao.persist(fakeQuote);
 
-		int id = testQuote.getId();
+		int id = fakeQuote.getId();
 		Quote result = quoteDao.load(id);
 
 		assertEquals("testQuote", result.getQuote());
