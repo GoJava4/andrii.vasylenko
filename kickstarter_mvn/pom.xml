@@ -126,14 +126,15 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+				<version>7.1.1.Final</version>
 				<configuration>
-					<url>http://localhost:8080/manager/text</url>
-					<username>admin</username>
-					<password>admin</password>
-					<path>/kickstarter</path>
+					<hostname>localhost</hostname>
+					<port>9999</port>
+					<name>admin</name>
+					<password>111</password>
+					<name>kickstarter.war</name>
 				</configuration>
 			</plugin>
 		</plugins>
