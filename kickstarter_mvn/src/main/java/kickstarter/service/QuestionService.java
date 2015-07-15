@@ -12,14 +12,6 @@ public class QuestionService {
 	private ProjectDao projectDao;
 	private QuestionDao questionDao;
 
-	public void setProjectDao(ProjectDao projectDao) {
-		this.projectDao = projectDao;
-	}
-
-	public void setQuestionDao(QuestionDao questionDao) {
-		this.questionDao = questionDao;
-	}
-
 	@Transactional
 	public Question persistQuestion(int projectId, String question) {
 		try {
@@ -36,6 +28,14 @@ public class QuestionService {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public void setProjectDao(ProjectDao projectDao) {
+		this.projectDao = projectDao;
+	}
+
+	public void setQuestionDao(QuestionDao questionDao) {
+		this.questionDao = questionDao;
 	}
 
 	private Question createEntity(Project project, String question) {

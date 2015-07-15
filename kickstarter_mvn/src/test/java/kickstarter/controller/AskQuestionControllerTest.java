@@ -19,8 +19,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.ui.Model;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring-test-context.xml")
+@ContextConfiguration("classpath:spring-mvc-context.xml")
 public class AskQuestionControllerTest {
+	private static final String VIEW = "AskQuestion";
+	private static final String SUBMIT_VIEW = "AskQuestionSubmit";
+
 	@Mock
 	private ProjectService projectService;
 	@Mock
@@ -45,7 +48,7 @@ public class AskQuestionControllerTest {
 		String result = askQuestionController.showAskQuestionPage(model, 0);
 
 		verify(model, times(1)).addAttribute("project", null);
-		assertEquals("AskQuestion", result);
+		assertEquals(VIEW, result);
 	}
 
 	@Test
@@ -56,6 +59,6 @@ public class AskQuestionControllerTest {
 
 		verify(model, times(1)).addAttribute("project", null);
 		verify(model, times(1)).addAttribute("question", question);
-		assertEquals("AskQuestionSubmit", result);
+		assertEquals(SUBMIT_VIEW, result);
 	}
 }

@@ -7,11 +7,12 @@ import kickstarter.exception.DataBaseException;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 
-@ContextConfiguration("classpath:spring-test-context.xml")
+@ContextConfiguration("classpath:hibernate-test-context.xml")
+@TransactionConfiguration(defaultRollback = true)
 public class PaymentVariantDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Autowired
 	private PaymentVariantDao paymentVariantDao;
@@ -19,7 +20,6 @@ public class PaymentVariantDaoTest extends AbstractTransactionalJUnit4SpringCont
 	private PaymentVariant fakePaymentVariant;
 
 	@Test
-	@Rollback(true)
 	public void loadTest() throws DataBaseException {
 		PaymentVariant result = paymentVariantDao.load(1);
 
@@ -30,7 +30,6 @@ public class PaymentVariantDaoTest extends AbstractTransactionalJUnit4SpringCont
 	}
 
 	@Test
-	@Rollback(true)
 	public void persistTest() throws DataBaseException {
 		paymentVariantDao.persist(fakePaymentVariant);
 
@@ -43,13 +42,11 @@ public class PaymentVariantDaoTest extends AbstractTransactionalJUnit4SpringCont
 	}
 
 	@Test(expected = DataBaseException.class)
-	@Rollback(true)
 	public void shouldThrowException_whenPersistNull() throws DataBaseException {
 		paymentVariantDao.persist(null);
 	}
 
 	@Test(expected = DataBaseException.class)
-	@Rollback(true)
 	public void shouldThrowException_whenIncorrectId() throws DataBaseException {
 		paymentVariantDao.load(-1);
 	}

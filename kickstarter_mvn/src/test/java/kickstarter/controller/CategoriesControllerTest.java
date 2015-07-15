@@ -17,8 +17,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.ui.Model;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring-test-context.xml")
+@ContextConfiguration("classpath:spring-mvc-context.xml")
 public class CategoriesControllerTest {
+	private static final String VIEW = "Categories";
+
 	@Mock
 	private CategoryService categoryService;
 	@Mock
@@ -39,6 +41,6 @@ public class CategoriesControllerTest {
 		String result = categoriesController.showCategoriesPage(model);
 
 		verify(model, times(1)).addAttribute("categories", null);
-		assertEquals("Categories", result);
+		assertEquals(VIEW, result);
 	}
 }

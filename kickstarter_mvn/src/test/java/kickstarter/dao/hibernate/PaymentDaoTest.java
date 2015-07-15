@@ -1,18 +1,18 @@
 package kickstarter.dao.hibernate;
 
 import static org.junit.Assert.*;
-
 import kickstarter.dao.PaymentDao;
 import kickstarter.entity.Payment;
 import kickstarter.exception.DataBaseException;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 
-@ContextConfiguration("classpath:spring-test-context.xml")
+@ContextConfiguration("classpath:hibernate-test-context.xml")
+@TransactionConfiguration(defaultRollback = true)
 public class PaymentDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Autowired
 	private PaymentDao paymentDao;
@@ -20,7 +20,6 @@ public class PaymentDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	private Payment fakePayment;
 
 	@Test
-	@Rollback(true)
 	public void loadTest() throws DataBaseException {
 		Payment result = paymentDao.load(1);
 
@@ -30,7 +29,6 @@ public class PaymentDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	}
 
 	@Test
-	@Rollback(true)
 	public void persistTest() throws DataBaseException {
 		paymentDao.persist(fakePayment);
 
@@ -42,13 +40,11 @@ public class PaymentDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	}
 
 	@Test(expected = DataBaseException.class)
-	@Rollback(true)
 	public void shouldThrowException_whenPersistNull() throws DataBaseException {
 		paymentDao.persist(null);
 	}
 
 	@Test(expected = DataBaseException.class)
-	@Rollback(true)
 	public void shouldThrowException_whenIncorrectId() throws DataBaseException {
 		paymentDao.load(-1);
 	}

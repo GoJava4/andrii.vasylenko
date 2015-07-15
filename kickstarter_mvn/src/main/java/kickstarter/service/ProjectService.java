@@ -11,10 +11,6 @@ import kickstarter.exception.DataBaseException;
 public class ProjectService {
 	private ProjectDao projectDao;
 
-	public void setProjectDao(ProjectDao projectDao) {
-		this.projectDao = projectDao;
-	}
-
 	@Transactional(readOnly = true)
 	public Project loadProject(int projectId) {
 		try {
@@ -35,5 +31,9 @@ public class ProjectService {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public void setProjectDao(ProjectDao projectDao) {
+		this.projectDao = projectDao;
 	}
 }

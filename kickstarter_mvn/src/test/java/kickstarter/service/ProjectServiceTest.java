@@ -11,16 +11,14 @@ import kickstarter.exception.DataBaseException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring-test-context.xml")
 public class ProjectServiceTest {
+	private static final int PROJECT_ID = 1;
+	private static final int CATEGORY_ID = 1;
+
 	@Mock
 	private Project project;
 	@Mock
@@ -39,7 +37,7 @@ public class ProjectServiceTest {
 	public void loadProjectTest() throws DataBaseException {
 		when(projectDao.load(anyInt())).thenReturn(project);
 
-		Project result = projectService.loadProject(0);
+		Project result = projectService.loadProject(PROJECT_ID);
 
 		assertEquals(project, result);
 	}
@@ -48,7 +46,7 @@ public class ProjectServiceTest {
 	public void loadProjectsInCategoryTest() throws DataBaseException {
 		when(projectDao.loadProjectsInCategory(anyInt())).thenReturn(projects);
 
-		List<Project> result = projectService.loadProjectsInCategory(0);
+		List<Project> result = projectService.loadProjectsInCategory(CATEGORY_ID);
 
 		assertEquals(projects, result);
 	}
@@ -59,7 +57,7 @@ public class ProjectServiceTest {
 		when(projectDao.load(anyInt())).thenThrow(DataBaseException.class);
 		when(projectDao.loadProjectsInCategory(anyInt())).thenThrow(DataBaseException.class);
 
-		assertNull(projectService.loadProject(0));
-		assertNull(projectService.loadProjectsInCategory(0));
+		assertNull(projectService.loadProject(PROJECT_ID));
+		assertNull(projectService.loadProjectsInCategory(CATEGORY_ID));
 	}
 }

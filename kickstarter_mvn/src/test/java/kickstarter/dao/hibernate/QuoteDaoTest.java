@@ -7,11 +7,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 
-@ContextConfiguration("classpath:spring-test-context.xml")
+@ContextConfiguration("classpath:hibernate-test-context.xml")
+@TransactionConfiguration(defaultRollback = true)
 public class QuoteDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Autowired
 	private QuoteDao quoteDao;
@@ -19,7 +20,6 @@ public class QuoteDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 	private Quote fakeQuote;
 
 	@Test
-	@Rollback(true)
 	public void loadTest() throws DataBaseException {
 		Quote result = quoteDao.load(1);
 
@@ -27,7 +27,6 @@ public class QuoteDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 	}
 
 	@Test
-	@Rollback(true)
 	public void persistTest() throws DataBaseException {
 		quoteDao.persist(fakeQuote);
 
@@ -38,20 +37,17 @@ public class QuoteDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 	}
 
 	@Test
-	@Rollback(true)
 	public void loadRandomTest() throws DataBaseException {
 		Quote result = quoteDao.loadRandom();
 		assertNotNull(result);
 	}
 
 	@Test(expected = DataBaseException.class)
-	@Rollback(true)
 	public void shouldThrowException_whenPersistNull() throws DataBaseException {
 		quoteDao.persist(null);
 	}
 
 	@Test(expected = DataBaseException.class)
-	@Rollback(true)
 	public void shouldThrowException_whenIncorrectId() throws DataBaseException {
 		quoteDao.load(-1);
 	}

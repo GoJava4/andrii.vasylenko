@@ -12,11 +12,12 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 
-@ContextConfiguration("classpath:spring-test-context.xml")
+@ContextConfiguration("classpath:hibernate-test-context.xml")
+@TransactionConfiguration(defaultRollback = true)
 public class ProjectDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Autowired
 	private ProjectDao projectDao;
@@ -24,7 +25,6 @@ public class ProjectDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	private Project fakeProject;
 
 	@Test
-	@Rollback(true)
 	public void loadTest() throws DataBaseException {
 		Project result = projectDao.load(1);
 
@@ -43,7 +43,6 @@ public class ProjectDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	}
 
 	@Test
-	@Rollback(true)
 	public void persistTest() throws DataBaseException {
 		projectDao.persist(fakeProject);
 
@@ -60,20 +59,17 @@ public class ProjectDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	}
 
 	@Test
-	@Rollback(true)
 	public void loadProjectsInCategoryTest() throws DataBaseException {
 		List<Project> result = projectDao.loadProjectsInCategory(1);
 		assertEquals(2, result.size());
 	}
 
 	@Test(expected = DataBaseException.class)
-	@Rollback(true)
 	public void shouldThrowException_whenPersistNull() throws DataBaseException {
 		projectDao.persist(null);
 	}
 
 	@Test(expected = DataBaseException.class)
-	@Rollback(true)
 	public void shouldThrowException_whenIncorrectId() throws DataBaseException {
 		projectDao.load(-1);
 	}

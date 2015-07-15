@@ -13,16 +13,17 @@ import kickstarter.exception.DataBaseException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring-test-context.xml")
 public class PaymentServiceTest {
+	private static final int PROJECT_ID = 1;
+	private static final String PAYMENT_VARIANT_ID = "1";
+	private static final String PAYMENT_VARIANT_OTHER = "other";
+	private static final int PAYMENT_AMOUNT = 10000;
+	private static final int PAYMENT_AMOUNT_OTHER = 1000;
+
 	@Mock
 	private Project project;
 	@Mock
@@ -45,28 +46,28 @@ public class PaymentServiceTest {
 	public void shouldPersistInputAmount_whenPaymentVariantIsOther() throws DataBaseException {
 		when(projectDao.load(anyInt())).thenReturn(project);
 		when(paymentVariantDao.load(anyInt())).thenReturn(paymentVariant);
-		when(paymentVariant.getAmount()).thenReturn(10000);
+		when(paymentVariant.getAmount()).thenReturn(PAYMENT_AMOUNT);
 
-		Payment result = paymentService.persistPayment(0, "other", "1000");
+		Payment result = paymentService.persistPayment(PROJECT_ID, PAYMENT_VARIANT_OTHER, "" + PAYMENT_AMOUNT_OTHER);
 
 		verify(paymentVariantDao, never()).load(anyInt());
 		verify(paymentDao, times(1)).persist(result);
 		assertEquals(project, result.getProject());
-		assertEquals(1000, result.getAmount());
+		assertEquals(PAYMENT_AMOUNT_OTHER, result.getAmount());
 	}
 
 	@Test
 	public void shouldPersistAmountFromPaymentVariant_whenPaymentVariantIsNotOther() throws DataBaseException {
 		when(projectDao.load(anyInt())).thenReturn(project);
 		when(paymentVariantDao.load(anyInt())).thenReturn(paymentVariant);
-		when(paymentVariant.getAmount()).thenReturn(10000);
+		when(paymentVariant.getAmount()).thenReturn(PAYMENT_AMOUNT);
 
-		Payment result = paymentService.persistPayment(0, "1", "");
+		Payment result = paymentService.persistPayment(PROJECT_ID, PAYMENT_VARIANT_ID, "");
 
 		verify(paymentVariantDao, times(1)).load(anyInt());
 		verify(paymentDao, times(1)).persist(result);
 		assertEquals(project, result.getProject());
-		assertEquals(10000, result.getAmount());
+		assertEquals(PAYMENT_AMOUNT, result.getAmount());
 	}
 
 	@Test
@@ -74,8 +75,8 @@ public class PaymentServiceTest {
 	public void shouldReturnNull_whenDataBaseException() throws DataBaseException {
 		when(projectDao.load(anyInt())).thenThrow(DataBaseException.class);
 		when(paymentVariantDao.load(anyInt())).thenReturn(paymentVariant);
-		when(paymentVariant.getAmount()).thenReturn(10000);
+		when(paymentVariant.getAmount()).thenReturn(PAYMENT_AMOUNT);
 
-		assertNull(paymentService.persistPayment(0, "1", ""));
+		assertNull(paymentService.persistPayment(PROJECT_ID, PAYMENT_VARIANT_ID, ""));
 	}
 }

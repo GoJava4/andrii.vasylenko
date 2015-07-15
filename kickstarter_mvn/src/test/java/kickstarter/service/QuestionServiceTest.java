@@ -11,16 +11,14 @@ import kickstarter.exception.DataBaseException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring-test-context.xml")
 public class QuestionServiceTest {
+	private static final int PROJECT_ID = 1;
+	private static final String QUESTION = "testQuestion";
+
 	@Mock
 	private Project project;
 	@Mock
@@ -39,11 +37,11 @@ public class QuestionServiceTest {
 	public void persistQuestionTest() throws DataBaseException {
 		when(projectDao.load(anyInt())).thenReturn(project);
 
-		Question result = questionService.persistQuestion(0, "testQuestion");
+		Question result = questionService.persistQuestion(PROJECT_ID, QUESTION);
 
 		verify(questionDao, times(1)).persist(result);
 		assertEquals(project, result.getProject());
-		assertEquals("testQuestion", result.getQuestion());
+		assertEquals(QUESTION, result.getQuestion());
 	}
 
 	@Test
@@ -51,6 +49,6 @@ public class QuestionServiceTest {
 	public void shouldReturnNull_whenDataBaseException() throws DataBaseException {
 		when(projectDao.load(anyInt())).thenThrow(DataBaseException.class);
 
-		assertNull(questionService.persistQuestion(0, "testQuestion"));
+		assertNull(questionService.persistQuestion(PROJECT_ID, QUESTION));
 	}
 }

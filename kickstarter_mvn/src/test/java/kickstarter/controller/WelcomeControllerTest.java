@@ -17,8 +17,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.ui.Model;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring-test-context.xml")
+@ContextConfiguration("classpath:spring-mvc-context.xml")
 public class WelcomeControllerTest {
+	private static final String VIEW = "Quote";
+
 	@Mock
 	private QuoteService quoteService;
 	@Mock
@@ -39,6 +41,6 @@ public class WelcomeControllerTest {
 		String result = welcomeController.showWelcomePage(model);
 
 		verify(model, times(1)).addAttribute("quote", null);
-		assertEquals("Quote", result);
+		assertEquals(VIEW, result);
 	}
 }

@@ -11,10 +11,6 @@ import kickstarter.exception.DataBaseException;
 public class CategoryService {
 	private CategoryDao categoryDao;
 
-	public void setCategoryDao(CategoryDao categoryDao) {
-		this.categoryDao = categoryDao;
-	}
-
 	@Transactional(readOnly = true)
 	public List<Category> loadAllCategories() {
 		try {
@@ -24,5 +20,9 @@ public class CategoryService {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public void setCategoryDao(CategoryDao categoryDao) {
+		this.categoryDao = categoryDao;
 	}
 }

@@ -9,10 +9,6 @@ import kickstarter.exception.DataBaseException;
 public class QuoteService {
 	private QuoteDao quoteDao;
 
-	public void setQuoteDao(QuoteDao quoteDao) {
-		this.quoteDao = quoteDao;
-	}
-
 	@Transactional(readOnly = true)
 	public Quote loadRandomQuote() {
 		try {
@@ -22,5 +18,9 @@ public class QuoteService {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public void setQuoteDao(QuoteDao quoteDao) {
+		this.quoteDao = quoteDao;
 	}
 }

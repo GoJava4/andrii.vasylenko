@@ -10,11 +10,12 @@ import kickstarter.exception.DataBaseException;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 
-@ContextConfiguration("classpath:spring-test-context.xml")
+@ContextConfiguration("classpath:hibernate-test-context.xml")
+@TransactionConfiguration(defaultRollback = true)
 public class CategoryDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Autowired
 	private CategoryDao categoryDao;
@@ -22,7 +23,6 @@ public class CategoryDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 	private Category fakeCategory;
 
 	@Test
-	@Rollback(true)
 	public void loadTest() throws DataBaseException {
 		Category result = categoryDao.load(1);
 
@@ -30,7 +30,6 @@ public class CategoryDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 	}
 
 	@Test
-	@Rollback(true)
 	public void persistTest() throws DataBaseException {
 		categoryDao.persist(fakeCategory);
 
@@ -41,20 +40,17 @@ public class CategoryDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 	}
 
 	@Test
-	@Rollback(true)
 	public void loadAllTest() throws DataBaseException {
 		List<Category> result = categoryDao.loadAll();
 		assertNotNull(result);
 	}
 
 	@Test(expected = DataBaseException.class)
-	@Rollback(true)
 	public void shouldThrowException_whenPersistNull() throws DataBaseException {
 		categoryDao.persist(null);
 	}
 
 	@Test(expected = DataBaseException.class)
-	@Rollback(true)
 	public void shouldThrowException_whenIncorrectId() throws DataBaseException {
 		categoryDao.load(-1);
 	}

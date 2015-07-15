@@ -19,8 +19,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.ui.Model;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring-test-context.xml")
+@ContextConfiguration("classpath:spring-mvc-context.xml")
 public class DonateControllerTest {
+	private static final String VIEW = "Donate";
+	private static final String SUBMIT_VIEW = "DonateSubmit";
+
 	@Mock
 	private ProjectService projectService;
 	@Mock
@@ -45,7 +48,7 @@ public class DonateControllerTest {
 		String result = donateController.showDonatePage(model, 0);
 
 		verify(model, times(1)).addAttribute("project", null);
-		assertEquals("Donate", result);
+		assertEquals(VIEW, result);
 	}
 
 	@Test
@@ -55,6 +58,6 @@ public class DonateControllerTest {
 		String result = donateController.submitDonatePage(model, 0, "", "");
 
 		verify(model, times(1)).addAttribute("project", null);
-		assertEquals("DonateSubmit", result);
+		assertEquals(SUBMIT_VIEW, result);
 	}
 }
