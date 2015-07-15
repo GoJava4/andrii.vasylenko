@@ -1,8 +1,10 @@
 package kickstarter.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
+
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 public class Project implements Serializable {
 	private static final long serialVersionUID = -5672417376734008303L;
@@ -12,7 +14,7 @@ public class Project implements Serializable {
 	private String name;
 	private String description;
 	private int totalAmount;
-	private Date finalDate;
+	private DateTime finalDate;
 	private String history;
 	private String link;
 	private Set<Payment> payments;
@@ -21,8 +23,7 @@ public class Project implements Serializable {
 	private int collectAmount;
 
 	public int getDaysLeft() {
-		long diff = finalDate.getTime() - System.currentTimeMillis();
-		return (int) (diff / 1000 / 60 / 60 / 24);
+		return Days.daysBetween(DateTime.now(), getFinalDate()).getDays();
 	}
 
 	public int getId() {
@@ -65,11 +66,11 @@ public class Project implements Serializable {
 		this.totalAmount = totalAmount;
 	}
 
-	public Date getFinalDate() {
+	public DateTime getFinalDate() {
 		return finalDate;
 	}
 
-	public void setFinalDate(Date finalDate) {
+	public void setFinalDate(DateTime finalDate) {
 		this.finalDate = finalDate;
 	}
 

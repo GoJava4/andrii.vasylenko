@@ -45,6 +45,9 @@
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
 				<prop key="hibernate.enable_lazy_load_no_trans">${hibernate.enable_lazy_load_no_trans}</prop>
+				<prop key="jadira.usertype.autoRegisterUserTypes">${jadira.usertype.autoRegisterUserTypes}</prop>
+				<prop key="jadira.usertype.databaseZone">${jadira.usertype.databaseZone}</prop>
+				<prop key="jadira.usertype.javaZone">${jadira.usertype.javaZone}</prop>
 			</props>
 		</property>
 	</bean>

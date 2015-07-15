@@ -1,33 +1,38 @@
 package kickstarter.entity;
 
 import static org.junit.Assert.*;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import kickstarter.entity.Project;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
+import org.joda.time.DateTimeZone;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring-test-context.xml")
 public class ProjectTest {
-	@Autowired
-	private Project fakeProject;
+	private final static int DAYS_IN_TWO_YEARS = 365 * 2;
+	private final static DateTime TEST_FINAL_DAY = new DateTime(2016, 1, 1, 0, 0, 0, DateTimeZone.forID("Europe/Kiev"));
+	private final static DateTime TEST_CURRENT_DAY = new DateTime(2014, 1, 1, 0, 0, 0,
+			DateTimeZone.forID("Europe/Kiev"));
 
-	@Test
-	public void getDaysLeftTest() throws ParseException {
-		assertEquals(expectedDaysLeft(), fakeProject.getDaysLeft());
+	@Spy
+	private Project project;
+
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
 	}
 
-	private int expectedDaysLeft() throws ParseException {
-		Date finalDate = new SimpleDateFormat("yyyy-MM-dd").parse("2020-01-01");
-		long diff = finalDate.getTime() - System.currentTimeMillis();
-		return (int) (diff / 1000 / 60 / 60 / 24);
+	@Test
+	public void getDaysLeftTest() {
+		project.setFinalDate(TEST_FINAL_DAY);
+		DateTimeUtils.setCurrentMillisFixed(TEST_CURRENT_DAY.getMillis());
+
+		assertEquals(TEST_FINAL_DAY, project.getFinalDate());
+		assertEquals(DAYS_IN_TWO_YEARS, project.getDaysLeft());
+
+		DateTimeUtils.setCurrentMillisSystem();
 	}
 }

@@ -29,8 +29,18 @@
 		<property name="description" value="testDescription" />
 		<property name="totalAmount" value="10000" />
 		<property name="finalDate">
-			<bean factory-bean="dateFormat" factory-method="parse">
-				<constructor-arg value="2020-01-01" />
+			<bean class="org.joda.time.DateTime">
+				<constructor-arg index="0" value="2020" />
+				<constructor-arg index="1" value="1" />
+				<constructor-arg index="2" value="1" />
+				<constructor-arg index="3" value="0" />
+				<constructor-arg index="4" value="0" />
+				<constructor-arg index="5" value="0" />
+				<constructor-arg index="6">
+					<bean factory-method="forID" class="org.joda.time.DateTimeZone">
+						<constructor-arg value="Europe/Kiev" />
+					</bean>
+				</constructor-arg>
 			</bean>
 		</property>
 		<property name="history" value="testHistory" />
@@ -62,9 +72,5 @@
 			</bean>
 		</property>
 		<property name="question" value="testQuestion" />
-	</bean>
-
-	<bean id="dateFormat" class="java.text.SimpleDateFormat">
-		<constructor-arg value="yyyy-MM-dd" />
 	</bean>
 </beans>

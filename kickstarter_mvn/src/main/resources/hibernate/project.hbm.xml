@@ -26,9 +26,11 @@
 			<column name="total_amount" length="255" />
 		</property>
 
-		<property name="finalDate" type="java.util.Date">
+		<property name="finalDate"
+			type="org.jadira.usertype.dateandtime.joda.PersistentDateTime">
 			<column name="final_date" />
 		</property>
+
 
 		<property name="history" type="string">
 			<column name="history" length="255" />

@@ -2,14 +2,14 @@ package kickstarter.dao.hibernate;
 
 import static org.junit.Assert.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import kickstarter.dao.ProjectDao;
 import kickstarter.entity.Project;
 import kickstarter.exception.DataBaseException;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -25,7 +25,7 @@ public class ProjectDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 
 	@Test
 	@Rollback(true)
-	public void loadTest() throws DataBaseException, ParseException {
+	public void loadTest() throws DataBaseException {
 		Project result = projectDao.load(1);
 
 		assertEquals(1, result.getCategory().getId());
@@ -33,7 +33,7 @@ public class ProjectDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 		assertEquals("velo parking", result.getName());
 		assertEquals("velo parking in Kiev", result.getDescription());
 		assertEquals(10000, result.getTotalAmount());
-		assertEquals(new SimpleDateFormat("yyyy-MM-dd").parse("2015-09-30"), result.getFinalDate());
+		assertEquals(new DateTime(2015, 9, 30, 0, 0, 0, DateTimeZone.forID("Europe/Kiev")), result.getFinalDate());
 		assertEquals("History1", result.getHistory());
 		assertEquals("www.project1.com", result.getLink());
 		assertEquals(500, result.getCollectAmount());
@@ -44,7 +44,7 @@ public class ProjectDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 
 	@Test
 	@Rollback(true)
-	public void persistTest() throws DataBaseException, ParseException {
+	public void persistTest() throws DataBaseException {
 		projectDao.persist(fakeProject);
 
 		int id = fakeProject.getId();
@@ -54,7 +54,7 @@ public class ProjectDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 		assertEquals(1, result.getCategory().getId());
 		assertEquals("testDescription", result.getDescription());
 		assertEquals(10000, result.getTotalAmount());
-		assertEquals(new SimpleDateFormat("yyyy-MM-dd").parse("2020-01-01"), result.getFinalDate());
+		assertEquals(new DateTime(2020, 1, 1, 0, 0, 0, DateTimeZone.forID("Europe/Kiev")), result.getFinalDate());
 		assertEquals("testHistory", result.getHistory());
 		assertEquals("testLink", result.getLink());
 	}
