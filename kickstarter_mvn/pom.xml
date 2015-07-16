@@ -15,6 +15,12 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.richfaces</groupId>
+			<artifactId>richfaces</artifactId>
+			<version>4.5.7.Final</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
 			<version>2.2.11</version>
