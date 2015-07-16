@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<h:body>
+
+	<ui:composition template="/WEB-INF/jsf/template/commonLayout.xhtml">
+
+		<ui:define name="header">
+			<h1>Kickstarter: Categories</h1>
+		</ui:define>
+
+		<ui:define name="content">
+			<h2>CHOOSE CATEGORY:</h2>
+
+			<rich:list value="${categories}" id="list" var="category">
+				<h:outputLink value="/kickstarter/projects?category=${category.id}">
+					<h:outputText value="${category.name}" styleClass="item" />
+				</h:outputLink>
+			</rich:list>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>
