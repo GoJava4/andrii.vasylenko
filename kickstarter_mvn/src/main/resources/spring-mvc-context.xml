@@ -8,11 +8,9 @@
 
 	<mvc:annotation-driven />
 
-	<bean id="welcomeController"
-		class="ua.kiev.avp256.kickstarter_server.controller.WelcomeController"
-		autowire="byName">
-		<property name="view" value="Quote" />
-	</bean>
+	<bean id="quoteController"
+		class="ua.kiev.avp256.kickstarter_server.controller.QuoteController"
+		autowire="byName" />
 	<bean id="categoriesController"
 		class="ua.kiev.avp256.kickstarter_server.controller.CategoriesController"
 		autowire="byName">
