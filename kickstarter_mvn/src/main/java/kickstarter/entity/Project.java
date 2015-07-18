@@ -3,9 +3,12 @@ package kickstarter.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
+@XmlRootElement
 public class Project implements Serializable {
 	private static final long serialVersionUID = -5672417376734008303L;
 
@@ -20,7 +23,7 @@ public class Project implements Serializable {
 	private Set<Payment> payments;
 	private Set<Question> questions;
 	private Set<PaymentVariant> paymentVariants;
-	private int collectAmount;
+	private Integer collectAmount;
 
 	public int getDaysLeft() {
 		return Days.daysBetween(DateTime.now(), getFinalDate()).getDays();
@@ -114,11 +117,11 @@ public class Project implements Serializable {
 		this.paymentVariants = paymentVariants;
 	}
 
-	public int getCollectAmount() {
+	public Integer getCollectAmount() {
 		return collectAmount;
 	}
 
-	public void setCollectAmount(int collectAmount) {
+	public void setCollectAmount(Integer collectAmount) {
 		this.collectAmount = collectAmount;
 	}
 }

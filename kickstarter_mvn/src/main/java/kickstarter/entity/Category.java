@@ -3,6 +3,9 @@ package kickstarter.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Category implements Serializable {
 	private static final long serialVersionUID = -3814189872666848087L;
 

@@ -36,7 +36,7 @@ public class ProjectDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 		assertEquals(new DateTime(2015, 9, 30, 0, 0, 0, DateTimeZone.forID("Europe/Kiev")), result.getFinalDate());
 		assertEquals("History1", result.getHistory());
 		assertEquals("www.project1.com", result.getLink());
-		assertEquals(500, result.getCollectAmount());
+		assertEquals(new Integer(500), result.getCollectAmount());
 		assertEquals(1, result.getPayments().size());
 		assertEquals(3, result.getPaymentVariants().size());
 		assertEquals(1, result.getQuestions().size());
