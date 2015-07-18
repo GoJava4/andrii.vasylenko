@@ -5,14 +5,18 @@
 
 	<import resource="classpath:hibernate-context.xml" />
 
-	<bean id="quoteService" class="kickstarter.service.QuoteService"
+	<bean id="quoteService" class="ua.kiev.avp256.kickstarter_server.service.QuoteService"
 		autowire="byName" />
-	<bean id="categoryService" class="kickstarter.service.CategoryService"
+	<bean id="categoryService"
+		class="ua.kiev.avp256.kickstarter_server.service.CategoryService"
 		autowire="byName" />
-	<bean id="projectService" class="kickstarter.service.ProjectService"
+	<bean id="projectService"
+		class="ua.kiev.avp256.kickstarter_server.service.ProjectService"
 		autowire="byName" />
-	<bean id="questionService" class="kickstarter.service.QuestionService"
+	<bean id="questionService"
+		class="ua.kiev.avp256.kickstarter_server.service.QuestionService"
 		autowire="byName" />
-	<bean id="paymentService" class="kickstarter.service.PaymentService"
+	<bean id="paymentService"
+		class="ua.kiev.avp256.kickstarter_server.service.PaymentService"
 		autowire="byName" />
 </beans>

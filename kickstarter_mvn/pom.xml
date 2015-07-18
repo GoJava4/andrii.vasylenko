@@ -110,7 +110,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>kickstarter</finalName>
+		<finalName>kickstarter_server</finalName>
 
 		<resources>
 			<resource>
@@ -145,7 +145,7 @@
 					<port>9999</port>
 					<name>admin</name>
 					<password>111</password>
-					<name>kickstarter.war</name>
+					<name>kickstarter_server.war</name>
 				</configuration>
 			</plugin>
 		</plugins>

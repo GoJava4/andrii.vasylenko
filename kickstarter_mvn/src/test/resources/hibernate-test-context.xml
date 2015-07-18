@@ -11,16 +11,18 @@
 		<jdbc:script location="classpath:sql\data.sql" />
 	</jdbc:initialize-database>
 
-	<bean name="fakeQuote" class="kickstarter.entity.Quote" scope="prototype">
+	<bean name="fakeQuote" class="ua.kiev.avp256.kickstarter_server.entity.Quote"
+		scope="prototype">
 		<property name="quote" value="testQuote" />
 	</bean>
-	<bean name="fakeCategory" class="kickstarter.entity.Category"
+	<bean name="fakeCategory" class="ua.kiev.avp256.kickstarter_server.entity.Category"
 		scope="prototype">
 		<property name="name" value="testName" />
 	</bean>
-	<bean name="fakeProject" class="kickstarter.entity.Project" scope="prototype">
+	<bean name="fakeProject" class="ua.kiev.avp256.kickstarter_server.entity.Project"
+		scope="prototype">
 		<property name="category">
-			<bean class="kickstarter.entity.Category">
+			<bean class="ua.kiev.avp256.kickstarter_server.entity.Category">
 				<property name="id" value="1" />
 			</bean>
 		</property>
@@ -45,28 +47,29 @@
 		<property name="history" value="testHistory" />
 		<property name="link" value="testLink" />
 	</bean>
-	<bean name="fakePayment" class="kickstarter.entity.Payment" scope="prototype">
+	<bean name="fakePayment" class="ua.kiev.avp256.kickstarter_server.entity.Payment"
+		scope="prototype">
 		<property name="project">
-			<bean class="kickstarter.entity.Project">
+			<bean class="ua.kiev.avp256.kickstarter_server.entity.Project">
 				<property name="id" value="1" />
 			</bean>
 		</property>
 		<property name="amount" value="1000" />
 	</bean>
-	<bean name="fakePaymentVariant" class="kickstarter.entity.PaymentVariant"
-		scope="prototype">
+	<bean name="fakePaymentVariant"
+		class="ua.kiev.avp256.kickstarter_server.entity.PaymentVariant" scope="prototype">
 		<property name="project">
-			<bean class="kickstarter.entity.Project">
+			<bean class="ua.kiev.avp256.kickstarter_server.entity.Project">
 				<property name="id" value="1" />
 			</bean>
 		</property>
 		<property name="amount" value="1000" />
 		<property name="description" value="testDescription" />
 	</bean>
-	<bean name="fakeQuestion" class="kickstarter.entity.Question"
+	<bean name="fakeQuestion" class="ua.kiev.avp256.kickstarter_server.entity.Question"
 		scope="prototype">
 		<property name="project">
-			<bean class="kickstarter.entity.Project">
+			<bean class="ua.kiev.avp256.kickstarter_server.entity.Project">
 				<property name="id" value="1" />
 			</bean>
 		</property>

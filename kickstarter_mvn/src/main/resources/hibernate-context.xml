@@ -6,20 +6,27 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<bean id="quoteDao" class="kickstarter.dao.hibernate.QuoteDaoImpl"
+	<bean id="quoteDao"
+		class="ua.kiev.avp256.kickstarter_server.dao.hibernate.QuoteDaoImpl"
 		autowire="byName" />
-	<bean id="categoryDao" class="kickstarter.dao.hibernate.CategoryDaoImpl"
+	<bean id="categoryDao"
+		class="ua.kiev.avp256.kickstarter_server.dao.hibernate.CategoryDaoImpl"
 		autowire="byName" />
-	<bean id="projectDao" class="kickstarter.dao.hibernate.ProjectDaoImpl"
+	<bean id="projectDao"
+		class="ua.kiev.avp256.kickstarter_server.dao.hibernate.ProjectDaoImpl"
 		autowire="byName" />
-	<bean id="questionDao" class="kickstarter.dao.hibernate.QuestionDaoImpl"
+	<bean id="questionDao"
+		class="ua.kiev.avp256.kickstarter_server.dao.hibernate.QuestionDaoImpl"
 		autowire="byName" />
-	<bean id="paymentVariantDao" class="kickstarter.dao.hibernate.PaymentVariantDaoImpl"
+	<bean id="paymentVariantDao"
+		class="ua.kiev.avp256.kickstarter_server.dao.hibernate.PaymentVariantDaoImpl"
 		autowire="byName" />
-	<bean id="paymentDao" class="kickstarter.dao.hibernate.PaymentDaoImpl"
+	<bean id="paymentDao"
+		class="ua.kiev.avp256.kickstarter_server.dao.hibernate.PaymentDaoImpl"
 		autowire="byName" />
 
-	<bean id="daoSupport" class="kickstarter.dao.hibernate.support.HibernateDaoSupport"
+	<bean id="daoSupport"
+		class="ua.kiev.avp256.kickstarter_server.dao.hibernate.support.HibernateDaoSupport"
 		autowire="byName" />
 
 	<bean

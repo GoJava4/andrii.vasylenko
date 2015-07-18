@@ -8,29 +8,35 @@
 
 	<mvc:annotation-driven />
 
-	<bean id="welcomeController" class="kickstarter.controller.WelcomeController"
+	<bean id="welcomeController"
+		class="ua.kiev.avp256.kickstarter_server.controller.WelcomeController"
 		autowire="byName">
 		<property name="view" value="Quote" />
 	</bean>
-	<bean id="categoriesController" class="kickstarter.controller.CategoriesController"
+	<bean id="categoriesController"
+		class="ua.kiev.avp256.kickstarter_server.controller.CategoriesController"
 		autowire="byName">
 		<property name="view" value="Categories" />
 	</bean>
-	<bean id="projectsController" class="kickstarter.controller.ProjectsController"
+	<bean id="projectsController"
+		class="ua.kiev.avp256.kickstarter_server.controller.ProjectsController"
 		autowire="byName">
 		<property name="view" value="Projects" />
 	</bean>
-	<bean id="projectController" class="kickstarter.controller.ProjectController"
+	<bean id="projectController"
+		class="ua.kiev.avp256.kickstarter_server.controller.ProjectController"
 		autowire="byName">
 		<property name="view" value="Project" />
 	</bean>
 
-	<bean id="askQuestionController" class="kickstarter.controller.AskQuestionController"
+	<bean id="askQuestionController"
+		class="ua.kiev.avp256.kickstarter_server.controller.AskQuestionController"
 		autowire="byName">
 		<property name="view" value="AskQuestion" />
 		<property name="submitView" value="AskQuestionSubmit" />
 	</bean>
-	<bean id="donateController" class="kickstarter.controller.DonateController"
+	<bean id="donateController"
+		class="ua.kiev.avp256.kickstarter_server.controller.DonateController"
 		autowire="byName">
 		<property name="view" value="Donate" />
 		<property name="submitView" value="DonateSubmit" />

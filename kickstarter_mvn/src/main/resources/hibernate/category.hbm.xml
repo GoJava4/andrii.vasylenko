@@ -3,7 +3,8 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="kickstarter.entity.Category" table="Categories">
+	<class name="ua.kiev.avp256.kickstarter_server.entity.Category"
+		table="Categories">
 		<id name="id" type="java.lang.Integer">
 			<column name="id" />
 			<generator class="identity" />
@@ -18,7 +19,7 @@
 			<key>
 				<column name="id_category" not-null="true" />
 			</key>
-			<one-to-many class="kickstarter.entity.Project" />
+			<one-to-many class="ua.kiev.avp256.kickstarter_server.entity.Project" />
 		</set>
 	</class>
 </hibernate-mapping>

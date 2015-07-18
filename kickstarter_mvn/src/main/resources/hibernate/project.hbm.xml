@@ -3,14 +3,16 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="kickstarter.entity.Project" table="Projects">
+	<class name="ua.kiev.avp256.kickstarter_server.entity.Project"
+		table="Projects">
 		<id name="id" type="java.lang.Integer">
 			<column name="id" />
 			<generator class="identity" />
 		</id>
 
-		<many-to-one name="category" class="kickstarter.entity.Category"
-			fetch="join" foreign-key="projects_id_category_fkey">
+		<many-to-one name="category"
+			class="ua.kiev.avp256.kickstarter_server.entity.Category" fetch="join"
+			foreign-key="projects_id_category_fkey">
 			<column name="id_category" not-null="true" />
 		</many-to-one>
 
@@ -45,7 +47,7 @@
 			<key>
 				<column name="id_project" not-null="true" />
 			</key>
-			<one-to-many class="kickstarter.entity.Payment" />
+			<one-to-many class="ua.kiev.avp256.kickstarter_server.entity.Payment" />
 		</set>
 
 		<set name="questions" table="Questions" inverse="true" lazy="true"
@@ -53,7 +55,7 @@
 			<key>
 				<column name="id_project" not-null="true" />
 			</key>
-			<one-to-many class="kickstarter.entity.Question" />
+			<one-to-many class="ua.kiev.avp256.kickstarter_server.entity.Question" />
 		</set>
 
 		<set name="paymentVariants" table="PaymentVariants" inverse="true"
@@ -61,7 +63,8 @@
 			<key>
 				<column name="id_project" not-null="true" />
 			</key>
-			<one-to-many class="kickstarter.entity.PaymentVariant" />
+			<one-to-many
+				class="ua.kiev.avp256.kickstarter_server.entity.PaymentVariant" />
 		</set>
 
 		<property name="collectAmount" type="java.lang.Integer">
