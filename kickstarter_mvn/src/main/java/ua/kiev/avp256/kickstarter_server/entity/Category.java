@@ -11,6 +11,7 @@ public class Category implements Serializable {
 
 	private int id;
 	private String name;
+
 	private Set<Project> projects;
 
 	public int getId() {

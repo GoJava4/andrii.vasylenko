@@ -11,11 +11,11 @@
 	<bean id="quoteController"
 		class="ua.kiev.avp256.kickstarter_server.controller.QuoteController"
 		autowire="byName" />
-	<bean id="categoriesController"
-		class="ua.kiev.avp256.kickstarter_server.controller.CategoriesController"
-		autowire="byName">
-		<property name="view" value="Categories" />
-	</bean>
+
+	<bean id="categoryController"
+		class="ua.kiev.avp256.kickstarter_server.controller.CategoryController"
+		autowire="byName" />
+
 	<bean id="projectsController"
 		class="ua.kiev.avp256.kickstarter_server.controller.ProjectsController"
 		autowire="byName">
