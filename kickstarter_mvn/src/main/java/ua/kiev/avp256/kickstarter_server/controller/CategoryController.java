@@ -14,7 +14,7 @@ import ua.kiev.avp256.kickstarter_server.service.CategoryService;
 public class CategoryController {
 	private CategoryService categoryService;
 
-	@RequestMapping(value = "/v1", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public List<Category> getAllCategories() {
 		return categoryService.loadAllCategories();
 	}

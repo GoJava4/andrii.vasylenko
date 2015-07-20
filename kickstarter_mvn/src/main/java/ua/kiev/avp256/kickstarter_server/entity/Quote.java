@@ -2,9 +2,6 @@ package ua.kiev.avp256.kickstarter_server.entity;
 
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
 public class Quote implements Serializable {
 	private static final long serialVersionUID = -7177896743757665598L;
 
