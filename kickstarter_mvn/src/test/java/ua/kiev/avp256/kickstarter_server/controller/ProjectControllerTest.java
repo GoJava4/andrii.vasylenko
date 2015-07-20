@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 
 import ua.kiev.avp256.kickstarter_server.controller.ProjectController;
 import ua.kiev.avp256.kickstarter_server.entity.Project;
+import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 import ua.kiev.avp256.kickstarter_server.service.ProjectService;
 
 public class ProjectControllerTest {
@@ -51,5 +52,37 @@ public class ProjectControllerTest {
 		Project result = projectController.getProject(0);
 
 		assertEquals(project, result);
+	}
+
+	@Test(expected = DataNotFoundException.class)
+	@SuppressWarnings("unchecked")
+	public void dataNotFoundExceptionProjectsTest() {
+		when(projectService.loadProjectsInCategory(anyInt())).thenThrow(DataNotFoundException.class);
+
+		projectController.getProjects(0);
+	}
+
+	@Test(expected = Exception.class)
+	@SuppressWarnings("unchecked")
+	public void exceptionProjectsTest() {
+		when(projectService.loadProjectsInCategory(anyInt())).thenThrow(RuntimeException.class);
+
+		projectController.getProjects(0);
+	}
+
+	@Test(expected = DataNotFoundException.class)
+	@SuppressWarnings("unchecked")
+	public void dataNotFoundExceptionProjectTest() {
+		when(projectService.loadProject(anyInt())).thenThrow(DataNotFoundException.class);
+
+		projectController.getProject(0);
+	}
+
+	@Test(expected = Exception.class)
+	@SuppressWarnings("unchecked")
+	public void exceptionProjectTest() {
+		when(projectService.loadProject(anyInt())).thenThrow(RuntimeException.class);
+
+		projectController.getProject(0);
 	}
 }

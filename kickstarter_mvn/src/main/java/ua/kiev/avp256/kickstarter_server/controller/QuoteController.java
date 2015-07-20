@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ua.kiev.avp256.kickstarter_server.entity.Quote;
+import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 import ua.kiev.avp256.kickstarter_server.exception.InternalServerException;
 import ua.kiev.avp256.kickstarter_server.service.QuoteService;
 
@@ -17,6 +18,8 @@ public class QuoteController {
 	public Quote getRandomQuote() {
 		try {
 			return quoteService.loadRandomQuote();
+		} catch (DataNotFoundException e) {
+			throw e;
 		} catch (Exception e) {
 			throw new InternalServerException("Unknown Internal Server Error");
 		}

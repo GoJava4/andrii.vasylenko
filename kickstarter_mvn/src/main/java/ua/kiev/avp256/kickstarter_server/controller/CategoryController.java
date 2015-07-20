@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ua.kiev.avp256.kickstarter_server.entity.Category;
+import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 import ua.kiev.avp256.kickstarter_server.exception.InternalServerException;
 import ua.kiev.avp256.kickstarter_server.service.CategoryService;
 
@@ -19,6 +20,8 @@ public class CategoryController {
 	public List<Category> getAllCategories() {
 		try {
 			return categoryService.loadAllCategories();
+		} catch (DataNotFoundException e) {
+			throw e;
 		} catch (Exception e) {
 			throw new InternalServerException("Unknown Internal Server Error");
 		}

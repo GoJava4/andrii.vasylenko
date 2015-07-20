@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.kiev.avp256.kickstarter_server.controller.CategoryController;
 import ua.kiev.avp256.kickstarter_server.entity.Category;
+import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 import ua.kiev.avp256.kickstarter_server.service.CategoryService;
 
 public class CategoryControllerTest {
@@ -37,5 +38,21 @@ public class CategoryControllerTest {
 		List<Category> result = categoriesController.getAllCategories();
 
 		assertEquals(categories, result);
+	}
+
+	@Test(expected = DataNotFoundException.class)
+	@SuppressWarnings("unchecked")
+	public void dataNotFoundExceptionTest() {
+		when(categoryService.loadAllCategories()).thenThrow(DataNotFoundException.class);
+
+		categoriesController.getAllCategories();
+	}
+
+	@Test(expected = Exception.class)
+	@SuppressWarnings("unchecked")
+	public void exceptionTest() {
+		when(categoryService.loadAllCategories()).thenThrow(RuntimeException.class);
+
+		categoriesController.getAllCategories();
 	}
 }
