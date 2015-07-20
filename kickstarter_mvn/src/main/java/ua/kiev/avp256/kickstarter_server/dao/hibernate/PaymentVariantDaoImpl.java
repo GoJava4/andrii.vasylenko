@@ -5,9 +5,9 @@ import ua.kiev.avp256.kickstarter_server.dao.hibernate.support.DaoSupport;
 import ua.kiev.avp256.kickstarter_server.entity.PaymentVariant;
 
 public class PaymentVariantDaoImpl implements PaymentVariantDao {
-	private DaoSupport<PaymentVariant> daoSupport;
+	private DaoSupport daoSupport;
 
-	public void setDaoSupport(DaoSupport<PaymentVariant> daoSupport) {
+	public void setDaoSupport(DaoSupport daoSupport) {
 		this.daoSupport = daoSupport;
 	}
 

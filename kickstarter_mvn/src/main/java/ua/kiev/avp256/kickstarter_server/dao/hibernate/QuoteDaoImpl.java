@@ -7,9 +7,9 @@ import ua.kiev.avp256.kickstarter_server.dao.hibernate.support.DaoSupport;
 import ua.kiev.avp256.kickstarter_server.entity.Quote;
 
 public class QuoteDaoImpl implements QuoteDao {
-	private DaoSupport<Quote> daoSupport;
+	private DaoSupport daoSupport;
 
-	public void setDaoSupport(DaoSupport<Quote> daoSupport) {
+	public void setDaoSupport(DaoSupport daoSupport) {
 		this.daoSupport = daoSupport;
 	}
 

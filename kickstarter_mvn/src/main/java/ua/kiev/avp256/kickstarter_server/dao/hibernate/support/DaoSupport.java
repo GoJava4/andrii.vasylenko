@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-public interface DaoSupport<ENTITY> {
+public interface DaoSupport {
 	Session getCurrentSession();
 
-	void persist(ENTITY entity);
+	<ENTITY> void persist(ENTITY entity);
 
-	ENTITY load(int id, Class<ENTITY> clazz);
+	<ENTITY> ENTITY load(int id, Class<ENTITY> clazz);
 
 	void check(List<?> result);
 }

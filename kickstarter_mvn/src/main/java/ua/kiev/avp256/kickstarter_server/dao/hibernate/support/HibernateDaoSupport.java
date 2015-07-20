@@ -8,7 +8,7 @@ import org.hibernate.criterion.Restrictions;
 
 import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 
-public class HibernateDaoSupport<ENTITY> implements DaoSupport<ENTITY> {
+public class HibernateDaoSupport implements DaoSupport {
 
 	private SessionFactory sessionFactory;
 
@@ -22,7 +22,7 @@ public class HibernateDaoSupport<ENTITY> implements DaoSupport<ENTITY> {
 	}
 
 	@Override
-	public void persist(ENTITY entity) {
+	public <ENTITY> void persist(ENTITY entity) {
 		if (entity == null) {
 			throw new DataNotFoundException("entity is null");
 		}
@@ -31,7 +31,7 @@ public class HibernateDaoSupport<ENTITY> implements DaoSupport<ENTITY> {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public ENTITY load(int id, Class<ENTITY> clazz) {
+	public <ENTITY> ENTITY load(int id, Class<ENTITY> clazz) {
 		List<?> result = sessionFactory.getCurrentSession().createCriteria(clazz).add(Restrictions.idEq(id)).list();
 
 		check(result);
