@@ -3,12 +3,11 @@ package ua.kiev.avp256.kickstarter_server.entity;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
-@XmlRootElement
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Project implements Serializable {
 	private static final long serialVersionUID = -5672417376734008303L;
 
@@ -20,10 +19,14 @@ public class Project implements Serializable {
 	private DateTime finalDate;
 	private String history;
 	private String link;
-	private Set<Payment> payments;
-	private Set<Question> questions;
-	private Set<PaymentVariant> paymentVariants;
 	private Integer collectAmount;
+
+	@JsonIgnore
+	private Set<Payment> payments;
+	@JsonIgnore
+	private Set<Question> questions;
+	@JsonIgnore
+	private Set<PaymentVariant> paymentVariants;
 
 	public int getDaysLeft() {
 		return Days.daysBetween(DateTime.now(), getFinalDate()).getDays();

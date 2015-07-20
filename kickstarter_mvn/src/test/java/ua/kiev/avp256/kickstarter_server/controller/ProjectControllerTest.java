@@ -3,25 +3,21 @@ package ua.kiev.avp256.kickstarter_server.controller;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.ui.Model;
 
 import ua.kiev.avp256.kickstarter_server.controller.ProjectController;
+import ua.kiev.avp256.kickstarter_server.entity.Project;
 import ua.kiev.avp256.kickstarter_server.service.ProjectService;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring-mvc-context.xml")
 public class ProjectControllerTest {
-	private static final String VIEW = "Project";
-
 	@Mock
 	private ProjectService projectService;
 	@Mock
@@ -29,6 +25,10 @@ public class ProjectControllerTest {
 	@Autowired
 	@InjectMocks
 	private ProjectController projectController;
+	@Mock
+	private Project project;
+	@Mock
+	private List<Project> projects;
 
 	@Before
 	public void setup() {
@@ -36,12 +36,20 @@ public class ProjectControllerTest {
 	}
 
 	@Test
-	public void showProjectPageTest() {
-		when(projectService.loadProject(anyInt())).thenReturn(null);
+	public void getProjectsTest() {
+		when(projectService.loadProjectsInCategory(anyInt())).thenReturn(projects);
 
-		String result = projectController.showProjectPage(model, 0);
+		List<Project> result = projectController.getProjects(0);
 
-		verify(model, times(1)).addAttribute("project", null);
-		assertEquals(VIEW, result);
+		assertEquals(projects, result);
+	}
+
+	@Test
+	public void getProjectTest() {
+		when(projectService.loadProject(anyInt())).thenReturn(project);
+
+		Project result = projectController.getProject(0);
+
+		assertEquals(project, result);
 	}
 }

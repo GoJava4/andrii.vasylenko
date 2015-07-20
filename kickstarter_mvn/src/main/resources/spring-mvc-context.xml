@@ -16,16 +16,9 @@
 		class="ua.kiev.avp256.kickstarter_server.controller.CategoryController"
 		autowire="byName" />
 
-	<bean id="projectsController"
-		class="ua.kiev.avp256.kickstarter_server.controller.ProjectsController"
-		autowire="byName">
-		<property name="view" value="Projects" />
-	</bean>
 	<bean id="projectController"
 		class="ua.kiev.avp256.kickstarter_server.controller.ProjectController"
-		autowire="byName">
-		<property name="view" value="Project" />
-	</bean>
+		autowire="byName" />
 
 	<bean id="askQuestionController"
 		class="ua.kiev.avp256.kickstarter_server.controller.AskQuestionController"
