@@ -14,7 +14,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import ua.kiev.avp256.kickstarter_server.dao.ProjectDao;
 import ua.kiev.avp256.kickstarter_server.entity.Project;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
+import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 
 @ContextConfiguration("classpath:hibernate-test-context.xml")
 @TransactionConfiguration(defaultRollback = true)
@@ -25,7 +25,7 @@ public class ProjectDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	private Project fakeProject;
 
 	@Test
-	public void loadTest() throws DataBaseException {
+	public void loadTest() {
 		Project result = projectDao.load(1);
 
 		assertEquals(1, result.getCategory().getId());
@@ -43,7 +43,7 @@ public class ProjectDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	}
 
 	@Test
-	public void persistTest() throws DataBaseException {
+	public void persistTest() {
 		projectDao.persist(fakeProject);
 
 		int id = fakeProject.getId();
@@ -59,18 +59,18 @@ public class ProjectDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	}
 
 	@Test
-	public void loadProjectsInCategoryTest() throws DataBaseException {
+	public void loadProjectsInCategoryTest() {
 		List<Project> result = projectDao.loadProjectsInCategory(1);
 		assertEquals(2, result.size());
 	}
 
-	@Test(expected = DataBaseException.class)
-	public void shouldThrowException_whenPersistNull() throws DataBaseException {
+	@Test(expected = DataNotFoundException.class)
+	public void shouldThrowException_whenPersistNull() {
 		projectDao.persist(null);
 	}
 
-	@Test(expected = DataBaseException.class)
-	public void shouldThrowException_whenIncorrectId() throws DataBaseException {
+	@Test(expected = DataNotFoundException.class)
+	public void shouldThrowException_whenIncorrectId() {
 		projectDao.load(-1);
 	}
 }

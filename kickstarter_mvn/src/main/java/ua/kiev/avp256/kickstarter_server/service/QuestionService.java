@@ -6,7 +6,6 @@ import ua.kiev.avp256.kickstarter_server.dao.ProjectDao;
 import ua.kiev.avp256.kickstarter_server.dao.QuestionDao;
 import ua.kiev.avp256.kickstarter_server.entity.Project;
 import ua.kiev.avp256.kickstarter_server.entity.Question;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
 
 public class QuestionService {
 	private ProjectDao projectDao;
@@ -14,20 +13,13 @@ public class QuestionService {
 
 	@Transactional
 	public Question persistQuestion(int projectId, String question) {
-		try {
-			Project project = projectDao.load(projectId);
+		Project project = projectDao.load(projectId);
 
-			Question entity = createEntity(project, question);
+		Question entity = createEntity(project, question);
 
-			questionDao.persist(entity);
+		questionDao.persist(entity);
 
-			return entity;
-
-		} catch (DataBaseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+		return entity;
 	}
 
 	public void setProjectDao(ProjectDao projectDao) {

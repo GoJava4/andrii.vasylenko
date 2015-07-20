@@ -7,7 +7,6 @@ import org.hibernate.criterion.Restrictions;
 import ua.kiev.avp256.kickstarter_server.dao.ProjectDao;
 import ua.kiev.avp256.kickstarter_server.dao.hibernate.support.DaoSupport;
 import ua.kiev.avp256.kickstarter_server.entity.Project;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
 
 public class ProjectDaoImpl implements ProjectDao {
 	private DaoSupport<Project> daoSupport;
@@ -17,13 +16,13 @@ public class ProjectDaoImpl implements ProjectDao {
 	}
 
 	@Override
-	public void persist(Project project) throws DataBaseException {
+	public void persist(Project project) {
 		daoSupport.persist(project);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Project> loadProjectsInCategory(int categoryId) throws DataBaseException {
+	public List<Project> loadProjectsInCategory(int categoryId) {
 		List<?> result = daoSupport.getCurrentSession().createCriteria(Project.class)
 				.add(Restrictions.eq("category.id", categoryId)).list();
 
@@ -33,7 +32,7 @@ public class ProjectDaoImpl implements ProjectDao {
 	}
 
 	@Override
-	public Project load(int id) throws DataBaseException {
+	public Project load(int id) {
 		return daoSupport.load(id, Project.class);
 	}
 }

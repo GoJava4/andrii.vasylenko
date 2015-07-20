@@ -10,7 +10,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import ua.kiev.avp256.kickstarter_server.dao.QuoteDao;
 import ua.kiev.avp256.kickstarter_server.entity.Quote;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
+import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 
 @ContextConfiguration("classpath:hibernate-test-context.xml")
 @TransactionConfiguration(defaultRollback = true)
@@ -21,14 +21,14 @@ public class QuoteDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 	private Quote fakeQuote;
 
 	@Test
-	public void loadTest() throws DataBaseException {
+	public void loadTest() {
 		Quote result = quoteDao.load(1);
 
 		assertEquals("Don't cry because it's over, smile because it happened", result.getQuote());
 	}
 
 	@Test
-	public void persistTest() throws DataBaseException {
+	public void persistTest() {
 		quoteDao.persist(fakeQuote);
 
 		int id = fakeQuote.getId();
@@ -38,18 +38,18 @@ public class QuoteDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 	}
 
 	@Test
-	public void loadRandomTest() throws DataBaseException {
+	public void loadRandomTest() {
 		Quote result = quoteDao.loadRandom();
 		assertNotNull(result);
 	}
 
-	@Test(expected = DataBaseException.class)
-	public void shouldThrowException_whenPersistNull() throws DataBaseException {
+	@Test(expected = DataNotFoundException.class)
+	public void shouldThrowException_whenPersistNull() {
 		quoteDao.persist(null);
 	}
 
-	@Test(expected = DataBaseException.class)
-	public void shouldThrowException_whenIncorrectId() throws DataBaseException {
+	@Test(expected = DataNotFoundException.class)
+	public void shouldThrowException_whenIncorrectId() {
 		quoteDao.load(-1);
 	}
 }

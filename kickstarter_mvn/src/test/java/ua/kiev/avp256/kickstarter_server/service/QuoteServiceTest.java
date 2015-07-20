@@ -11,7 +11,7 @@ import org.mockito.MockitoAnnotations;
 
 import ua.kiev.avp256.kickstarter_server.dao.QuoteDao;
 import ua.kiev.avp256.kickstarter_server.entity.Quote;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
+import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 import ua.kiev.avp256.kickstarter_server.service.QuoteService;
 
 public class QuoteServiceTest {
@@ -28,7 +28,7 @@ public class QuoteServiceTest {
 	}
 
 	@Test
-	public void loadRandomQuoteTest() throws DataBaseException {
+	public void loadRandomQuoteTest() {
 		when(quoteDao.loadRandom()).thenReturn(quote);
 
 		Quote result = quoteService.loadRandomQuote();
@@ -36,13 +36,11 @@ public class QuoteServiceTest {
 		assertEquals(quote, result);
 	}
 
-	@Test
+	@Test(expected = DataNotFoundException.class)
 	@SuppressWarnings("unchecked")
-	public void shouldReturnNull_whenDataBaseException() throws DataBaseException {
-		when(quoteDao.loadRandom()).thenThrow(DataBaseException.class);
+	public void throwExceptionTest() {
+		when(quoteDao.loadRandom()).thenThrow(DataNotFoundException.class);
 
-		Quote result = quoteService.loadRandomQuote();
-
-		assertNull(result);
+		quoteService.loadRandomQuote();
 	}
 }

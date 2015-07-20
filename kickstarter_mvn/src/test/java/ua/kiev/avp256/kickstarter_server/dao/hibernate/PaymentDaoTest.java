@@ -10,7 +10,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import ua.kiev.avp256.kickstarter_server.dao.PaymentDao;
 import ua.kiev.avp256.kickstarter_server.entity.Payment;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
+import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 
 @ContextConfiguration("classpath:hibernate-test-context.xml")
 @TransactionConfiguration(defaultRollback = true)
@@ -21,7 +21,7 @@ public class PaymentDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	private Payment fakePayment;
 
 	@Test
-	public void loadTest() throws DataBaseException {
+	public void loadTest() {
 		Payment result = paymentDao.load(1);
 
 		assertEquals(1, result.getProject().getId());
@@ -30,7 +30,7 @@ public class PaymentDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	}
 
 	@Test
-	public void persistTest() throws DataBaseException {
+	public void persistTest() {
 		paymentDao.persist(fakePayment);
 
 		int id = fakePayment.getId();
@@ -40,13 +40,13 @@ public class PaymentDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 		assertEquals(1, result.getProject().getId());
 	}
 
-	@Test(expected = DataBaseException.class)
-	public void shouldThrowException_whenPersistNull() throws DataBaseException {
+	@Test(expected = DataNotFoundException.class)
+	public void shouldThrowException_whenPersistNull() {
 		paymentDao.persist(null);
 	}
 
-	@Test(expected = DataBaseException.class)
-	public void shouldThrowException_whenIncorrectId() throws DataBaseException {
+	@Test(expected = DataNotFoundException.class)
+	public void shouldThrowException_whenIncorrectId() {
 		paymentDao.load(-1);
 	}
 }

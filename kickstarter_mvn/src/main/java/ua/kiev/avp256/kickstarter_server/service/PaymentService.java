@@ -7,7 +7,6 @@ import ua.kiev.avp256.kickstarter_server.dao.PaymentVariantDao;
 import ua.kiev.avp256.kickstarter_server.dao.ProjectDao;
 import ua.kiev.avp256.kickstarter_server.entity.Payment;
 import ua.kiev.avp256.kickstarter_server.entity.Project;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
 
 public class PaymentService {
 	private ProjectDao projectDao;
@@ -16,22 +15,15 @@ public class PaymentService {
 
 	@Transactional
 	public Payment persistPayment(int projectId, String paymentVariant, String amount) {
-		try {
-			Project project = projectDao.load(projectId);
+		Project project = projectDao.load(projectId);
 
-			int paymentAmount = getAmount(paymentVariant, amount);
+		int paymentAmount = getAmount(paymentVariant, amount);
 
-			Payment entity = createEntity(project, paymentAmount);
+		Payment entity = createEntity(project, paymentAmount);
 
-			paymentDao.persist(entity);
+		paymentDao.persist(entity);
 
-			return entity;
-
-		} catch (DataBaseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+		return entity;
 	}
 
 	public void setProjectDao(ProjectDao projectDao) {
@@ -53,7 +45,7 @@ public class PaymentService {
 		return payment;
 	}
 
-	private int getAmount(String paymentVariant, String amount) throws DataBaseException {
+	private int getAmount(String paymentVariant, String amount) {
 		if ("other".equals(paymentVariant)) {
 			return Integer.parseInt(amount);
 		} else {

@@ -13,7 +13,7 @@ import org.mockito.MockitoAnnotations;
 
 import ua.kiev.avp256.kickstarter_server.dao.CategoryDao;
 import ua.kiev.avp256.kickstarter_server.entity.Category;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
+import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 import ua.kiev.avp256.kickstarter_server.service.CategoryService;
 
 public class CategoryServiceTest {
@@ -30,7 +30,7 @@ public class CategoryServiceTest {
 	}
 
 	@Test
-	public void loadAllCategoriesTest() throws DataBaseException {
+	public void loadAllCategoriesTest() {
 		when(categoryDao.loadAll()).thenReturn(categories);
 
 		List<Category> result = categoryService.loadAllCategories();
@@ -38,13 +38,11 @@ public class CategoryServiceTest {
 		assertEquals(categories, result);
 	}
 
-	@Test
+	@Test(expected = DataNotFoundException.class)
 	@SuppressWarnings("unchecked")
-	public void shouldReturnNull_whenDataBaseException() throws DataBaseException {
-		when(categoryDao.loadAll()).thenThrow(DataBaseException.class);
+	public void throwExceptionTest() {
+		when(categoryDao.loadAll()).thenThrow(DataNotFoundException.class);
 
-		List<Category> result = categoryService.loadAllCategories();
-
-		assertNull(result);
+		categoryService.loadAllCategories();
 	}
 }

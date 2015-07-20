@@ -5,7 +5,6 @@ import java.util.List;
 import ua.kiev.avp256.kickstarter_server.dao.CategoryDao;
 import ua.kiev.avp256.kickstarter_server.dao.hibernate.support.DaoSupport;
 import ua.kiev.avp256.kickstarter_server.entity.Category;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
 
 public class CategoryDaoImpl implements CategoryDao {
 	private DaoSupport<Category> daoSupport;
@@ -15,13 +14,13 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 
 	@Override
-	public void persist(Category category) throws DataBaseException {
+	public void persist(Category category) {
 		daoSupport.persist(category);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Category> loadAll() throws DataBaseException {
+	public List<Category> loadAll() {
 		List<?> result = daoSupport.getCurrentSession().createCriteria(Category.class).list();
 
 		daoSupport.check(result);
@@ -30,7 +29,7 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 
 	@Override
-	public Category load(int id) throws DataBaseException {
+	public Category load(int id) {
 		return daoSupport.load(id, Category.class);
 	}
 }

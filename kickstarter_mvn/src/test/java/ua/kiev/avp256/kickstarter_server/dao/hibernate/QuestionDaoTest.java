@@ -10,7 +10,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import ua.kiev.avp256.kickstarter_server.dao.QuestionDao;
 import ua.kiev.avp256.kickstarter_server.entity.Question;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
+import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 
 @ContextConfiguration("classpath:hibernate-test-context.xml")
 @TransactionConfiguration(defaultRollback = true)
@@ -21,7 +21,7 @@ public class QuestionDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 	private Question fakeQuestion;
 
 	@Test
-	public void loadTest() throws DataBaseException {
+	public void loadTest() {
 		Question result = questionDao.load(1);
 
 		assertEquals(1, result.getProject().getId());
@@ -30,7 +30,7 @@ public class QuestionDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 	}
 
 	@Test
-	public void persistTest() throws DataBaseException {
+	public void persistTest() {
 		questionDao.persist(fakeQuestion);
 
 		int id = fakeQuestion.getId();
@@ -40,13 +40,13 @@ public class QuestionDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 		assertEquals(1, result.getProject().getId());
 	}
 
-	@Test(expected = DataBaseException.class)
-	public void shouldThrowException_whenPersistNull() throws DataBaseException {
+	@Test(expected = DataNotFoundException.class)
+	public void shouldThrowException_whenPersistNull() {
 		questionDao.persist(null);
 	}
 
-	@Test(expected = DataBaseException.class)
-	public void shouldThrowException_whenIncorrectId() throws DataBaseException {
+	@Test(expected = DataNotFoundException.class)
+	public void shouldThrowException_whenIncorrectId() {
 		questionDao.load(-1);
 	}
 }

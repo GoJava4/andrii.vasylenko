@@ -12,7 +12,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import ua.kiev.avp256.kickstarter_server.dao.CategoryDao;
 import ua.kiev.avp256.kickstarter_server.entity.Category;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
+import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 
 @ContextConfiguration("classpath:hibernate-test-context.xml")
 @TransactionConfiguration(defaultRollback = true)
@@ -23,14 +23,14 @@ public class CategoryDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 	private Category fakeCategory;
 
 	@Test
-	public void loadTest() throws DataBaseException {
+	public void loadTest() {
 		Category result = categoryDao.load(1);
 
 		assertEquals("Sport", result.getName());
 	}
 
 	@Test
-	public void persistTest() throws DataBaseException {
+	public void persistTest() {
 		categoryDao.persist(fakeCategory);
 
 		int id = fakeCategory.getId();
@@ -40,18 +40,18 @@ public class CategoryDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 	}
 
 	@Test
-	public void loadAllTest() throws DataBaseException {
+	public void loadAllTest() {
 		List<Category> result = categoryDao.loadAll();
 		assertNotNull(result);
 	}
 
-	@Test(expected = DataBaseException.class)
-	public void shouldThrowException_whenPersistNull() throws DataBaseException {
+	@Test(expected = DataNotFoundException.class)
+	public void shouldThrowException_whenPersistNull() {
 		categoryDao.persist(null);
 	}
 
-	@Test(expected = DataBaseException.class)
-	public void shouldThrowException_whenIncorrectId() throws DataBaseException {
+	@Test(expected = DataNotFoundException.class)
+	public void shouldThrowException_whenIncorrectId() {
 		categoryDao.load(-1);
 	}
 }

@@ -15,7 +15,7 @@ import ua.kiev.avp256.kickstarter_server.dao.ProjectDao;
 import ua.kiev.avp256.kickstarter_server.entity.Payment;
 import ua.kiev.avp256.kickstarter_server.entity.PaymentVariant;
 import ua.kiev.avp256.kickstarter_server.entity.Project;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
+import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 import ua.kiev.avp256.kickstarter_server.service.PaymentService;
 
 public class PaymentServiceTest {
@@ -44,7 +44,7 @@ public class PaymentServiceTest {
 	}
 
 	@Test
-	public void shouldPersistInputAmount_whenPaymentVariantIsOther() throws DataBaseException {
+	public void shouldPersistInputAmount_whenPaymentVariantIsOther() {
 		when(projectDao.load(anyInt())).thenReturn(project);
 		when(paymentVariantDao.load(anyInt())).thenReturn(paymentVariant);
 		when(paymentVariant.getAmount()).thenReturn(PAYMENT_AMOUNT);
@@ -58,7 +58,7 @@ public class PaymentServiceTest {
 	}
 
 	@Test
-	public void shouldPersistAmountFromPaymentVariant_whenPaymentVariantIsNotOther() throws DataBaseException {
+	public void shouldPersistAmountFromPaymentVariant_whenPaymentVariantIsNotOther() {
 		when(projectDao.load(anyInt())).thenReturn(project);
 		when(paymentVariantDao.load(anyInt())).thenReturn(paymentVariant);
 		when(paymentVariant.getAmount()).thenReturn(PAYMENT_AMOUNT);
@@ -71,13 +71,13 @@ public class PaymentServiceTest {
 		assertEquals(PAYMENT_AMOUNT, result.getAmount());
 	}
 
-	@Test
+	@Test(expected = DataNotFoundException.class)
 	@SuppressWarnings("unchecked")
-	public void shouldReturnNull_whenDataBaseException() throws DataBaseException {
-		when(projectDao.load(anyInt())).thenThrow(DataBaseException.class);
+	public void throwExceptionTest() {
+		when(projectDao.load(anyInt())).thenThrow(DataNotFoundException.class);
 		when(paymentVariantDao.load(anyInt())).thenReturn(paymentVariant);
 		when(paymentVariant.getAmount()).thenReturn(PAYMENT_AMOUNT);
 
-		assertNull(paymentService.persistPayment(PROJECT_ID, PAYMENT_VARIANT_ID, ""));
+		paymentService.persistPayment(PROJECT_ID, PAYMENT_VARIANT_ID, "");
 	}
 }

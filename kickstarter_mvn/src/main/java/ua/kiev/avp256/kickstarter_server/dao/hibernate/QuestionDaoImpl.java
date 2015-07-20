@@ -3,7 +3,6 @@ package ua.kiev.avp256.kickstarter_server.dao.hibernate;
 import ua.kiev.avp256.kickstarter_server.dao.QuestionDao;
 import ua.kiev.avp256.kickstarter_server.dao.hibernate.support.DaoSupport;
 import ua.kiev.avp256.kickstarter_server.entity.Question;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
 
 public class QuestionDaoImpl implements QuestionDao {
 	private DaoSupport<Question> daoSupport;
@@ -13,12 +12,12 @@ public class QuestionDaoImpl implements QuestionDao {
 	}
 
 	@Override
-	public void persist(Question question) throws DataBaseException {
+	public void persist(Question question) {
 		daoSupport.persist(question);
 	}
 
 	@Override
-	public Question load(int id) throws DataBaseException {
+	public Question load(int id) {
 		return daoSupport.load(id, Question.class);
 	}
 }

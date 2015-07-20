@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ua.kiev.avp256.kickstarter_server.entity.Project;
+import ua.kiev.avp256.kickstarter_server.exception.InternalServerException;
 import ua.kiev.avp256.kickstarter_server.service.ProjectService;
 
 @RestController
@@ -17,12 +18,20 @@ public class ProjectController {
 
 	@RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
 	public List<Project> getProjects(@PathVariable int categoryId) {
-		return projectService.loadProjectsInCategory(categoryId);
+		try {
+			return projectService.loadProjectsInCategory(categoryId);
+		} catch (Exception e) {
+			throw new InternalServerException("Unknown Internal Server Error");
+		}
 	}
 
 	@RequestMapping(value = "/{projectId}", method = RequestMethod.GET)
 	public Project getProject(@PathVariable int projectId) {
-		return projectService.loadProject(projectId);
+		try {
+			return projectService.loadProject(projectId);
+		} catch (Exception e) {
+			throw new InternalServerException("Unknown Internal Server Error");
+		}
 	}
 
 	public void setProjectService(ProjectService projectService) {

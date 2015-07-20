@@ -5,7 +5,6 @@ import java.util.List;
 import ua.kiev.avp256.kickstarter_server.dao.QuoteDao;
 import ua.kiev.avp256.kickstarter_server.dao.hibernate.support.DaoSupport;
 import ua.kiev.avp256.kickstarter_server.entity.Quote;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
 
 public class QuoteDaoImpl implements QuoteDao {
 	private DaoSupport<Quote> daoSupport;
@@ -15,12 +14,12 @@ public class QuoteDaoImpl implements QuoteDao {
 	}
 
 	@Override
-	public void persist(Quote quote) throws DataBaseException {
+	public void persist(Quote quote) {
 		daoSupport.persist(quote);
 	}
 
 	@Override
-	public Quote loadRandom() throws DataBaseException {
+	public Quote loadRandom() {
 		List<?> result = daoSupport.getCurrentSession().getNamedQuery("loadRandomQuote").setMaxResults(1).list();
 
 		daoSupport.check(result);
@@ -29,7 +28,7 @@ public class QuoteDaoImpl implements QuoteDao {
 	}
 
 	@Override
-	public Quote load(int id) throws DataBaseException {
+	public Quote load(int id) {
 		return daoSupport.load(id, Quote.class);
 	}
 }

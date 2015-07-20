@@ -13,7 +13,7 @@ import ua.kiev.avp256.kickstarter_server.dao.ProjectDao;
 import ua.kiev.avp256.kickstarter_server.dao.QuestionDao;
 import ua.kiev.avp256.kickstarter_server.entity.Project;
 import ua.kiev.avp256.kickstarter_server.entity.Question;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
+import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 import ua.kiev.avp256.kickstarter_server.service.QuestionService;
 
 public class QuestionServiceTest {
@@ -35,7 +35,7 @@ public class QuestionServiceTest {
 	}
 
 	@Test
-	public void persistQuestionTest() throws DataBaseException {
+	public void persistQuestionTest() {
 		when(projectDao.load(anyInt())).thenReturn(project);
 
 		Question result = questionService.persistQuestion(PROJECT_ID, QUESTION);
@@ -45,11 +45,11 @@ public class QuestionServiceTest {
 		assertEquals(QUESTION, result.getQuestion());
 	}
 
-	@Test
+	@Test(expected = DataNotFoundException.class)
 	@SuppressWarnings("unchecked")
-	public void shouldReturnNull_whenDataBaseException() throws DataBaseException {
-		when(projectDao.load(anyInt())).thenThrow(DataBaseException.class);
+	public void throwExceptionTest() {
+		when(projectDao.load(anyInt())).thenThrow(DataNotFoundException.class);
 
-		assertNull(questionService.persistQuestion(PROJECT_ID, QUESTION));
+		questionService.persistQuestion(PROJECT_ID, QUESTION);
 	}
 }

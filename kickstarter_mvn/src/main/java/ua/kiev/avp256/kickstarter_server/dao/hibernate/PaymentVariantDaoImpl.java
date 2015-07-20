@@ -3,7 +3,6 @@ package ua.kiev.avp256.kickstarter_server.dao.hibernate;
 import ua.kiev.avp256.kickstarter_server.dao.PaymentVariantDao;
 import ua.kiev.avp256.kickstarter_server.dao.hibernate.support.DaoSupport;
 import ua.kiev.avp256.kickstarter_server.entity.PaymentVariant;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
 
 public class PaymentVariantDaoImpl implements PaymentVariantDao {
 	private DaoSupport<PaymentVariant> daoSupport;
@@ -13,12 +12,12 @@ public class PaymentVariantDaoImpl implements PaymentVariantDao {
 	}
 
 	@Override
-	public void persist(PaymentVariant paymentVariant) throws DataBaseException {
+	public void persist(PaymentVariant paymentVariant) {
 		daoSupport.persist(paymentVariant);
 	}
 
 	@Override
-	public PaymentVariant load(int id) throws DataBaseException {
+	public PaymentVariant load(int id) {
 		return daoSupport.load(id, PaymentVariant.class);
 	}
 }

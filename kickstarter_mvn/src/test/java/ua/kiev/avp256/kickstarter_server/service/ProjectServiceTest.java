@@ -13,7 +13,7 @@ import org.mockito.MockitoAnnotations;
 
 import ua.kiev.avp256.kickstarter_server.dao.ProjectDao;
 import ua.kiev.avp256.kickstarter_server.entity.Project;
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
+import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 import ua.kiev.avp256.kickstarter_server.service.ProjectService;
 
 public class ProjectServiceTest {
@@ -35,7 +35,7 @@ public class ProjectServiceTest {
 	}
 
 	@Test
-	public void loadProjectTest() throws DataBaseException {
+	public void loadProjectTest() {
 		when(projectDao.load(anyInt())).thenReturn(project);
 
 		Project result = projectService.loadProject(PROJECT_ID);
@@ -44,7 +44,7 @@ public class ProjectServiceTest {
 	}
 
 	@Test
-	public void loadProjectsInCategoryTest() throws DataBaseException {
+	public void loadProjectsInCategoryTest() {
 		when(projectDao.loadProjectsInCategory(anyInt())).thenReturn(projects);
 
 		List<Project> result = projectService.loadProjectsInCategory(CATEGORY_ID);
@@ -52,13 +52,11 @@ public class ProjectServiceTest {
 		assertEquals(projects, result);
 	}
 
-	@Test
+	@Test(expected = DataNotFoundException.class)
 	@SuppressWarnings("unchecked")
-	public void shouldReturnNull_whenDataBaseException() throws DataBaseException {
-		when(projectDao.load(anyInt())).thenThrow(DataBaseException.class);
-		when(projectDao.loadProjectsInCategory(anyInt())).thenThrow(DataBaseException.class);
+	public void throwExceptionTest() {
+		when(projectDao.load(anyInt())).thenThrow(DataNotFoundException.class);
 
-		assertNull(projectService.loadProject(PROJECT_ID));
-		assertNull(projectService.loadProjectsInCategory(CATEGORY_ID));
+		projectService.loadProject(PROJECT_ID);
 	}
 }

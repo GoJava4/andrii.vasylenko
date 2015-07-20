@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
-import ua.kiev.avp256.kickstarter_server.exception.DataBaseException;
+import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 
 public class HibernateDaoSupport<ENTITY> implements DaoSupport<ENTITY> {
 
@@ -22,16 +22,16 @@ public class HibernateDaoSupport<ENTITY> implements DaoSupport<ENTITY> {
 	}
 
 	@Override
-	public void persist(ENTITY entity) throws DataBaseException {
+	public void persist(ENTITY entity) {
 		if (entity == null) {
-			throw new DataBaseException("entity is null");
+			throw new DataNotFoundException("entity is null");
 		}
 		getCurrentSession().persist(entity);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public ENTITY load(int id, Class<ENTITY> clazz) throws DataBaseException {
+	public ENTITY load(int id, Class<ENTITY> clazz) {
 		List<?> result = sessionFactory.getCurrentSession().createCriteria(clazz).add(Restrictions.idEq(id)).list();
 
 		check(result);
@@ -40,9 +40,9 @@ public class HibernateDaoSupport<ENTITY> implements DaoSupport<ENTITY> {
 	}
 
 	@Override
-	public void check(List<?> result) throws DataBaseException {
+	public void check(List<?> result) {
 		if (result == null || result.isEmpty()) {
-			throw new DataBaseException("there is no data in table");
+			throw new DataNotFoundException("there are no data in table");
 		}
 	}
 }
