@@ -11,7 +11,6 @@ public class Category implements Serializable {
 	private int id;
 	private String name;
 
-
 	@JsonIgnore
 	private Set<Project> projects;
 
