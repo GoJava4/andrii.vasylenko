@@ -2,9 +2,6 @@ package ua.kiev.avp256.kickstarter_server.entity;
 
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
 public class Payment implements Serializable {
 	private static final long serialVersionUID = -3116811010948870329L;
 
