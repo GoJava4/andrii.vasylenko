@@ -50,7 +50,7 @@ public class QuestionServiceTest {
 	}
 
 	@Test
-	public void loadProjectsInCategoryTest() {
+	public void loadQuestionsInProjectTest() {
 		when(questionDao.loadQuestionsInProject(anyInt())).thenReturn(questions);
 
 		List<Question> result = questionService.loadQuestionsInProject(PROJECT_ID);

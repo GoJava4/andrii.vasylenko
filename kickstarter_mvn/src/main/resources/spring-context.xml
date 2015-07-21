@@ -7,16 +7,24 @@
 
 	<bean id="quoteService" class="ua.kiev.avp256.kickstarter_server.service.QuoteService"
 		autowire="byName" />
+
 	<bean id="categoryService"
 		class="ua.kiev.avp256.kickstarter_server.service.CategoryService"
 		autowire="byName" />
+
 	<bean id="projectService"
 		class="ua.kiev.avp256.kickstarter_server.service.ProjectService"
 		autowire="byName" />
+
 	<bean id="questionService"
 		class="ua.kiev.avp256.kickstarter_server.service.QuestionService"
 		autowire="byName" />
+
 	<bean id="paymentService"
 		class="ua.kiev.avp256.kickstarter_server.service.PaymentService"
+		autowire="byName" />
+
+	<bean id="paymentVariantService"
+		class="ua.kiev.avp256.kickstarter_server.service.PaymentVariantService"
 		autowire="byName" />
 </beans>

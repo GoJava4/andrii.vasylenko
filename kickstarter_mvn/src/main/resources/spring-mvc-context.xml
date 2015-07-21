@@ -38,4 +38,8 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+
+	<bean id="paymentVariantController"
+		class="ua.kiev.avp256.kickstarter_server.controller.PaymentVariantController"
+		autowire="byName" />
 </beans>

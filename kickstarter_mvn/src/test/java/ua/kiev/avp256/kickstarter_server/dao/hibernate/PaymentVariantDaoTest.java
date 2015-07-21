@@ -2,6 +2,8 @@ package ua.kiev.avp256.kickstarter_server.dao.hibernate;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -28,6 +30,12 @@ public class PaymentVariantDaoTest extends AbstractTransactionalJUnit4SpringCont
 		assertEquals("velo parking", result.getProject().getName());
 		assertEquals(10, result.getAmount());
 		assertEquals("minimum", result.getDescription());
+	}
+
+	@Test
+	public void loadQuestionsInProjectTest() {
+		List<PaymentVariant> result = paymentVariantDao.loadPaymentVariantsInProject(1);
+		assertEquals(3, result.size());
 	}
 
 	@Test
