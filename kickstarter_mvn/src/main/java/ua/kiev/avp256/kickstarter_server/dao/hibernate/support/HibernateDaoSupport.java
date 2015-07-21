@@ -9,12 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import ua.kiev.avp256.kickstarter_server.exception.DataNotFoundException;
 
 public class HibernateDaoSupport implements DaoSupport {
-
 	private SessionFactory sessionFactory;
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
 
 	@Override
 	public Session getCurrentSession() {
@@ -44,5 +39,9 @@ public class HibernateDaoSupport implements DaoSupport {
 		if (result == null || result.isEmpty()) {
 			throw new DataNotFoundException("there are no data in table");
 		}
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 }

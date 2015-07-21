@@ -11,10 +11,6 @@ import ua.kiev.avp256.kickstarter_server.entity.Project;
 public class ProjectDaoImpl implements ProjectDao {
 	private DaoSupport daoSupport;
 
-	public void setDaoSupport(DaoSupport daoSupport) {
-		this.daoSupport = daoSupport;
-	}
-
 	@Override
 	public void persist(Project project) {
 		daoSupport.persist(project);
@@ -34,5 +30,9 @@ public class ProjectDaoImpl implements ProjectDao {
 	@Override
 	public Project load(int id) {
 		return daoSupport.load(id, Project.class);
+	}
+
+	public void setDaoSupport(DaoSupport daoSupport) {
+		this.daoSupport = daoSupport;
 	}
 }

@@ -9,10 +9,6 @@ import ua.kiev.avp256.kickstarter_server.entity.Quote;
 public class QuoteDaoImpl implements QuoteDao {
 	private DaoSupport daoSupport;
 
-	public void setDaoSupport(DaoSupport daoSupport) {
-		this.daoSupport = daoSupport;
-	}
-
 	@Override
 	public void persist(Quote quote) {
 		daoSupport.persist(quote);
@@ -30,5 +26,9 @@ public class QuoteDaoImpl implements QuoteDao {
 	@Override
 	public Quote load(int id) {
 		return daoSupport.load(id, Quote.class);
+	}
+
+	public void setDaoSupport(DaoSupport daoSupport) {
+		this.daoSupport = daoSupport;
 	}
 }

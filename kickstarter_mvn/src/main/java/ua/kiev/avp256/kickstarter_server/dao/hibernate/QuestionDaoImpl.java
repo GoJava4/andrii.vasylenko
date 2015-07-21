@@ -11,10 +11,6 @@ import ua.kiev.avp256.kickstarter_server.entity.Question;
 public class QuestionDaoImpl implements QuestionDao {
 	private DaoSupport daoSupport;
 
-	public void setDaoSupport(DaoSupport daoSupport) {
-		this.daoSupport = daoSupport;
-	}
-
 	@Override
 	public void persist(Question question) {
 		daoSupport.persist(question);
@@ -34,5 +30,9 @@ public class QuestionDaoImpl implements QuestionDao {
 	@Override
 	public Question load(int id) {
 		return daoSupport.load(id, Question.class);
+	}
+
+	public void setDaoSupport(DaoSupport daoSupport) {
+		this.daoSupport = daoSupport;
 	}
 }

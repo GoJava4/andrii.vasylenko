@@ -7,10 +7,6 @@ import ua.kiev.avp256.kickstarter_server.entity.Payment;
 public class PaymentDaoImpl implements PaymentDao {
 	private DaoSupport daoSupport;
 
-	public void setDaoSupport(DaoSupport daoSupport) {
-		this.daoSupport = daoSupport;
-	}
-
 	@Override
 	public void persist(Payment payment) {
 		daoSupport.persist(payment);
@@ -19,5 +15,9 @@ public class PaymentDaoImpl implements PaymentDao {
 	@Override
 	public Payment load(int id) {
 		return daoSupport.load(id, Payment.class);
+	}
+
+	public void setDaoSupport(DaoSupport daoSupport) {
+		this.daoSupport = daoSupport;
 	}
 }
