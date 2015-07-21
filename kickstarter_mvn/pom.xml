@@ -41,14 +41,9 @@
 		<log4j.version>1.2.17</log4j.version>
 
 		<!-- TEST -->
-		<spring.test.version>${spring.framework.version}</spring.test.version>
-		<spring.test.scope>test</spring.test.scope>
 		<h2.database.version>1.4.187</h2.database.version>
-		<h2.database.scope>test</h2.database.scope>
 		<mockito.version>1.10.19</mockito.version>
-		<mockito.scope>test</mockito.scope>
 		<junit.version>4.12</junit.version>
-		<junit.scope>test</junit.scope>
 	</properties>
 
 	<build>
@@ -155,29 +150,29 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>${spring.test.version}</version>
-			<scope>${spring.test.scope}</scope>
+			<version>${spring.framework.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>${h2.database.version}</version>
-			<scope>${h2.database.scope}</scope>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>${mockito.version}</version>
-			<scope>${mockito.scope}</scope>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
-			<scope>${junit.scope}</scope>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
