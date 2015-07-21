@@ -2,118 +2,54 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>ua.com.goit</groupId>
-	<artifactId>kickstarter_mvn</artifactId>
+	<groupId>ua.kiev.avp256</groupId>
+	<artifactId>kickstarter_server</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>kickstarter_mvn Maven Webapp</name>
+	<name>kickstarter_server Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.7</java.version>
+
+		<!-- plugins -->
+		<maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
+		<maven.compiler.plugin.fork>true</maven.compiler.plugin.fork>
+		<jboss.as.maven.plugin.version>7.1.1.Final</jboss.as.maven.plugin.version>
+		<jboss.as.maven.plugin.hostname>localhost</jboss.as.maven.plugin.hostname>
+		<jboss.as.maven.plugin.port>9999</jboss.as.maven.plugin.port>
+		<jboss.as.maven.plugin.name>admin</jboss.as.maven.plugin.name>
+		<jboss.as.maven.plugin.password>111</jboss.as.maven.plugin.password>
+		<jboss.as.maven.plugin.name>kickstarter_server.war</jboss.as.maven.plugin.name>
+
+		<!-- dependencies -->
+		<spring.framework.version>4.1.6.RELEASE</spring.framework.version>
+
+		<javax.servlet.api.version>3.1.0</javax.servlet.api.version>
+		<javax.servlet.api.scope>provided</javax.servlet.api.scope>
+
+		<jackson.databind.version>2.5.4</jackson.databind.version>
+
+		<hibernate.version>4.3.10.Final</hibernate.version>
+		<commons.dbcp.version>1.4</commons.dbcp.version>
+		<postgresql.version>9.4-1200-jdbc41</postgresql.version>
+
+		<joda.time.version>2.8.1</joda.time.version>
+		<jadira.usertype.core.version>4.0.0.GA</jadira.usertype.core.version>
+
+		<log4j.version>1.2.17</log4j.version>
+
+		<!-- TEST -->
+		<spring.test.version>${spring.framework.version}</spring.test.version>
+		<spring.test.scope>test</spring.test.scope>
+		<h2.database.version>1.4.187</h2.database.version>
+		<h2.database.scope>test</h2.database.scope>
+		<mockito.version>1.10.19</mockito.version>
+		<mockito.scope>test</mockito.scope>
+		<junit.version>4.12</junit.version>
+		<junit.scope>test</junit.scope>
 	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.5.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-			<version>2.8.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jadira.usertype</groupId>
-			<artifactId>usertype.core</artifactId>
-			<version>4.0.0.GA</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>4.3.10.Final</version>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>4.1.6.RELEASE</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>4.1.6.RELEASE</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>9.4-1200-jdbc41</version>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.187</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>4.1.6.RELEASE</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>1.10.19</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
 
 	<build>
 		<finalName>kickstarter_server</finalName>
@@ -133,27 +69,115 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
+				<version>${maven.compiler.plugin.version}</version>
 				<configuration>
-					<encoding>UTF-8</encoding>
-					<fork>true</fork>
-					<source>1.7</source>
-					<target>1.7</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<fork>${maven.compiler.plugin.fork}</fork>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 
 			<plugin>
 				<groupId>org.jboss.as.plugins</groupId>
 				<artifactId>jboss-as-maven-plugin</artifactId>
-				<version>7.1.1.Final</version>
+				<version>${jboss.as.maven.plugin.version}</version>
 				<configuration>
-					<hostname>localhost</hostname>
-					<port>9999</port>
-					<name>admin</name>
-					<password>111</password>
-					<name>kickstarter_server.war</name>
+					<hostname>${jboss.as.maven.plugin.hostname}</hostname>
+					<port>${jboss.as.maven.plugin.port}</port>
+					<name>${jboss.as.maven.plugin.name}</name>
+					<password>${jboss.as.maven.plugin.password}</password>
+					<name>${jboss.as.maven.plugin.name}</name>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.framework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.framework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${javax.servlet.api.version}</version>
+			<scope>${javax.servlet.api.scope}</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.databind.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>${commons.dbcp.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda.time.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jadira.usertype</groupId>
+			<artifactId>usertype.core</artifactId>
+			<version>${jadira.usertype.core.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
+		<!-- TEST -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.test.version}</version>
+			<scope>${spring.test.scope}</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.database.version}</version>
+			<scope>${h2.database.scope}</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>${mockito.version}</version>
+			<scope>${mockito.scope}</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>${junit.scope}</scope>
+		</dependency>
+	</dependencies>
 </project>
