@@ -7,7 +7,7 @@ import org.hibernate.Session;
 public interface DaoSupport {
 	Session getCurrentSession();
 
-	<ENTITY> void persist(ENTITY entity);
+	void persist(Object entity);
 
 	<ENTITY> ENTITY load(int id, Class<ENTITY> clazz);
 

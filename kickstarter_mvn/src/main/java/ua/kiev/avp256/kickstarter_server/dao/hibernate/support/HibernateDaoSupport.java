@@ -22,7 +22,7 @@ public class HibernateDaoSupport implements DaoSupport {
 	}
 
 	@Override
-	public <ENTITY> void persist(ENTITY entity) {
+	public void persist(Object entity) {
 		if (entity == null) {
 			throw new DataNotFoundException("entity is null");
 		}
