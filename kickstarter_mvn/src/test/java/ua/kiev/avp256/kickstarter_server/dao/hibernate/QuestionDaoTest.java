@@ -2,6 +2,8 @@ package ua.kiev.avp256.kickstarter_server.dao.hibernate;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -27,6 +29,12 @@ public class QuestionDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 		assertEquals(1, result.getProject().getId());
 		assertEquals("velo parking", result.getProject().getName());
 		assertEquals("Question 1?", result.getQuestion());
+	}
+
+	@Test
+	public void loadQuestionsInProjectTest() {
+		List<Question> result = questionDao.loadQuestionsInProject(1);
+		assertEquals(1, result.size());
 	}
 
 	@Test

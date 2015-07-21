@@ -3,6 +3,8 @@ package ua.kiev.avp256.kickstarter_server.service;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -28,6 +30,8 @@ public class QuestionServiceTest {
 	private QuestionDao questionDao;
 	@InjectMocks
 	private QuestionService questionService;
+	@Mock
+	private List<Question> questions;
 
 	@Before
 	public void setup() {
@@ -43,6 +47,15 @@ public class QuestionServiceTest {
 		verify(questionDao, times(1)).persist(result);
 		assertEquals(project, result.getProject());
 		assertEquals(QUESTION, result.getQuestion());
+	}
+
+	@Test
+	public void loadProjectsInCategoryTest() {
+		when(questionDao.loadQuestionsInProject(anyInt())).thenReturn(questions);
+
+		List<Question> result = questionService.loadQuestionsInProject(PROJECT_ID);
+
+		assertEquals(questions, result);
 	}
 
 	@Test(expected = DataNotFoundException.class)

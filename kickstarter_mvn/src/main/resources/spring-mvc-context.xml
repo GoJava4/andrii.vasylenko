@@ -20,12 +20,10 @@
 		class="ua.kiev.avp256.kickstarter_server.controller.ProjectController"
 		autowire="byName" />
 
-	<bean id="askQuestionController"
-		class="ua.kiev.avp256.kickstarter_server.controller.AskQuestionController"
-		autowire="byName">
-		<property name="view" value="AskQuestion" />
-		<property name="submitView" value="AskQuestionSubmit" />
-	</bean>
+	<bean id="questionController"
+		class="ua.kiev.avp256.kickstarter_server.controller.QuestionController"
+		autowire="byName" />
+
 	<bean id="donateController"
 		class="ua.kiev.avp256.kickstarter_server.controller.DonateController"
 		autowire="byName">

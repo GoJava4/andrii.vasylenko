@@ -1,5 +1,7 @@
 package ua.kiev.avp256.kickstarter_server.service;
 
+import java.util.List;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import ua.kiev.avp256.kickstarter_server.dao.ProjectDao;
@@ -10,6 +12,11 @@ import ua.kiev.avp256.kickstarter_server.entity.Question;
 public class QuestionService {
 	private ProjectDao projectDao;
 	private QuestionDao questionDao;
+
+	@Transactional(readOnly = true)
+	public List<Question> loadQuestionsInProject(int projectId) {
+		return questionDao.loadQuestionsInProject(projectId);
+	}
 
 	@Transactional
 	public Question persistQuestion(int projectId, String question) {
