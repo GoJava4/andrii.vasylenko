@@ -24,20 +24,9 @@
 		class="ua.kiev.avp256.kickstarter_server.controller.QuestionController"
 		autowire="byName" />
 
-	<bean id="donateController"
-		class="ua.kiev.avp256.kickstarter_server.controller.DonateController"
-		autowire="byName">
-		<property name="view" value="Donate" />
-		<property name="submitView" value="DonateSubmit" />
-	</bean>
-
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
+	<bean id="paymentController"
+		class="ua.kiev.avp256.kickstarter_server.controller.PaymentController"
+		autowire="byName" />
 
 	<bean id="paymentVariantController"
 		class="ua.kiev.avp256.kickstarter_server.controller.PaymentVariantController"
