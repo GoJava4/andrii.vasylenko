@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.kiev.avp256.kickstarter_server.controller.ProjectController;
 import ua.kiev.avp256.kickstarter_server.entity.Project;
@@ -20,7 +19,6 @@ import ua.kiev.avp256.kickstarter_server.service.ProjectService;
 public class ProjectControllerTest {
 	@Mock
 	private ProjectService projectService;
-	@Autowired
 	@InjectMocks
 	private ProjectController projectController;
 	@Mock

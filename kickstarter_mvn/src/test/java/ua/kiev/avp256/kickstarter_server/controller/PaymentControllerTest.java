@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.kiev.avp256.kickstarter_server.controller.PaymentController;
 import ua.kiev.avp256.kickstarter_server.entity.Payment;
@@ -21,7 +20,6 @@ import ua.kiev.avp256.kickstarter_server.service.PaymentService;
 public class PaymentControllerTest {
 	@Mock
 	private PaymentService paymentService;
-	@Autowired
 	@InjectMocks
 	private PaymentController paymentController;
 	@Mock
