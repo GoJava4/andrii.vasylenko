@@ -5,8 +5,8 @@
 	<groupId>ua.kiev.avp256</groupId>
 	<artifactId>kickstarter_server</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>kickstarter_server Maven Webapp</name>
+	<version>1.0</version>
+	<name>'Kickstarter' RESTful Web Service</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
