@@ -1,11 +1,13 @@
 package ua.kiev.avp256.kickstarter_client.view;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.ws.rs.WebApplicationException;
 
 import ua.kiev.avp256.kickstarter_client.service.Client;
 import ua.kiev.avp256.kickstarter_server.entity.Project;
@@ -46,6 +48,14 @@ public class ProjectBean implements Serializable {
 
 	private void init() {
 		project = client.getEntity("project/" + id, Project.class);
-		questions = client.getEntitiesList("question/project/" + id, Question.class);
+		initAdditionalFields();
+	}
+
+	private void initAdditionalFields() {
+		try {
+			questions = client.getEntitiesList("question/project/" + id, Question.class);
+		} catch (WebApplicationException e) {
+			questions = new ArrayList<>();
+		}
 	}
 }
