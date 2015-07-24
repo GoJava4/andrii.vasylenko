@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ua.kiev.avp256</groupId>
+	<artifactId>kickstarter_client</artifactId>
+	<packaging>war</packaging>
+	<version>1.0</version>
+	<name>'Kickstarter' Web Application</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.7</java.version>
+
+		<!-- plugins -->
+		<maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
+		<maven.compiler.plugin.fork>true</maven.compiler.plugin.fork>
+
+		<jboss.as.maven.plugin.version>7.1.1.Final</jboss.as.maven.plugin.version>
+		<jboss.as.maven.plugin.hostname>localhost</jboss.as.maven.plugin.hostname>
+		<jboss.as.maven.plugin.port>9999</jboss.as.maven.plugin.port>
+		<jboss.as.maven.plugin.name>admin</jboss.as.maven.plugin.name>
+		<jboss.as.maven.plugin.password>111</jboss.as.maven.plugin.password>
+		<jboss.as.maven.plugin.name>kickstarter.war</jboss.as.maven.plugin.name>
+
+		<!-- dependencies -->
+		<kickstarter.server.version>1.0</kickstarter.server.version>
+		<kickstarter.server.scope>system</kickstarter.server.scope>
+		<kickstarter.server.systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/kickstarter_entity.jar</kickstarter.server.systemPath>
+
+		<prime.faces.version>5.2</prime.faces.version>
+		<pretty.faces.version>3.3.3</pretty.faces.version>
+		<sun.faces.version>2.2.11</sun.faces.version>
+
+		<javax.servlet.api.version>3.1.0</javax.servlet.api.version>
+		<javax.servlet.api.scope>provided</javax.servlet.api.scope>
+
+		<sun.jersey.version>1.19</sun.jersey.version>
+
+		<jackson.version>2.5.4</jackson.version>
+
+		<joda.time.version>2.8.1</joda.time.version>
+	</properties>
+
+	<build>
+		<finalName>kickstarter</finalName>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<fork>${maven.compiler.plugin.fork}</fork>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+				<version>${jboss.as.maven.plugin.version}</version>
+				<configuration>
+					<hostname>${jboss.as.maven.plugin.hostname}</hostname>
+					<port>${jboss.as.maven.plugin.port}</port>
+					<name>${jboss.as.maven.plugin.name}</name>
+					<password>${jboss.as.maven.plugin.password}</password>
+					<name>${jboss.as.maven.plugin.name}</name>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>ua.kiev.avp256</groupId>
+			<artifactId>kickstarter_server</artifactId>
+			<version>${kickstarter.server.version}</version>
+			<scope>${kickstarter.server.scope}</scope>
+			<systemPath>${kickstarter.server.systemPath}</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>${prime.faces.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ocpsoft</groupId>
+			<artifactId>prettyfaces-jsf2</artifactId>
+			<version>${pretty.faces.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>${sun.faces.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>${sun.faces.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${javax.servlet.api.version}</version>
+			<scope>${javax.servlet.api.scope}</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>${sun.jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<version>${sun.jersey.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda.time.version}</version>
+		</dependency>
+	</dependencies>
+</project>

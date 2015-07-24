@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+	<ui:composition template="/resources/template/commonLayout.xhtml">
+
+		<ui:define name="header">
+			<h1>Kickstarter: Projects</h1>
+		</ui:define>
+
+		<ui:define name="content">
+			<h:form>
+				<p:dataScroller value="#{projectsBean.projects}" var="project"
+					chunkSize="5">
+					<h:panelGrid columns="2" style="width:100%"
+						columnClasses="logo,detail">
+						<p:outputPanel>
+							<h:panelGrid columns="2" cellpadding="5">
+								<h:link outcome="project">
+									<f:param name="id" value="#{project.id}" />
+									<h:outputText value="#{project.name}" styleClass="item" />
+								</h:link>
+								<h3>description: #{project.description}</h3>
+								<h3>total amount: #{project.totalAmount}</h3>
+								<h3>collected amount: #{project.collectAmount}</h3>
+								<h3>days left: #{project.daysLeft}</h3>
+							</h:panelGrid>
+						</p:outputPanel>
+					</h:panelGrid>
+				</p:dataScroller>
+			</h:form>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

@@ -1,0 +1,25 @@
+<pretty-config xmlns="http://ocpsoft.com/prettyfaces/3.3.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ocpsoft.com/prettyfaces/3.3.0
+		http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.0.xsd">
+
+	<url-mapping id="welcome">
+		<pattern value="/" />
+		<view-id value="/faces/welcome.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="categories">
+		<pattern value="/categories" />
+		<view-id value="/faces/categories.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="projects">
+		<pattern value="/projects/#{ categoryId : projectsBean.categoryId }" />
+		<view-id value="/faces/projects.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="404">
+		<pattern value="/404" />
+		<view-id value="/faces/404.xhtml" />
+	</url-mapping>
+</pretty-config>
