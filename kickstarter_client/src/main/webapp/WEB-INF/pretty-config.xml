@@ -18,6 +18,11 @@
 		<view-id value="/faces/projects.xhtml" />
 	</url-mapping>
 
+	<url-mapping id="project">
+		<pattern value="/project/#{ id : projectBean.id }" />
+		<view-id value="/faces/project.xhtml" />
+	</url-mapping>
+
 	<url-mapping id="404">
 		<pattern value="/404" />
 		<view-id value="/faces/404.xhtml" />

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+	<ui:composition template="/resources/template/commonLayout.xhtml">
+
+		<ui:define name="header">
+			<h1>Kickstarter: Project</h1>
+		</ui:define>
+
+		<ui:define name="content">
+			<h2>#{projectBean.project.name}</h2>
+
+			<br clear="all" />
+			<h3>description: #{projectBean.project.description}</h3>
+			<h3>total amount: #{projectBean.project.totalAmount}</h3>
+			<h3>collect amount: #{projectBean.project.collectAmount}</h3>
+			<h3>days left: #{projectBean.project.daysLeft}</h3>
+			<h3>history: #{projectBean.project.history}</h3>
+			<h3>link: #{projectBean.project.link}</h3>
+
+			<br clear="all" />
+			<p:dataList value="#{projectBean.questions}" var="question"
+				type="ordered">
+				<f:facet name="header">Questions</f:facet>
+				<h3>#{question.question}</h3>
+			</p:dataList>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>
