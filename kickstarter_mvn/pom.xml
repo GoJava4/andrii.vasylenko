@@ -37,7 +37,8 @@
 		<javax.servlet.api.version>3.1.0</javax.servlet.api.version>
 		<javax.servlet.api.scope>provided</javax.servlet.api.scope>
 
-		<jackson.databind.version>2.5.4</jackson.databind.version>
+		<sun.jersey.version>1.19</sun.jersey.version>
+		<jackson.version>2.5.4</jackson.version>
 
 		<hibernate.version>4.3.10.Final</hibernate.version>
 		<commons.dbcp.version>1.4</commons.dbcp.version>
@@ -137,9 +138,20 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<version>${sun.jersey.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>${jackson.databind.version}</version>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-joda</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 
 		<dependency>

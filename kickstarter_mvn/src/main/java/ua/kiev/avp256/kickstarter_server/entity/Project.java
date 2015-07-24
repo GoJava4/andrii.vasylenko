@@ -7,7 +7,13 @@ import org.joda.time.DateTime;
 import org.joda.time.Days;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.joda.deser.DateTimeDeserializer;
+import com.fasterxml.jackson.datatype.joda.ser.DateTimeSerializer;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Project implements Serializable {
 	private static final long serialVersionUID = -5672417376734008303L;
 
@@ -16,10 +22,13 @@ public class Project implements Serializable {
 	private String name;
 	private String description;
 	private int totalAmount;
-	private DateTime finalDate;
 	private String history;
 	private String link;
 	private Integer collectAmount;
+
+	@JsonDeserialize(using = DateTimeDeserializer.class)
+	@JsonSerialize(using = DateTimeSerializer.class)
+	private DateTime finalDate;
 
 	@JsonIgnore
 	private Set<Payment> payments;
