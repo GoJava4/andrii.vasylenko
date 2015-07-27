@@ -15,7 +15,16 @@
 		</ui:define>
 
 		<ui:define name="content">
-			<h3>Quote: #{quoteBean.quote.quote}</h3>
+			<h3 id="quote" />
+			<script>
+				initQuote();
+				function initQuote() {
+					$.getJSON('http://localhost:8080/kickstarter_server/v1/quote/random', function(data) {
+						var quote = document.getElementById("quote");
+						quote.innerHTML = "Quote: " + data.quote;
+					});
+				}
+			</script>
 			<br clear="all" />
 			<h:link outcome="categories">
 				<h2>GO TO KICKSTARTER -></h2>
